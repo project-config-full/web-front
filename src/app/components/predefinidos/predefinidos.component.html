@@ -1,1 +1,27 @@
-<p>predefinidos works!</p>
+<div class="container">
+    <div class="container-inputs">
+        @for(input of inputs; track input){
+            <div class="input-wraper">
+                <input type="color" [title]="input.for" [(ngModel)]="input.color" >
+            </div><!-- input-wraper -->
+        }
+    </div><!-- container-input -->
+
+    <div class="container-prede">
+        <header>
+            <h3>Predefinidos:</h3>
+        </header>
+
+        <div class="prede-contet-wraper">
+            @for(prede of predefinidos; track prede){
+                <div class="prede-wraper">
+                    <div class="configuracao" [ngStyle]="{ 'background-color': prede.color_config}" ></div><!-- configuracao -->
+                    <div class="conteudo" [ngStyle]="{ 'background-color': prede.color_conteudo}">
+                        <div class="btn-config" [ngStyle]="{ 'background-color': prede.color_icon_config}"></div><!-- bnt-config -->
+                        <div class="text" [ngStyle]="{ 'background-color': prede.color_text}"></div><!-- text -->
+                    </div><!-- conetudo -->
+                </div><!-- prede-wraper -->
+            }
+        </div><!-- prede-contet-wraper -->
+    </div><!-- container-prede -->
+</div><!-- container -->

@@ -1,9 +1,21 @@
-import { Injectable } from '@angular/core';
+export interface Buttons{
+  predefinidos: boolean,
+  button_state: boolean
+  text_h4: string,
+  button_id: string,
+  text_button: { on: string, off: string },
+  color_button: { on: string, off: string },
+  cirlce_left: { on: string, off: string }
+}
 
-@Injectable({
-  providedIn: 'root'
-})
-export class InterfacesService {
+export interface GetStyleButton {
+  text_button: string;
+  color_button: string;
+  color_text: string;
+  circle_left: string;
+}
 
-  constructor() { }
+export interface inputs{
+  color: string,
+  for: string,
 }

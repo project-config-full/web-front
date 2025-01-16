@@ -26,3 +26,29 @@
     width: 100%;
     height: 100%;
 }
+
+.container .container-text{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container .container-text, .container .container-text .text-wrape{
+    width: 100%;
+}
+
+.text-wraper header{
+    padding: 20px 0;
+    display: grid;
+    place-items: center;
+}
+
+.text-wraper .text{
+    max-width: 600px;
+}
+
+.text-wraper .text p{
+    text-align: justify;
+    padding: 0 20px;
+}
