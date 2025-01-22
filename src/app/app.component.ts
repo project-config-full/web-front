@@ -2,6 +2,7 @@ import { Component  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConfiguracaoComponent } from './components/configuracao/configuracao.component';
 import { ConteudoComponent } from "./components/conteudo/conteudo.component";
+import { predefinidos } from './services/interface/interfaces.service';
 
 @Component({
   selector: 'app-root',
@@ -36,5 +37,11 @@ export class AppComponent {
     }else{
       this.color_icon_config = val.color
     }
+  }
+
+  receberPrede(prede: predefinidos){
+    this.color_conteudo = prede.color_conteudo;
+    this.color_icon_config = prede.color_icon_config;
+    this.color_text = prede.color_text;
   }
 }

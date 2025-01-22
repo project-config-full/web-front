@@ -1,6 +1,6 @@
 <div class="container">
   <div class="container-config" [ngStyle]="{ 'width': value_config ? width_config : '0%' }">
-    <app-configuracao (enviInput)="receberInput($event)" (enviState)="receberBtnState($event)" ></app-configuracao>
+    <app-configuracao (enviPrede)="receberPrede($event)" (enviInput)="receberInput($event)" (enviState)="receberBtnState($event)" ></app-configuracao>
   </div><!-- container-config -->
 
   <div class="container-conteudo" [ngStyle]="{ 'width': value_config ? width_conteudo : '100%' }">

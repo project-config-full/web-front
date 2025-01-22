@@ -28,7 +28,7 @@ export class ConteudoComponent {
   @Input()
   set button_state(val: boolean){
     this.color_conteudo = val ? "#B87333" : "#2c2c2c";
-    this.color_icon_config = val ? "#3E2723" : "#000000";
+    this.color_icon_config = val ? "#873408" : "#000000";
     this.color_text = val ? "#833434" : "#f5f5f5";
   }
 }

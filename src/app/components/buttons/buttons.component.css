@@ -35,6 +35,7 @@
     border-radius: 30px;
     position: relative;
     transition: background-color 0.3s;
+    cursor: pointer;
 }
 
 .button-wraper .separar .button h5{

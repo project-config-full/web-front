@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { Buttons } from './../../services/interface/interfaces.service'
+import { Buttons, predefinidos } from './../../services/interface/interfaces.service'
 import { CommonModule } from '@angular/common';
 import { GetStyleButton } from './../../services/interface/interfaces.service';
 import { FormsModule } from '@angular/forms';
@@ -59,6 +59,7 @@ export class ButtonsComponent {
 
   @Output() enviButtonState = new EventEmitter<boolean>()
   @Output() enviInput = new EventEmitter<{ color: string, index: number }>()
+  @Output() enviPrede = new EventEmitter<predefinidos>()
 
   enviButtonActive(button: Buttons){
     if(button === this.buttons[0]){
@@ -70,5 +71,9 @@ export class ButtonsComponent {
 
   receberInput(val: { color: string, index: number }){
     this.enviInput.emit(val);
+  }
+
+  receberPrede(prede: predefinidos){
+    this.enviPrede.emit(prede)
   }
 }

@@ -20,14 +20,23 @@ export class PredefinidosComponent {
   ]
 
   predefinidos: predefinidos[] = [
-    { color_config: '#5acf5d', color_conteudo: '#B87333', color_text: '#833434', color_icon_config: '#3E2723' },
-    { color_config: '#FF69B4', color_conteudo: '#800080', color_text: '#f5f5f5', color_icon_config: '#FFFFFF' },
+    { color_config: '#5acf5d', color_conteudo: '#B87333', color_text: '#833434', color_icon_config: '#873408' },
+    { color_config: '#FF69B4', color_conteudo: '#800080', color_text: '#FE62E2', color_icon_config: '#E9AEF9' },
     { color_config: '#4682B4', color_conteudo: '#C0C0C0', color_text: '#000000', color_icon_config: '#3E2723' }
   ]
 
   @Output() enviInput = new EventEmitter<{ color: string, index: number }>();
+  @Output() enviPredefinidos = new EventEmitter<predefinidos>()
 
   enviInputColor(color: string, index: number){
     this.enviInput.emit({color, index})
+  }
+
+  enviPrede(prede: predefinidos){
+    this.inputs[0].color = prede.color_config;
+    this.inputs[1].color = prede.color_conteudo;
+    this.inputs[2].color = prede.color_text;
+    this.inputs[3].color = prede.color_icon_config;
+    this.enviPredefinidos.emit(prede)
   }
 }

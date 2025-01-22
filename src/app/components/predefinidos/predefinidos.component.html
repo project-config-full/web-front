@@ -14,7 +14,7 @@
 
         <div class="prede-contet-wraper">
             @for(prede of predefinidos; track prede){
-                <div class="prede-wraper">
+                <div class="prede-wraper" (click)="enviPrede(prede)">
                     <div class="configuracao" [ngStyle]="{ 'background-color': prede.color_config}" ></div><!-- configuracao -->
                     <div class="conteudo" [ngStyle]="{ 'background-color': prede.color_conteudo}">
                         <div class="btn-config" [ngStyle]="{ 'background-color': prede.color_icon_config}"></div><!-- bnt-config -->
