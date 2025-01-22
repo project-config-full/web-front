@@ -4,19 +4,31 @@ import { CommonModule } from '@angular/common';
 import { GetStyleButton } from './../../services/interface/interfaces.service';
 import { FormsModule } from '@angular/forms';
 import { PredefinidosComponent } from '../predefinidos/predefinidos.component';
+import { trigger, style, animate, transition, keyframes } from '@angular/animations';
 
 @Component({
   selector: 'app-buttons',
   standalone: true,
   imports: [CommonModule, FormsModule, PredefinidosComponent],
   templateUrl: './buttons.component.html',
-  styleUrl: './buttons.component.css'
+  styleUrl: './buttons.component.css',
+  animations: [
+    trigger('btnReload', [
+      transition('inative <=> active', [
+        animate('3s', keyframes([
+          style({ opacity: 0.3 , pointerEvents: 'none'}),
+          style({ opacity: 1 })
+        ]))
+      ])
+    ])
+  ]
 })
 export class ButtonsComponent {
   buttons: Buttons[] = [
     {
       predefinidos: true,
       button_state: false,
+      reload: false,
       text_h4: 'Cor na tela',
       button_id: 'color_of_screen',
       text_button: { on: 'Outro', off: 'Padrão' },
@@ -26,6 +38,7 @@ export class ButtonsComponent {
     {
       predefinidos: false,
       button_state: false,
+      reload: true,
       text_h4: 'Trocar texto',
       button_id: 'troca_text',
       text_button: { on: 'Chat', off: 'Lorem' },
@@ -35,6 +48,7 @@ export class ButtonsComponent {
     {
       predefinidos: false,
       button_state: false,
+      reload: true,
       text_h4: 'Remover texto',
       button_id: 'remov_text',
       text_button: { on: 'Sem', off: 'Com' },
@@ -75,5 +89,13 @@ export class ButtonsComponent {
 
   receberPrede(prede: predefinidos){
     this.enviPrede.emit(prede)
+  }
+
+  ativar_reload: boolean = false;
+
+  reloadBtn(button: Buttons){
+    if(button.reload){
+      this.ativar_reload = !this.ativar_reload;
+    }
   }
 }

@@ -1,6 +1,7 @@
 export interface Buttons{
   predefinidos: boolean,
-  button_state: boolean
+  button_state: boolean,
+  reload: boolean,
   text_h4: string,
   button_id: string,
   text_button: { on: string, off: string },
