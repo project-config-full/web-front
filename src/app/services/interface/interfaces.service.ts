@@ -18,4 +18,12 @@ export interface GetStyleButton {
 export interface inputs{
   color: string,
   for: string,
+  id: number
+}
+
+export interface predefinidos{
+  color_config: string,
+  color_text: string,
+  color_conteudo: string,
+  color_icon_config: string
 }

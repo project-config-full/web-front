@@ -3,6 +3,7 @@
     height: 100%;
     background-color: #2c2c2c;
     position: relative;
+    transition: background-color 0.5s;
 }
 
 .container #abrirConfiguracao{
@@ -25,6 +26,7 @@
 .container #abrirConfiguracao label svg{
     width: 100%;
     height: 100%;
+    transition: fill 0.5s;
 }
 
 .container .container-text{
@@ -32,6 +34,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: color 0.5s;
 }
 
 .container .container-text, .container .container-text .text-wrape{

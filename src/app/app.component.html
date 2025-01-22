@@ -1,9 +1,9 @@
 <div class="container">
   <div class="container-config" [ngStyle]="{ 'width': value_config ? width_config : '0%' }">
-    <app-configuracao></app-configuracao>
+    <app-configuracao (enviInput)="receberInput($event)" (enviState)="receberBtnState($event)" ></app-configuracao>
   </div><!-- container-config -->
 
   <div class="container-conteudo" [ngStyle]="{ 'width': value_config ? width_conteudo : '100%' }">
-    <app-conteudo (envi_config_value)="receberValueConfig($event)"></app-conteudo>
+    <app-conteudo  [color_icon_config]="color_icon_config" [color_text]="color_text" [color_conteudo]="color_conteudo" [button_state]="button_state_prede" (envi_config_value)="receberValueConfig($event)"></app-conteudo>
   </div><!-- container-content -->
 </div><!-- container -->

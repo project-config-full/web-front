@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Buttons } from './../../services/interface/interfaces.service'
 import { CommonModule } from '@angular/common';
 import { GetStyleButton } from './../../services/interface/interfaces.service';
@@ -57,7 +57,18 @@ export class ButtonsComponent {
     }
   }
 
-  teste(button = this.buttons[0]){
-    console.log(this.getStyleButton(button).color_button);
+  @Output() enviButtonState = new EventEmitter<boolean>()
+  @Output() enviInput = new EventEmitter<{ color: string, index: number }>()
+
+  enviButtonActive(button: Buttons){
+    if(button === this.buttons[0]){
+      setTimeout(()=>{
+        this.enviButtonState.emit(this.buttons[0].button_state)
+      }, 10);
+    }
+  }
+
+  receberInput(val: { color: string, index: number }){
+    this.enviInput.emit(val);
   }
 }

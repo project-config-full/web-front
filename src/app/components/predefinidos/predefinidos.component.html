@@ -2,7 +2,7 @@
     <div class="container-inputs">
         @for(input of inputs; track input){
             <div class="input-wraper">
-                <input type="color" [title]="input.for" [(ngModel)]="input.color" >
+                <input type="color" [title]="input.for" (input)="enviInputColor(input.color, input.id)" [(ngModel)]="input.color" >
             </div><!-- input-wraper -->
         }
     </div><!-- container-input -->

@@ -5,8 +5,8 @@
                 <h4>{{ button.text_h4 }}:</h4>
             </div><!-- separar -->
             <div class="separar">
-                <input type="checkbox" [id]="button.button_id" [(ngModel)]="button.button_state">
-                <label [for]="button.button_id" class="button" [ngStyle]="{ 'background-color': getStyleButton(button).color_button }" (click)="teste()">
+                <input type="checkbox" [id]="button.button_id" [(ngModel)]="button.button_state" (change)="enviButtonActive(button)">
+                <label [for]="button.button_id" class="button" [ngStyle]="{ 'background-color': getStyleButton(button).color_button }">
                     <h5 [ngStyle]="{ 'color': getStyleButton(button).color_text }" >{{ getStyleButton(button).text_button}}</h5>
                     <div class="circle" [ngStyle]="{ 'left': getStyleButton(button).circle_left }"></div>
                 </label>
@@ -15,7 +15,7 @@
 
         @if(button.predefinidos && button.button_state){
             <div class="container-prede">
-                <app-predefinidos></app-predefinidos>
+                <app-predefinidos (enviInput)="receberInput($event)"></app-predefinidos>
             </div><!-- container-prede -->
         }
     }

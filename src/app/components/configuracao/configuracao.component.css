@@ -1,8 +1,9 @@
 .container{
     width: 100%;
     height: 100%;
-    background-color: darkred;
     color: whitesmoke;
+    transition: background-color 0.5s;
+    background-color: #5acf5d;
 }
 
 .container header{
