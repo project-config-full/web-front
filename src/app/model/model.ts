@@ -1,6 +1,8 @@
 export interface Buttons{
   predefinidos: boolean,
   button_state: boolean,
+  troca_text: boolean,
+  remove_text: boolean,
   reload: boolean,
   text_h4: string,
   button_id: string,

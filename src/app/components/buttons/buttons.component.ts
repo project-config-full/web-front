@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, isFormArray } from '@angular/forms';
 import { PredefinidosComponent } from '../predefinidos/predefinidos.component';
 import { trigger, style, animate, transition, keyframes } from '@angular/animations';
 import { Buttons, GetStyleButton, predefinidos } from '../../model/model';
@@ -27,6 +27,8 @@ export class ButtonsComponent {
     {
       predefinidos: true,
       button_state: false,
+      troca_text: false,
+      remove_text: false,
       reload: false,
       text_h4: 'Cor na tela',
       button_id: 'color_of_screen',
@@ -37,6 +39,8 @@ export class ButtonsComponent {
     {
       predefinidos: false,
       button_state: false,
+      troca_text: true,
+      remove_text: false,
       reload: true,
       text_h4: 'Trocar texto',
       button_id: 'troca_text',
@@ -47,6 +51,8 @@ export class ButtonsComponent {
     {
       predefinidos: false,
       button_state: false,
+      troca_text: false,
+      remove_text: true,
       reload: true,
       text_h4: 'Remover texto',
       button_id: 'remov_text',
@@ -91,16 +97,27 @@ export class ButtonsComponent {
   }
 
   @Output() enviTrocaText = new EventEmitter<boolean>();
+  @Output() enviRemoveText = new EventEmitter<boolean>();
 
   ativar_reload: boolean = false;
   troca_text: boolean = false;
+  remove_text: boolean = false;
 
   reloadBtn(button: Buttons){
     if(button.reload){
       this.ativar_reload = !this.ativar_reload;
 
 
-      this.enviTrocaText.emit();
+      if(button.troca_text){
+        this.troca_text = !this.troca_text;
+      }
+
+      if(button.remove_text){
+        this.remove_text = !this.remove_text;
+      }
+
+      this.enviTrocaText.emit(this.troca_text);
+      this.enviRemoveText.emit(this.remove_text);
     }
   }
 }

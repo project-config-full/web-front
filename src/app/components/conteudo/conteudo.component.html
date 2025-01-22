@@ -8,7 +8,7 @@
         </label>
     </div><!-- abrirConfiguracao -->
 
-    <div class="container-text" [ngStyle]="{ 'color': color_text }">
+    <div class="container-text" [ngStyle]="{ 'color': color_text }" [@trocaText]="trocaText ? 'active' : 'inactive'" [@RemovText]="removeText ? 'active' : 'inative'">
         @if(text_ativo.lorem){
             <div class="text-wraper">
                 <header>

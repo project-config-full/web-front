@@ -28,6 +28,8 @@ export class AppComponent {
   color_conteudo: string = "#2c2c2c";
   color_icon_config: string = "#000000";
   color_text: string = "#f5f5f5";
+  remove_text: boolean = false;
+  troca_text: boolean = false;
 
   receberInput(val: { color: string, index: number }){
     if(val.index === 1){
@@ -43,5 +45,13 @@ export class AppComponent {
     this.color_conteudo = prede.color_conteudo;
     this.color_icon_config = prede.color_icon_config;
     this.color_text = prede.color_text;
+  }
+
+  receberRemovText(val: boolean){
+    this.remove_text = val;
+  }
+
+  receberTrocaText(val: boolean){
+    this.troca_text = val;
   }
 }

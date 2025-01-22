@@ -4,6 +4,11 @@
     </header>
 
     <div class="container-buttons">
-        <app-buttons (enviPrede)="receberPrede($event)" (enviInput)="receberInput($event)" (enviButtonState)="receberButtonState($event)"></app-buttons>
+        <app-buttons
+        (enviRemoveText)="receberRemovText($event)"
+        (enviTrocaText)="receberTrocaText($event)"
+        (enviPrede)="receberPrede($event)"
+        (enviInput)="receberInput($event)"
+        (enviButtonState)="receberButtonState($event)"></app-buttons>
     </div><!-- container-buttons -->
 </div><!-- container -->
