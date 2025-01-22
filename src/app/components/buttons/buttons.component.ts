@@ -1,10 +1,9 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { Buttons, predefinidos } from './../../services/interface/interfaces.service'
 import { CommonModule } from '@angular/common';
-import { GetStyleButton } from './../../services/interface/interfaces.service';
 import { FormsModule } from '@angular/forms';
 import { PredefinidosComponent } from '../predefinidos/predefinidos.component';
 import { trigger, style, animate, transition, keyframes } from '@angular/animations';
+import { Buttons, GetStyleButton, predefinidos } from '../../model/model';
 
 @Component({
   selector: 'app-buttons',
@@ -91,11 +90,17 @@ export class ButtonsComponent {
     this.enviPrede.emit(prede)
   }
 
+  @Output() enviTrocaText = new EventEmitter<boolean>();
+
   ativar_reload: boolean = false;
+  troca_text: boolean = false;
 
   reloadBtn(button: Buttons){
     if(button.reload){
       this.ativar_reload = !this.ativar_reload;
+
+
+      this.enviTrocaText.emit();
     }
   }
 }

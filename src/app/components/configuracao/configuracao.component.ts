@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ButtonsComponent } from "../buttons/buttons.component";
 import { CommonModule } from '@angular/common';
-import { predefinidos } from '../../services/interface/interfaces.service';
+import { predefinidos } from '../../model/model';
 
 @Component({
   selector: 'app-configuracao',

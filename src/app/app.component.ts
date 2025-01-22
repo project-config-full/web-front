@@ -2,7 +2,7 @@ import { Component  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConfiguracaoComponent } from './components/configuracao/configuracao.component';
 import { ConteudoComponent } from "./components/conteudo/conteudo.component";
-import { predefinidos } from './services/interface/interfaces.service';
+import { predefinidos } from './model/model';
 
 @Component({
   selector: 'app-root',

@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { inputs } from '../../services/interface/interfaces.service';
-import { predefinidos } from '../../services/interface/interfaces.service';
+import { predefinidos, inputs } from '../../model/model';
 
 @Component({
   selector: 'app-predefinidos',
