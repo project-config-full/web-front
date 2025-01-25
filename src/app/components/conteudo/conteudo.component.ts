@@ -68,8 +68,10 @@ export class ConteudoComponent {
     this.trocaText = val;
 
     setTimeout(()=>{
-      this.text_ativo.lorem = val ? false : true;
-      this.text_ativo.chat = val;
+      if(!this.removeText){
+        this.text_ativo.lorem = val ? false : true;
+        this.text_ativo.chat = val;
+      }
     }, 2000)
   }
 
