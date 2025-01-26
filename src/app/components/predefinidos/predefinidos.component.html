@@ -15,7 +15,21 @@
         <div class="prede-contet-wraper">
             @for(prede of predefinidos; track prede){
                 <div class="prede-wraper" (click)="enviPrede(prede)">
-                    <div class="configuracao" [ngStyle]="{ 'background-color': prede.color_config}" ></div><!-- configuracao -->
+                    <div class="configuracao" [ngStyle]="{ 'background-color': prede.color_config}" >
+                        <div class="container-buttons">
+                            <div class="button-wraper">
+                                <div class="button ativo" [ngStyle]="{ 'background-color': prede.color_button.on }">
+                                    <div class="circle" [ngStyle]="{ 'background-color': prede.color_circle }"></div><!-- circle -->
+                                </div><!-- button -->
+                            </div><!-- button-wraper -->
+
+                            <div class="button-wraper">
+                                <div class="button" [ngStyle]="{ 'background-color': prede.color_button.off }">
+                                    <div class="circle" [ngStyle]="{ 'background-color': prede.color_circle }"></div><!-- circle -->
+                                </div><!-- button -->
+                            </div><!-- button-wraper -->
+                        </div><!-- container-buttons -->
+                    </div><!-- configuracao -->
                     <div class="conteudo" [ngStyle]="{ 'background-color': prede.color_conteudo}">
                         <div class="btn-config" [ngStyle]="{ 'background-color': prede.color_icon_config}"></div><!-- bnt-config -->
                         <div class="text" [ngStyle]="{ 'background-color': prede.color_text}"></div><!-- text -->

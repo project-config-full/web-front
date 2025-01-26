@@ -8,7 +8,8 @@ export interface Buttons{
   button_id: string,
   text_button: { on: string, off: string },
   color_button: { on: string, off: string },
-  cirlce_left: { on: string, off: string }
+  cirlce_left: { on: string, off: string },
+  color_circle: string;
 }
 
 export interface GetStyleButton {
@@ -28,5 +29,12 @@ export interface predefinidos{
   color_config: string,
   color_text: string,
   color_conteudo: string,
-  color_icon_config: string
+  color_icon_config: string,
+  color_button: { on: string, off: string },
+  color_circle: string
+}
+
+export interface color_buttons{
+  on: string,
+  off: string
 }

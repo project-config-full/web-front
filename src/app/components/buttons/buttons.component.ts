@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, isFormArray } from '@angular/forms';
 import { PredefinidosComponent } from '../predefinidos/predefinidos.component';
 import { trigger, style, animate, transition, keyframes } from '@angular/animations';
-import { Buttons, GetStyleButton, predefinidos } from '../../model/model';
+import { Buttons, GetStyleButton, predefinidos, color_buttons } from '../../model/model';
 
 @Component({
   selector: 'app-buttons',
@@ -23,6 +23,8 @@ import { Buttons, GetStyleButton, predefinidos } from '../../model/model';
   ]
 })
 export class ButtonsComponent {
+  color_buttons: color_buttons = { on: '#C0C0C0', off: '#2C2C2C' };
+
   buttons: Buttons[] = [
     {
       predefinidos: true,
@@ -33,8 +35,9 @@ export class ButtonsComponent {
       text_h4: 'Cor na tela',
       button_id: 'color_of_screen',
       text_button: { on: 'Outro', off: 'Padrão' },
-      color_button: { on: '#C0C0C0', off: '#2C2C2C' },
-      cirlce_left: { on: '80px', off: '0px' }
+      color_button: { on: this.color_buttons.on, off: this.color_buttons.off },
+      cirlce_left: { on: '80px', off: '0px' },
+      color_circle: "#f5deb3"
     },
     {
       predefinidos: false,
@@ -45,8 +48,9 @@ export class ButtonsComponent {
       text_h4: 'Trocar texto',
       button_id: 'troca_text',
       text_button: { on: 'Chat', off: 'Lorem' },
-      color_button: { on: '#C0C0C0', off: '#2C2C2C' },
-      cirlce_left: { on: '80px', off: '0px' }
+      color_button: { on: this.color_buttons.on, off: this.color_buttons.off },
+      cirlce_left: { on: '80px', off: '0px' },
+      color_circle: "#f5deb3"
     },
     {
       predefinidos: false,
@@ -57,8 +61,9 @@ export class ButtonsComponent {
       text_h4: 'Remover texto',
       button_id: 'remov_text',
       text_button: { on: 'Sem', off: 'Com' },
-      color_button: { on: '#C0C0C0', off: '#2C2C2C' },
-      cirlce_left: { on: '80px', off: '0px' }
+      color_button: { on: this.color_buttons.on, off: this.color_buttons.off },
+      cirlce_left: { on: '80px', off: '0px' },
+      color_circle: "#f5deb3"
     }
   ]
 
@@ -84,6 +89,17 @@ export class ButtonsComponent {
     if(button === this.buttons[0]){
       setTimeout(()=>{
         this.enviButtonState.emit(this.buttons[0].button_state)
+        if(button.button_state){
+          this.buttons.forEach(button_ => {
+            button_.color_button = { on: "#663e10", off: "#d47a13" };
+            button_.color_circle = "#a35603";
+          });
+        }else{
+          this.buttons.forEach(button_ => {
+            button_.color_button = { on: "#C0C0C0", off: "#2C2C2C" };
+            button_.color_circle = "#f5deb3";
+          });
+        }
       }, 10);
     }
   }
@@ -94,6 +110,12 @@ export class ButtonsComponent {
 
   receberPrede(prede: predefinidos){
     this.enviPrede.emit(prede)
+    this.color_buttons = prede.color_button;
+
+    this.buttons.forEach(button => {
+      button.color_button = { on: this.color_buttons.on, off: this.color_buttons.off };
+      button.color_circle = prede.color_circle;
+    });
   }
 
   @Output() enviTrocaText = new EventEmitter<boolean>();
