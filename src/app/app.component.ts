@@ -1,8 +1,9 @@
-import { Component  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConfiguracaoComponent } from './components/configuracao/configuracao.component';
 import { ConteudoComponent } from "./components/conteudo/conteudo.component";
 import { predefinidos } from './model/model';
+import { LocalStorageService } from './service/local-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +12,17 @@ import { predefinidos } from './model/model';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  constructor(private service: LocalStorageService) {}
+
   width_config: string = '20%';
   width_conteudo: string = '80%';
   value_config: boolean = false;
   button_state_prede: boolean = false;
+
+  ngOnInit(): void {
+    this.value_config = this.service.getConfigOpen() ?? false;
+  }
 
   receberValueConfig(config: boolean){
     this.value_config = config;

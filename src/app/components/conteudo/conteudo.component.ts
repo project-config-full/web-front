@@ -1,7 +1,8 @@
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { LocalStorageService } from '../../service/local-storage.service';
 
 @Component({
   selector: 'app-conteudo',
@@ -39,7 +40,9 @@ import { FormsModule } from '@angular/forms';
    ])
   ]
 })
-export class ConteudoComponent {
+export class ConteudoComponent implements OnInit {
+  constructor(private service: LocalStorageService) {}
+
   @Output() envi_config_value = new EventEmitter<boolean>();
   config: boolean = true;
   text_ativo = {
@@ -52,8 +55,17 @@ export class ConteudoComponent {
   removeText: boolean = false;
   trocaText: boolean = false;
 
+  ngOnInit(): void {
+    this.config = this.service.getConfigOpen() ? false : true;
+  }
+
   enviConfigValue(){
     this.envi_config_value.emit(this.config);
+  }
+
+  enviInfos(){
+    this.enviConfigValue();
+    this.service.setConfigOpen(this.config);
   }
 
   @Input()
