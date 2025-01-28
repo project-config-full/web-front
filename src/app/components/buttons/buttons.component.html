@@ -15,7 +15,11 @@
 
         @if(button.predefinidos && button.button_state){
             <div class="container-prede">
-                <app-predefinidos (enviPredefinidos)="receberPrede($event)" (enviInput)="receberInput($event)"></app-predefinidos>
+                <app-predefinidos
+                [btn_color_screen_value]="btn_color_screen_value"
+                (enviPredefinidos)="receberPrede($event)"
+                (enviInput)="receberInput($event)"
+                ></app-predefinidos>
             </div><!-- container-prede -->
         }
     }

@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PredefinidosComponent } from '../predefinidos/predefinidos.component';
@@ -25,8 +25,9 @@ import { PredeService } from '../../service/prede/prede.service';
   ]
 })
 export class ButtonsComponent implements OnInit{
-  constructor(private service: LocalStorageService, private predeService: PredeService) { }
+  constructor(private serviceLocalS: LocalStorageService, private predeService: PredeService) { }
 
+  @Input() btn_color_screen_value: boolean = false;
   color_buttons: color_buttons = { on: '#C0C0C0', off: '#2C2C2C' };
 
   buttons: Buttons[] = [
@@ -40,7 +41,7 @@ export class ButtonsComponent implements OnInit{
       button_id: 'color_of_screen',
       text_button: { on: 'Outro', off: 'Padrão' },
       color_button: { on: this.color_buttons.on, off: this.color_buttons.off },
-      cirlce_left: { on: '80px', off: '0px' },
+      circle_left: { on: '80px', off: '0px' },
       color_circle: "#f5deb3"
     },
     {
@@ -53,7 +54,7 @@ export class ButtonsComponent implements OnInit{
       button_id: 'troca_text',
       text_button: { on: 'Chat', off: 'Lorem' },
       color_button: { on: this.color_buttons.on, off: this.color_buttons.off },
-      cirlce_left: { on: '80px', off: '0px' },
+      circle_left: { on: '80px', off: '0px' },
       color_circle: "#f5deb3"
     },
     {
@@ -66,20 +67,23 @@ export class ButtonsComponent implements OnInit{
       button_id: 'remov_text',
       text_button: { on: 'Sem', off: 'Com' },
       color_button: { on: this.color_buttons.on, off: this.color_buttons.off },
-      cirlce_left: { on: '80px', off: '0px' },
+      circle_left: { on: '80px', off: '0px' },
       color_circle: "#f5deb3"
     }
   ]
 
   ngOnInit(): void {
     this.buttons.forEach(button =>{
-      button.button_state = this.service.getButton(button.button_id);
-      button.color_button = this.predeService.predefinidos[this.predeService.index()].color_button;
-      button.color_circle = this.predeService.predefinidos[this.predeService.index()].color_circle;
+      button.button_state = this.serviceLocalS.getButton(button.button_id);
+
+      if(this.serviceLocalS.getPrede() !== null && this.serviceLocalS.getPrede() > 0 && this.btn_color_screen_value){
+        button.color_button = this.predeService.predefinidos[this.predeService.index()].color_button;
+        button.color_circle = this.predeService.predefinidos[this.predeService.index()].color_circle;
+      }
     });
 
-    this.troca_text = this.service.getButton('troca_text') ?? false;
-    this.remove_text = this.service.getButton('remove_text') ?? false;
+    this.troca_text = this.serviceLocalS.getButton('troca_text') ?? false;
+    this.remove_text = this.serviceLocalS.getButton('remov_text') ?? false;
   }
 
   getStyleButton(button: Buttons): GetStyleButton{
@@ -87,12 +91,12 @@ export class ButtonsComponent implements OnInit{
       text_button: button.text_button.on,
       color_button: button.color_button.on,
       color_text: button.color_button.off,
-      circle_left: button.cirlce_left.on
+      circle_left: button.circle_left.on
     } : {
       text_button: button.text_button.off,
       color_button: button.color_button.off,
       color_text: button.color_button.on,
-      circle_left: button.cirlce_left.off
+      circle_left: button.circle_left.off
     }
   }
 
@@ -102,6 +106,16 @@ export class ButtonsComponent implements OnInit{
 
   enviButtonActive(button: Buttons){
     if(button === this.buttons[0]){
+      this.predeService.inputs[0].color = "#5acf5d";
+      this.predeService.inputs[1].color = "#B87333";
+      this.predeService.inputs[2].color = "#833434";
+      this.predeService.inputs[3].color = "#873408";
+      this.serviceLocalS.setInput('color_config_input', "#5acf5d");
+      this.serviceLocalS.setInput('color_conteudo_input', "#B87333");
+      this.serviceLocalS.setInput('color_text_input', "#833434");
+      this.serviceLocalS.setInput('color_icon_config_input', "#873408");
+
+      this.serviceLocalS.setPrede(1);
       setTimeout(()=>{
         this.enviButtonState.emit(this.buttons[0].button_state)
         if(button.button_state){
@@ -120,7 +134,7 @@ export class ButtonsComponent implements OnInit{
   }
 
   setButton(button_id: string, val: boolean){
-    this.service.setButton(button_id, val);
+    this.serviceLocalS.setButton(button_id, val);
   }
 
   enviInfos(button: Buttons){

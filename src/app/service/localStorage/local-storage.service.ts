@@ -4,8 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class LocalStorageService {
-  constructor() { }
-
   setConfigOpen(val: boolean){
     localStorage.setItem('configAberto', `${val}`);
   }
@@ -29,4 +27,13 @@ export class LocalStorageService {
   getPrede(){
     return JSON.parse(localStorage.getItem('predefinido_ativo') ?? 'null');
   }
+
+  setInput(input_name: string, val: string){
+    localStorage.setItem(`${input_name}`, JSON.stringify(val));
+  }
+
+  getInput(input_name: string){
+    return JSON.parse(localStorage.getItem(`${input_name}`) ?? 'null');
+  }
+
 }

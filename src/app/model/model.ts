@@ -8,7 +8,7 @@ export interface Buttons{
   button_id: string,
   text_button: { on: string, off: string },
   color_button: { on: string, off: string },
-  cirlce_left: { on: string, off: string },
+  circle_left: { on: string, off: string },
   color_circle: string;
 }
 
@@ -22,10 +22,12 @@ export interface GetStyleButton {
 export interface inputs{
   color: string,
   for: string,
-  id: number
+  id: number,
+  _idLS: string
 }
 
 export interface predefinidos{
+  [_idLS: string]: string | { on: string, off: string };
   color_config: string,
   color_text: string,
   color_conteudo: string,

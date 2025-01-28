@@ -53,18 +53,44 @@ export class ConteudoComponent implements OnInit {
   @Input() color_conteudo: string = "#2c2c2c";
   @Input() color_icon_config: string = "#000000";
   @Input() color_text: string = "#f5f5f5";
+  btn_color_screen_value: boolean = false;
   removeText: boolean = false;
   trocaText: boolean = false;
 
   ngOnInit(): void {
+    this.btn_color_screen_value = this.serviceLocalS.getButton('color_of_screen') ?? false;
+
     this.config = this.serviceLocalS.getConfigOpen() ? false : true;
     this.text_ativo.lorem = this.serviceLocalS.getButton('troca_text') ? false : true;
     this.text_ativo.chat = this.serviceLocalS.getButton('troca_text');
 
-    if(this.serviceLocalS.getPrede() !== null && this.serviceLocalS.getPrede() > 0){
-      this.color_conteudo = this.predeService.predefinidos[this.predeService.index()].color_conteudo;
-      this.color_icon_config = this.predeService.predefinidos[this.predeService.index()].color_icon_config;
-      this.color_text = this.predeService.predefinidos[this.predeService.index()].color_text;
+    if(this.serviceLocalS.getPrede() !== null && this.serviceLocalS.getPrede() > 0 && this.btn_color_screen_value){
+      
+      if(this.serviceLocalS.getInput('color_conteudo_input') === this.predeService.predefinidos[this.predeService.index()].color_conteudo){
+        this.color_conteudo = this.predeService.predefinidos[this.predeService.index()].color_conteudo;  
+      }else{
+        this.color_conteudo = this.serviceLocalS.getInput('color_conteudo_input');
+      }
+
+      if(this.serviceLocalS.getInput('color_icon_config_input') === this.predeService.predefinidos[this.predeService.index()].color_icon_config){
+        this.color_icon_config = this.predeService.predefinidos[this.predeService.index()].color_icon_config;
+      }else{
+        this.color_icon_config = this.serviceLocalS.getInput('color_icon_config_input');
+      }
+
+      if(this.serviceLocalS.getInput('color_text_input') === this.predeService.predefinidos[this.predeService.index()].color_text){
+        this.color_text = this.predeService.predefinidos[this.predeService.index()].color_text;
+      }else{
+        this.color_text = this.serviceLocalS.getInput('color_text_input');
+      }
+    }
+
+    if(this.serviceLocalS.getButton('remov_text')){
+      this.remove_text = this.serviceLocalS.getButton('remov_text');
+      clearTimeout(this.timeout);
+
+      this.text_ativo.lorem = false;
+      this.text_ativo.chat = false;
     }
   }
 
@@ -78,7 +104,7 @@ export class ConteudoComponent implements OnInit {
   }
 
   @Input()
-  set button_state(val: boolean){
+  set button_state(val: boolean){ 
     this.color_conteudo = val ? "#B87333" : "#2c2c2c";
     this.color_icon_config = val ? "#873408" : "#000000";
     this.color_text = val ? "#833434" : "#f5f5f5";
@@ -96,23 +122,26 @@ export class ConteudoComponent implements OnInit {
     }, 2000)
   }
 
+  timeout!: ReturnType<typeof setTimeout>;
+
   @Input()
   set remove_text(val: boolean){
-    this.removeText = val;
-
-    if(val){
-      setTimeout(()=>{
-        this.text_ativo.lorem = false;
-        this.text_ativo.chat = false;
-      }, 3000)
-    }else{
-      if(this.trocaText){
-        this.text_ativo.lorem = false;
-        this.text_ativo.chat = true;
+    if(this.removeText !== val) {
+      this.removeText = val;
+      if(val){
+        this.timeout = setTimeout(()=>{
+          this.text_ativo.lorem = false;
+          this.text_ativo.chat = false;
+        }, 3000);
       }else{
-        this.text_ativo.lorem = true;
-        this.text_ativo.chat = false;
+        if(this.trocaText){
+          this.text_ativo.lorem = false;
+          this.text_ativo.chat = true;
+        }else{
+          this.text_ativo.lorem = true;
+          this.text_ativo.chat = false;
+        }
       }
-    }
+    } 
   }
 }

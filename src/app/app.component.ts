@@ -22,6 +22,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.value_config = this.service.getConfigOpen() ?? false;
+    this.button_state_prede = this.service.getButton('color_of_screen') ?? false;
+    this.remove_text = this.service.getButton('remov_text') ?? false;
+    this.troca_text = this.service.getButton('troca_text') ?? false;
   }
 
   receberValueConfig(config: boolean){

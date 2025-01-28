@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { predefinidos, inputs } from '../../model/model';
 import { PredeService } from '../../service/prede/prede.service';
 import { LocalStorageService } from '../../service/localStorage/local-storage.service';
+import { consumerPollProducersForChange } from '@angular/core/primitives/signals';
 
 @Component({
   selector: 'app-predefinidos',
@@ -15,31 +16,29 @@ import { LocalStorageService } from '../../service/localStorage/local-storage.se
 export class PredefinidosComponent implements OnInit {
   constructor(private predeService: PredeService, private serviceLocalS: LocalStorageService) {}
 
-  inputs: inputs[] = [
-    {color: '#5acf5d', for: 'Cor das Configurações', id: 0},
-    {color: '#B87333', for: 'Cor do Conteudo', id: 1},
-    {color: '#833434', for: 'Cor do texto', id: 2},
-    {color: '#3E2723', for: 'Cor do icone das configurações', id: 3}
-  ]
+  @Input() btn_color_screen_value: boolean = false;
+
+  inputs: inputs[] = [];
 
   predefinidos: predefinidos[] = [];
 
   ngOnInit(): void {
     this.predefinidos = this.predeService.predefinidos;
+    this.inputs = this.predeService.inputs;
 
-    if(this.serviceLocalS.getPrede() !== null && this.serviceLocalS.getPrede() > 0){
-      this.inputs[0].color = this.predeService.predefinidos[this.predeService.index()].color_config;
-      this.inputs[1].color = this.predeService.predefinidos[this.predeService.index()].color_conteudo;
-      this.inputs[2].color = this.predeService.predefinidos[this.predeService.index()].color_text;
-      this.inputs[3].color = this.predeService.predefinidos[this.predeService.index()].color_icon_config;
+    if(this.serviceLocalS.getPrede() !== null && this.serviceLocalS.getPrede() > 0 && this.btn_color_screen_value){
+      this.inputs.forEach(input =>{
+        input.color = this.serviceLocalS.getInput(input._idLS);
+      })
     }
   }
 
   @Output() enviInput = new EventEmitter<{ color: string, index: number }>();
   @Output() enviPredefinidos = new EventEmitter<predefinidos>()
 
-  enviInputColor(color: string, index: number){
+  enviInputColor(color: string, index: number, _idLS: string){
     this.enviInput.emit({color, index})
+    this.serviceLocalS.setInput(_idLS, color);
   }
 
   enviPrede(prede: predefinidos){
@@ -49,6 +48,10 @@ export class PredefinidosComponent implements OnInit {
     this.inputs[3].color = prede.color_icon_config;
     this.enviPredefinidos.emit(prede);
     this.serviceLocalS.setPrede(this.verificarIndex(prede) + 1);
+
+    this.inputs.forEach(input =>{
+      this.serviceLocalS.setInput(input._idLS, input.color);
+    })
   }
 
   verificarIndex(prede: predefinidos): number {

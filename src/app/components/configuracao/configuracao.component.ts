@@ -27,7 +27,11 @@ export class ConfiguracaoComponent implements OnInit {
     this.btn_color_screen_value = this.serviceLocalS.getButton('color_of_screen') ?? false;
 
     if(this.serviceLocalS.getPrede() !== null && this.serviceLocalS.getPrede() > 0 && this.btn_color_screen_value){
-      this.color_config = this.predeService.predefinidos[this.predeService.index()].color_config;
+      if(this.serviceLocalS.getInput('color_config_input') === this.predeService.predefinidos[this.predeService.index()].color_config){
+        this.color_config = this.predeService.predefinidos[this.predeService.index()].color_config;
+      }else{
+        this.color_config = this.serviceLocalS.getInput('color_config_input');
+      }
     } 
   }
 

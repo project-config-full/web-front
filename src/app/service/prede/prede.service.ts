@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { predefinidos } from '../../model/model';
+import { predefinidos, inputs } from '../../model/model';
 import { LocalStorageService } from '../localStorage/local-storage.service';
 
 @Injectable({
@@ -7,6 +7,13 @@ import { LocalStorageService } from '../localStorage/local-storage.service';
 })
 export class PredeService {
   constructor(private service: LocalStorageService) {}
+
+  inputs: inputs[] = [
+      {color: '#5acf5d', for: 'Cor das Configurações', id: 0, _idLS: 'color_config_input'},
+      {color: '#B87333', for: 'Cor do Conteudo', id: 1, _idLS: 'color_conteudo_input'},
+      {color: '#833434', for: 'Cor do texto', id: 2, _idLS: 'color_text_input'},
+      {color: '#873408', for: 'Cor do icone das configurações', id: 3, _idLS: 'color_icon_config_input'}
+    ]
 
   predefinidos: predefinidos[] = [
       { 
