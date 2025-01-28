@@ -1,9 +1,11 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, isFormArray } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { PredefinidosComponent } from '../predefinidos/predefinidos.component';
 import { trigger, style, animate, transition, keyframes } from '@angular/animations';
 import { Buttons, GetStyleButton, predefinidos, color_buttons } from '../../model/model';
+import { LocalStorageService } from '../../service/localStorage/local-storage.service';
+import { PredeService } from '../../service/prede/prede.service';
 
 @Component({
   selector: 'app-buttons',
@@ -22,7 +24,9 @@ import { Buttons, GetStyleButton, predefinidos, color_buttons } from '../../mode
     ])
   ]
 })
-export class ButtonsComponent {
+export class ButtonsComponent implements OnInit{
+  constructor(private service: LocalStorageService, private predeService: PredeService) { }
+
   color_buttons: color_buttons = { on: '#C0C0C0', off: '#2C2C2C' };
 
   buttons: Buttons[] = [
@@ -67,6 +71,17 @@ export class ButtonsComponent {
     }
   ]
 
+  ngOnInit(): void {
+    this.buttons.forEach(button =>{
+      button.button_state = this.service.getButton(button.button_id);
+      button.color_button = this.predeService.predefinidos[this.predeService.index()].color_button;
+      button.color_circle = this.predeService.predefinidos[this.predeService.index()].color_circle;
+    });
+
+    this.troca_text = this.service.getButton('troca_text') ?? false;
+    this.remove_text = this.service.getButton('remove_text') ?? false;
+  }
+
   getStyleButton(button: Buttons): GetStyleButton{
     return button.button_state ? {
       text_button: button.text_button.on,
@@ -102,6 +117,15 @@ export class ButtonsComponent {
         }
       }, 10);
     }
+  }
+
+  setButton(button_id: string, val: boolean){
+    this.service.setButton(button_id, val);
+  }
+
+  enviInfos(button: Buttons){
+   this.enviButtonActive(button);
+   this.setButton(button.button_id, button.button_state); 
   }
 
   receberInput(val: { color: string, index: number }){

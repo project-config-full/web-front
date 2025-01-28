@@ -2,7 +2,8 @@ import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { LocalStorageService } from '../../service/local-storage.service';
+import { LocalStorageService } from '../../service/localStorage/local-storage.service';
+import { PredeService } from '../../service/prede/prede.service';
 
 @Component({
   selector: 'app-conteudo',
@@ -41,7 +42,7 @@ import { LocalStorageService } from '../../service/local-storage.service';
   ]
 })
 export class ConteudoComponent implements OnInit {
-  constructor(private service: LocalStorageService) {}
+  constructor(private serviceLocalS: LocalStorageService, private predeService: PredeService) {}
 
   @Output() envi_config_value = new EventEmitter<boolean>();
   config: boolean = true;
@@ -56,7 +57,15 @@ export class ConteudoComponent implements OnInit {
   trocaText: boolean = false;
 
   ngOnInit(): void {
-    this.config = this.service.getConfigOpen() ? false : true;
+    this.config = this.serviceLocalS.getConfigOpen() ? false : true;
+    this.text_ativo.lorem = this.serviceLocalS.getButton('troca_text') ? false : true;
+    this.text_ativo.chat = this.serviceLocalS.getButton('troca_text');
+
+    if(this.serviceLocalS.getPrede() !== null && this.serviceLocalS.getPrede() > 0){
+      this.color_conteudo = this.predeService.predefinidos[this.predeService.index()].color_conteudo;
+      this.color_icon_config = this.predeService.predefinidos[this.predeService.index()].color_icon_config;
+      this.color_text = this.predeService.predefinidos[this.predeService.index()].color_text;
+    }
   }
 
   enviConfigValue(){
@@ -65,7 +74,7 @@ export class ConteudoComponent implements OnInit {
 
   enviInfos(){
     this.enviConfigValue();
-    this.service.setConfigOpen(this.config);
+    this.serviceLocalS.setConfigOpen(this.config);
   }
 
   @Input()

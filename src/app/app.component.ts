@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ConfiguracaoComponent } from './components/configuracao/configuracao.component';
 import { ConteudoComponent } from "./components/conteudo/conteudo.component";
 import { predefinidos } from './model/model';
-import { LocalStorageService } from './service/local-storage.service';
+import { LocalStorageService } from './service/localStorage/local-storage.service';
 
 @Component({
   selector: 'app-root',

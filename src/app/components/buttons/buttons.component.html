@@ -5,7 +5,7 @@
                 <h4>{{ button.text_h4 }}:</h4>
             </div><!-- separar -->
             <div class="separar">
-                <input type="checkbox" [id]="button.button_id" [(ngModel)]="button.button_state" (change)="enviButtonActive(button)">
+                <input type="checkbox" [id]="button.button_id" [(ngModel)]="button.button_state" (change)="enviInfos(button)">
                 <label [for]="button.button_id" class="button" [@btnReload]="ativar_reload && button.reload ? 'active' : 'inative'" (click)="reloadBtn(button)" [ngStyle]="{ 'background-color': getStyleButton(button).color_button }">
                     <h5 [ngStyle]="{ 'color': getStyleButton(button).color_text }" >{{ getStyleButton(button).text_button}}</h5>
                     <div class="circle" [ngStyle]="{ 'left': getStyleButton(button).circle_left, 'background-color': button.color_circle}"></div>

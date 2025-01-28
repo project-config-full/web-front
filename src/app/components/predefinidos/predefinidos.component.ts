@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { predefinidos, inputs } from '../../model/model';
-import { consumerPollProducersForChange } from '@angular/core/primitives/signals';
+import { PredeService } from '../../service/prede/prede.service';
+import { LocalStorageService } from '../../service/localStorage/local-storage.service';
 
 @Component({
   selector: 'app-predefinidos',
@@ -11,7 +12,9 @@ import { consumerPollProducersForChange } from '@angular/core/primitives/signals
   templateUrl: './predefinidos.component.html',
   styleUrl: './predefinidos.component.css'
 })
-export class PredefinidosComponent {
+export class PredefinidosComponent implements OnInit {
+  constructor(private predeService: PredeService, private serviceLocalS: LocalStorageService) {}
+
   inputs: inputs[] = [
     {color: '#5acf5d', for: 'Cor das Configurações', id: 0},
     {color: '#B87333', for: 'Cor do Conteudo', id: 1},
@@ -19,32 +22,18 @@ export class PredefinidosComponent {
     {color: '#3E2723', for: 'Cor do icone das configurações', id: 3}
   ]
 
-  predefinidos: predefinidos[] = [
-    { 
-      color_config: '#5acf5d',
-      color_conteudo: '#B87333',
-      color_text: '#833434',
-      color_icon_config: '#873408',
-      color_button: { on: '#663e10', off: '#d47a13' },
-      color_circle: '#a35603'
-     },
-    { 
-      color_config: '#FF69B4',
-      color_conteudo: '#800080',
-      color_text: '#FE62E2',
-      color_icon_config: '#E9AEF9',
-      color_button: { on: '#a909e8', off: '#e3009b' },
-      color_circle: '#7509bd' 
-    },
-    { 
-      color_config: '#4682B4',
-      color_conteudo: '#C0C0C0',
-      color_text: '#000000',
-      color_icon_config: '#3E2723',
-      color_button: { on: '#000000', off: '#C0C0C0' },
-      color_circle: '#3E2723'
-     }
-  ]
+  predefinidos: predefinidos[] = [];
+
+  ngOnInit(): void {
+    this.predefinidos = this.predeService.predefinidos;
+
+    if(this.serviceLocalS.getPrede() !== null && this.serviceLocalS.getPrede() > 0){
+      this.inputs[0].color = this.predeService.predefinidos[this.predeService.index()].color_config;
+      this.inputs[1].color = this.predeService.predefinidos[this.predeService.index()].color_conteudo;
+      this.inputs[2].color = this.predeService.predefinidos[this.predeService.index()].color_text;
+      this.inputs[3].color = this.predeService.predefinidos[this.predeService.index()].color_icon_config;
+    }
+  }
 
   @Output() enviInput = new EventEmitter<{ color: string, index: number }>();
   @Output() enviPredefinidos = new EventEmitter<predefinidos>()
@@ -58,7 +47,8 @@ export class PredefinidosComponent {
     this.inputs[1].color = prede.color_conteudo;
     this.inputs[2].color = prede.color_text;
     this.inputs[3].color = prede.color_icon_config;
-    this.enviPredefinidos.emit(prede)
+    this.enviPredefinidos.emit(prede);
+    this.serviceLocalS.setPrede(this.verificarIndex(prede) + 1);
   }
 
   verificarIndex(prede: predefinidos): number {
