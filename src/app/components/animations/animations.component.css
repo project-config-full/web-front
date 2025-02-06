@@ -1,0 +1,249 @@
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.container .animation-wraper{
+    width: 100px;
+    height: 45px;
+    border: 1px solid black;
+    box-sizing: content-box;
+    overflow: hidden;
+}
+
+.container .animation-wraper input[type="radio"]{
+    display: none;
+}
+
+.container .animation-wraper label{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.animation-wraper label .separar{
+    width: 50%;
+    height: 100%;
+}
+
+.animation-wraper label .separar .remov_text{
+    width: 100%;
+    height: 100%;
+    transition: background-color 0.5s;
+    overflow: hidden;
+}
+
+.animation-wraper label .separar .troca_text{
+    width: 100%;
+    height: 100%;
+    transition: background-color 0.5s;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+.animation-wraper label .text-wraper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.animation-wraper label .text-wraper p{
+    font-size: 4px;
+    max-width: 30px;
+    max-height: 25px;
+    overflow: hidden;
+    text-align: justify;
+}
+
+#animation_0_troca{
+    animation-name: animation_0_troca;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+#animation_0_remove{
+    animation-name: animation_0_remove;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+#animation_1_troca{
+    animation-name: animation_1_troca;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+#animation_1_remove{
+    animation-name: animation_1_remove;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+#animation_2_troca{
+    animation-name: animation_2_troca;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+#animation_2_remove{
+    animation-name: animation_2_remove;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+
+#animation_3_troca{
+    animation-name: animation_3_troca;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+#animation_3_remove{
+    animation-name: animation_3_remove;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes animation_0_troca{
+    0%, 100%{ transform:  translateY(0%); }
+
+    50%{ transform: translateY(100%); opacity: 0; }
+
+    75%{ transform: translateY(-100%); opacity: 0; }
+
+    90%{ transform: translateY(0%); opacity: 1; }
+}
+
+@keyframes animation_0_remove{
+    0%, 100%{ transform: translateX(0%); }
+
+    50%{ transform: translateX(-100%); opacity: 0; }
+
+    75%{ opacity: 0; }
+
+    90%{ transform: translateX(100%); }
+
+}
+
+@keyframes animation_1_troca{
+  0%, 100% { opacity: 1; filter: blur(0px); }
+
+  40% { opacity: 0; filter: blur(10px); }
+
+  50% { opacity: 1; filter: blur(5px); }
+}
+
+@keyframes animation_1_remove{
+  0%, 100% { opacity: 1; filter: blur(0px); transform: translateY(0); }
+
+  20% { opacity: 0.5; filter: blur(5px); transform: translateY(-10%); }
+
+  30% { opacity: 0; filter: blur(10px); transform: translateY(-20%); }
+
+  40%{ opacity: 0.4; filter: blur(20px); transform: translateY(10%); }
+
+  50% { opacity: 0; filter: blur(0px); transform: translateY(0%); }
+
+  60% { opacity: 0; filter: blur(12px); transform: translateY(100%); }
+
+  70% { opacity: 0.25; filter: blur(9px); transform: translateY(-20%); }
+
+  80% { opacity: 0.5; filter: blur(6px); transform: translateY(20%); }
+
+  90% { opacity: 0.75; filter: blur(3px); transform: translateY(-10%); }
+}
+
+@keyframes animation_2_troca{
+  0%, 100%{ filter: blur(0px); transform: translateX(0); }
+
+  20%{ filter: blur(2px); transform: translateX(-20%); }
+
+  30%{ filter: blur(5px); transform: translateX(20%); }
+
+  40%{ filter: blur(5px); transform: translateX(-10%); }
+
+  50%{ filter: blur(5px); transform: translateX(10%); }
+
+  60%{ filter: blur(5px); transform: translateX(-5%); }
+
+  70%{ filter: blur(5px); transform: translateX(5%); }
+
+  80%{ filter: blur(5px); transform: translateX(-2%); }
+
+  90%{ filter: blur(5px); transform: translateX(2%); }
+
+  100%{ filter: blur(0px); transform: translateX(0); }
+}
+
+@keyframes animation_2_remove{
+  0%, 100%{ opacity: 1; transform: scale(1); }
+
+  5%{ opacity: 1; transform: scale(1.5); }
+
+  10%{ opacity: 1; transform: scale(1); }
+
+  15%{ opacity: 1; transform: scale(1.5); }
+
+  20%{ opacity: 1; transform: scale(1); }
+
+  25%{ opacity: 1; transform: scale(1.5); }
+
+  30%{ opacity: 1; transform: scale(1); }
+
+  35%{ opacity: 0; transform: scale(1.5); }
+
+  40%{ opacity: 0; transform: scale(2); }
+
+  45%{ opacity: 1; transform: scale(1); }
+
+  50%{ transform: scale(1.5); }
+
+  55%{ transform: scale(1); }
+
+  60%{ transform: scale(1.5); }
+
+  65%{ transform: scale(1); }
+
+  70%{ transform: scale(1.5); }
+
+  75%{ transform: scale(0); }
+}
+
+@keyframes animation_3_troca{
+  0%, 100%{ opacity: 1; transform: scale(1); }
+
+  10%{ transform: scale(0.5); }
+
+  20%{ transform: scale(0.5) translateX(200%); }
+
+  30%{ opacity: 0; transform: translateX(-100%) scale(0.5); }
+
+  40%{ opacity: 1; transform: translateX(0) scale(0.5); }
+
+  50%{ transform: scale(1); }
+
+  60%{ transform: scale(0.5); }
+
+  70%{ transform: scale(0.5) translateX(-200%); }
+
+  80%{ opacity: 0; transform: translateX(100%) scale(0.5); }
+
+  90%{ opacity: 1; transform: translateX(0) scale(0.5); }
+}
+
+@keyframes animation_3_remove{
+  0%, 100%{ transform: translate(0) rotate(0deg); }
+
+  50%{ transform: translate(100%) rotate(360deg); }
+
+  60%{ opacity: 0; transform: translate(-100%) rotate(-360deg) ; }
+
+  90%{ opacity: 1; transform: translate(0); }
+}

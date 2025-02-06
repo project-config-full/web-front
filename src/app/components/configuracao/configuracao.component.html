@@ -6,6 +6,7 @@
     <div class="container-buttons">
         <app-buttons
         [btn_color_screen_value]="btn_color_screen_value"
+        (enviAnimation)="receberAnimation($event)"
         (enviRemoveText)="receberRemovText($event)"
         (enviTrocaText)="receberTrocaText($event)"
         (enviPrede)="receberPrede($event)"

@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { LocalStorageService } from '../../service/localStorage/local-storage.service';
 import { PredeService } from '../../service/prede/prede.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-conteudo',
@@ -13,7 +14,7 @@ import { PredeService } from '../../service/prede/prede.service';
   styleUrl: './conteudo.component.css',
   animations: [
     trigger('trocaText', [
-      transition('active <=> inactive', [
+      transition('final <=> init', [
         animate('3s', keyframes([
           style({ opacity: 1 }),
           style({ opacity: 0.5, transform: 'rotateY(100deg)'}),
@@ -23,7 +24,7 @@ import { PredeService } from '../../service/prede/prede.service';
       ])
     ]),
     trigger('RemovText', [
-      transition('inative => active', [
+      transition('init => final', [
         animate('3s', keyframes([
           style({ opacity: 1, transform: 'scale(1) rotateZ(0deg)' }),
           style({ opacity: 0.5, transform: 'scale(0.5) rotateZ(360deg)' }),
@@ -31,18 +32,160 @@ import { PredeService } from '../../service/prede/prede.service';
           style({ opacity: 0, transform: 'scale(0) rotateZ(0deg)' })
         ]))
       ]),
-      transition('active => inative', [
+      transition('final => init', [
         animate('3s', keyframes([
           style({ transform: 'scale(0) rotateZ(0deg)' }),
           style({ transform: 'scale(0.5) rotateZ(360deg)' }),
           style({ transform: 'scale(1) rotateZ(0deg)' })
         ]))
+      ]),
+   ]),
+   trigger('animate_0_troca', [
+    transition('init => final', [
+      animate('3s', keyframes([
+        style({ opacity: 1 , transform: 'translateY(0%)'}),
+        style({ opacity: 0 , transform: 'translateY(100%)'}),
+        style({ opacity: 0 , transform: 'translateY(-100%)'}),
+        style({ opacity: 1 , transform: 'translateY(0%)'})
+      ]))
+    ]),
+    transition('final => init', [
+      animate('3s', keyframes([
+        style({ opacity: 1 , transform: 'translateY(0%)'}),
+        style({ opacity: 0, transform: 'translateY(-100%)'}),
+        style({ opacity: 0 , transform: 'translateY(100%)'}),
+        style({ opacity: 1 , transform: 'translateY(0%)'}),
+      ]))
+    ])
+   ]),
+   trigger('animate_0_remove', [
+    transition('init => final', [
+      animate('3s', keyframes([
+        style({ opacity: 1, transform: 'translateX(-100%)'}),
+      ]))
+    ]),
+    transition('final => init', [
+      animate('3s', keyframes([
+        style({ opacity: 0, transform: 'translateX(100%)'}),
+        style({ opacity: 1, transform: 'translateX(0%)'}),
+      ]))
+    ])
+   ]),
+   trigger('animate_1_troca', [
+      transition('init <=> final', [
+        animate('3s', keyframes([
+          style({ opacity: 1, filter: 'blur(0px)' }),
+          style({ opacity: 0, filter: 'blur(10px)' }),
+          style({ opacity: 0, filter: 'blur(5px)' }),
+          style({ opacity: 1, filter: 'blur(0px)' }),
+        ])),
+      ]),
+   ]),
+   trigger('animate_1_remove', [
+      transition('init => final', [
+        animate('3s', keyframes([
+          style({ opacity: 1, filter: 'blur(0px)', transform: 'translateY(0%)'}),
+          style({ opacity: 0.5, filter: 'blur(5px)', transform: 'translateY(-10%)'}),
+          style({ opacity: 0, filter: 'blur(10px)', transform: 'translateY(-20%)'}),
+          style({ opacity: 0.4, filter: 'blur(20px)', transform: 'translateY(10%)'}),
+          style({ opacity: 0, filter: 'blur(0px)', transform: 'translateY(0%)'}),
+        ]))
+      ]),
+      transition('final => init', [
+        animate('3s', keyframes([
+          style({ opacity: 0, filter: 'blur(12px)', transform: 'translateY(100%)' }),
+          style({ opacity: 0.25, filter: 'blur(9px)', transform: 'translateY(-20%)' }),
+          style({ opacity: 0.5, filter: 'blur(6px)', transform: 'translateY(20%)' }),
+          style({ opacity: 0.75, filter: 'blur(3px)', transform: 'translateY(-10%)' }),
+          style({ opacity: 1, filter: 'blur(0px)', transform: 'translateY(0)' }),
+        ]))
       ])
+   ]),
+   trigger('animate_2_troca', [
+    transition('init <=> final', [
+      animate('3s', keyframes([
+        style({ opacity: 1, filter: 'blur(0px)', transform: 'translateX(0)' }),
+        style({ opacity: 1, filter: 'blur(2px)', transform: 'translateX(-20%)' }),
+        style({ opacity: 1, filter: 'blur(5px)', transform: 'translateX(20%)' }),
+        style({ opacity: 1, filter: 'blur(10px)', transform: 'translateX(-10%)' }),
+        style({ opacity: 0, filter: 'blur(10px)', transform: 'translateX(10%)' }),
+        style({ opacity: 0, filter: 'blur(10px)', transform: 'translateX(-5%)' }),
+        style({ opacity: 0, filter: 'blur(10px)', transform: 'translateX(5%)' }),
+        style({ opacity: 0, filter: 'blur(10px)', transform: 'translateX(-2%)' }),
+        style({ opacity: 1, filter: 'blur(10px)', transform: 'translateX(2%)' }),
+        style({ opacity: 1, filter: 'blur(0px)', transform: 'translateX(0)' }),
+      ]))
+    ])
+   ]),
+   trigger('animate_2_remove', [
+    transition('init => final', [
+      animate('3s', keyframes([
+        style({ opacity: 1, transform: 'scale(1)' }),
+        style({ opacity: 1, transform: 'scale(1.5)' }),
+        style({ opacity: 1, transform: 'scale(1' }),
+        style({ opacity: 1, transform: 'scale(1.5)' }),
+        style({ opacity: 1, transform: 'scale(1)' }),
+        style({ opacity: 1, transform: 'scale(1.5)' }),
+        style({ opacity: 1, transform: 'scale(1)' }),
+        style({ opacity: 0, transform: 'scale(1.5)' }),
+      ]))
+    ]),
+    transition('final => init', [
+      animate('3s', keyframes([
+        style({ opacity: 0, transform: 'scale(2)' }),
+        style({ opacity: 1, transform: 'scale(1)' }),
+        style({ transform: 'scale(1.5)' }),
+        style({ transform: 'scale(1' }),
+        style({ transform: 'scale(1.5)' }),
+        style({ transform: 'scale(1)' }),
+        style({ transform: 'scale(1.5)' }),
+        style({ transform: 'scale(0)'}),
+        style({ transform: 'scale(1)' }),
+      ]))
+    ])
+   ]),
+   trigger('animate_3_troca', [
+    transition('init => final', [
+      animate('3s', keyframes([
+        style({ opacity: 1, transform: 'scale(1)' }),
+        style({ transform: 'scale(0.5)' }),
+        style({ opacity: 0, transform: 'scale(0.5) translateX(200%)' }),
+        style({ opacity: 0, transform: 'translateX(-100%) scale(0.5)' }),
+        style({ opacity: 1, transform: 'translateX(0) scale(0.5)' }),
+        style({ transform: 'scale(1)' }),
+      ]))
+    ]),
+    transition('final => init', [
+      animate('3s', keyframes([
+        style({ opacity: 1, transform: 'scale(1)' }),
+        style({ transform: 'scale(0.5)' }),
+        style({ opacity: 0, transform: 'scale(0.5) translateX(-200%)' }),
+        style({ opacity: 0, transform: 'translateX(100%) scale(0.5)' }),
+        style({ opacity: 1, transform: 'translateX(0) scale(0.5)' }),
+        style({ transform: 'scale(1)' }),
+      ]))
+    ])
+   ]),
+   trigger('animate_3_remove', [
+    transition('init => final', [
+      animate('3s', keyframes([
+        style({ transform: 'translate(0) rotate(0deg)' }),
+        style({ opacity: 0, transform: 'translate(100%) rotate(360deg)' }),
+      ]))
+    ]),
+    transition('final => init', [
+      animate('3s', keyframes([
+        style({ opacity: 0, transform: 'translate(-100%) rotate(-360deg)' }),
+        style({ opacity: 1, transform: 'translate(0)' }),
+      ]))
+    ])
    ])
   ]
 })
 export class ConteudoComponent implements OnInit {
   constructor(private serviceLocalS: LocalStorageService, private predeService: PredeService) {}
+
+  @Input() animate: number = -1;
 
   @Output() envi_config_value = new EventEmitter<boolean>();
   config: boolean = true;
@@ -58,6 +201,8 @@ export class ConteudoComponent implements OnInit {
   trocaText: boolean = false;
 
   ngOnInit(): void {
+    this.animate = this.serviceLocalS.getAnimation() ?? -1;
+
     this.btn_color_screen_value = this.serviceLocalS.getButton('color_of_screen') ?? false;
 
     this.config = this.serviceLocalS.getConfigOpen() ? false : true;
@@ -65,9 +210,9 @@ export class ConteudoComponent implements OnInit {
     this.text_ativo.chat = this.serviceLocalS.getButton('troca_text');
 
     if(this.serviceLocalS.getPrede() !== null && this.serviceLocalS.getPrede() > 0 && this.btn_color_screen_value){
-      
+
       if(this.serviceLocalS.getInput('color_conteudo_input') === this.predeService.predefinidos[this.predeService.index()].color_conteudo){
-        this.color_conteudo = this.predeService.predefinidos[this.predeService.index()].color_conteudo;  
+        this.color_conteudo = this.predeService.predefinidos[this.predeService.index()].color_conteudo;
       }else{
         this.color_conteudo = this.serviceLocalS.getInput('color_conteudo_input');
       }
@@ -104,7 +249,7 @@ export class ConteudoComponent implements OnInit {
   }
 
   @Input()
-  set button_state(val: boolean){ 
+  set button_state(val: boolean){
     this.color_conteudo = val ? "#B87333" : "#2c2c2c";
     this.color_icon_config = val ? "#873408" : "#000000";
     this.color_text = val ? "#833434" : "#f5f5f5";
@@ -142,6 +287,6 @@ export class ConteudoComponent implements OnInit {
           this.text_ativo.chat = false;
         }
       }
-    } 
+    }
   }
 }

@@ -1,6 +1,7 @@
 <div class="container">
   <div class="container-config" [ngStyle]="{ 'width': value_config ? width_config : '0%' }">
     <app-configuracao
+      (enviAnimation)="receberAnimation($event)"
       (enviPrede)="receberPrede($event)"
       (enviInput)="receberInput($event)"
       (enviState)="receberBtnState($event)"
@@ -17,6 +18,7 @@
       [button_state]="button_state_prede"
       [remove_text]="remove_text"
       [troca_text]="troca_text"
+      [animate]="animate"
       (envi_config_value)="receberValueConfig($event)"
       ></app-conteudo>
   </div><!-- container-content -->

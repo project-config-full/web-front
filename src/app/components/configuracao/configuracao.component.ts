@@ -20,6 +20,8 @@ export class ConfiguracaoComponent implements OnInit {
   @Output() enviPrede = new EventEmitter<predefinidos>()
   @Output() enviRemoveText = new EventEmitter<boolean>()
   @Output() enviTrocaText = new EventEmitter<boolean>()
+  @Output() enviAnimation = new EventEmitter<number>()
+  @Output() enviAnimationVal = new EventEmitter<boolean>()
   color_config: string = "#8b0000";
   btn_color_screen_value: boolean = false;
 
@@ -32,7 +34,7 @@ export class ConfiguracaoComponent implements OnInit {
       }else{
         this.color_config = this.serviceLocalS.getInput('color_config_input');
       }
-    } 
+    }
   }
 
   receberButtonState(val: boolean){
@@ -48,6 +50,10 @@ export class ConfiguracaoComponent implements OnInit {
     }
 
     this.enviInput.emit(val);
+  }
+
+  receberAnimation(index: number){
+    this.enviAnimation.emit(index);
   }
 
   receberPrede(prede: predefinidos){

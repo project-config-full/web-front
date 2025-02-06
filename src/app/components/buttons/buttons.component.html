@@ -6,7 +6,7 @@
             </div><!-- separar -->
             <div class="separar">
                 <input type="checkbox" [id]="button.button_id" [(ngModel)]="button.button_state" (change)="enviInfos(button)">
-                <label [for]="button.button_id" class="button" [@btnReload]="ativar_reload && button.reload ? 'active' : 'inative'" (click)="reloadBtn(button)" [ngStyle]="{ 'background-color': getStyleButton(button).color_button }">
+                <label [for]="button.button_id" class="button" [@btnReload]="button.reload_especial && ativar_reload_especial ? 'init' : 'final'" [@btnReload]="ativar_reload && button.reload ? 'init' : 'final'" (click)="click_button(button)" [ngStyle]="{ 'background-color': getStyleButton(button).color_button }">
                     <h5 [ngStyle]="{ 'color': getStyleButton(button).color_text }" >{{ getStyleButton(button).text_button}}</h5>
                     <div class="circle" [ngStyle]="{ 'left': getStyleButton(button).circle_left, 'background-color': button.color_circle}"></div>
                 </label>
@@ -21,6 +21,17 @@
                 (enviInput)="receberInput($event)"
                 ></app-predefinidos>
             </div><!-- container-prede -->
+        }
+
+        @if(button.troca_animation && button.button_state){
+            <div class="container-animations">
+                <app-animations
+                (envi_animation)="receberAnimation($event)"
+                [reload_animation]="ativar_reload_especial"
+                [animations_color]="color_animation"
+                [btn_color_screen_value]="btn_color_screen_value"
+                ></app-animations>
+            </div><!-- container-animations -->
         }
     }
 </div><!-- container -->

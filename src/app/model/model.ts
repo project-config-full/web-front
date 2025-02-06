@@ -1,9 +1,11 @@
 export interface Buttons{
   predefinidos: boolean,
+  troca_animation: boolean,
   button_state: boolean,
   troca_text: boolean,
   remove_text: boolean,
   reload: boolean,
+  reload_especial: boolean
   text_h4: string,
   button_id: string,
   text_button: { on: string, off: string },
@@ -39,4 +41,17 @@ export interface predefinidos{
 export interface color_buttons{
   on: string,
   off: string
+}
+
+export interface animations{
+  id: string,
+  checked: boolean,
+  color: { remov_text: string, troca_text: string },
+  identifier: { remov: string, troca: string },
+  title: { troca: string, remov: string },
+}
+
+export interface colorAnimation{
+  remov_text: string,
+  troca_text: string
 }

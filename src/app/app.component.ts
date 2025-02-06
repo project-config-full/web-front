@@ -19,6 +19,8 @@ export class AppComponent implements OnInit {
   width_conteudo: string = '80%';
   value_config: boolean = false;
   button_state_prede: boolean = false;
+  animate: number = -1;
+  animate_val: boolean = false;
 
   ngOnInit(): void {
     this.value_config = this.service.getConfigOpen() ?? false;
@@ -33,6 +35,10 @@ export class AppComponent implements OnInit {
 
   receberBtnState(val: boolean){
     this.button_state_prede = val;
+  }
+
+  receberAnimation(index: number){
+    this.animate = index
   }
 
   color_conteudo: string = "#2c2c2c";
