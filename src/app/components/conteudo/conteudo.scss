@@ -1,0 +1,19 @@
+.openConfig{
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  margin: .5rem;
+
+  svg{
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: 700px){
+  .openConfig{
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}

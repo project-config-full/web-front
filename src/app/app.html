@@ -1,0 +1,12 @@
+<div class="container">
+  <app-config
+    [class.transitionOff]="transitionOff"
+    [class.isOpenConfig]="configIsOpen"
+  ></app-config>
+
+  <app-conteudo
+    [class.transitionOff]="transitionOff"
+    [class.isOpenConfig]="configIsOpen"
+    (changeConfigEnv)="configIsOpen = $event"
+  ></app-conteudo>
+</div><!-- container -->
