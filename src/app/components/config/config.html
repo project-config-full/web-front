@@ -1,0 +1,27 @@
+<div class="container">
+  <header>
+    <h1>Settings</h1>
+  </header>
+
+  <section class="config">
+    @for(button of buttons; track button){
+     <div class="button-wrapper">
+      <div class="label">
+        <h4>{{ button.label + ':'}}</h4>
+      </div><!-- label -->
+      <div class="button" (click)="button.onClick()">
+        <div class="circle"></div><!-- circle -->
+        <div class="textInButton">
+          <h5>
+            {{
+              button.isActive ?
+              button.textInButton.active :
+              button.textInButton.disable
+            }}
+          </h5>
+        </div><!-- textInButton -->
+      </div><!-- button -->
+     </div><!-- button-wrapper -->
+    }
+  </section><!-- config -->
+</div><!-- container -->
