@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeConfig } from '../../services/changeConfig/change-config';
 
 @Component({
   selector: 'app-conteudo',
@@ -8,6 +9,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './conteudo.scss'
 })
 export class Conteudo {
+  constructor(private changeConfigService: ChangeConfig){}
+
   @Output() changeConfigEnv = new EventEmitter<boolean>();
 
   changeConfig(): void{
@@ -16,6 +19,7 @@ export class Conteudo {
 
     localStorage.setItem('configIsOpen', JSON.stringify(!configIsOpenVal));
 
+    this.changeConfigService.setConfigVal(!configIsOpenVal);
     this.changeConfigEnv.emit(!configIsOpenVal);
   }
 }

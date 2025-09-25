@@ -1,6 +1,12 @@
 .container{
   width: 100%;
   height: 100%;
+  transform: translateY(100%);
+  transition: transform .5s ease-in-out;
+
+  &.openingConfig{
+    transform: translate(0);
+  }
 
   header{
     width: 100%;
