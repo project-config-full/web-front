@@ -1,59 +1,6 @@
-# ProjectConfigNew
-
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.1.
-
-## Development server
-
-To start a local development server, run:
-
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Project Config é um dos meus primeiros projetos na área de front-end. Ele começou com uma simples tela de abertura e um botão para mudar o tema de dark para light.
+Com o tempo, fui tendo mais e mais ideias, com a ajuda do meu cunhado e do meu pai. No início, eu programava apenas com HTML, CSS e JavaScript (com jQuery). Hoje em dia, esse projeto está incrível, com funcionalidades que desafiam quem tenta reproduzi-las.
+Por isso, posso dizer que este projeto é uma boa porta de entrada para você que deseja começar na área de desenvolvimento web.
+Eu sei que, para quem está começando agora, ele pode parecer um projeto complexo — e eu digo que realmente é — mas ele só ficou assim com o tempo; no início não tinha nada demais.
+Então, eu desafio você, programador iniciante, intermediário ou até avançado, a refazer o Project Config. Não tenha medo de fazer do seu jeito ou simplesmente tentar "copiar" o meu projeto do absoluto zero.
+Fique à vontade para entrar em contato comigo para pedir ajuda. Eu vou adorar ajudar!
