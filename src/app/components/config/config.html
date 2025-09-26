@@ -9,9 +9,15 @@
       <div class="label">
         <h4>{{ button.label + ':'}}</h4>
       </div><!-- label -->
-      <div class="button" (click)="button.onClick()">
-        <div class="circle"></div><!-- circle -->
-        <div class="textInButton">
+      <div class="button"
+        [style.backgroundColor]="button.color.backgroundColor"
+        (click)="button.onClick(button)"
+      >
+        <div class="circle"
+          [style.backgroundColor]="button.color.colorOfCircle"
+          [class.active]="button.isActive"
+        ></div><!-- circle -->
+        <div class="textInButton" [style.color]="button.color.colorOfText">
           <h5>
             {{
               button.isActive ?

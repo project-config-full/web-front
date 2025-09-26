@@ -33,17 +33,21 @@ export class Config {
       label: "Theme",
       textInButton: {
         disable: "Default",
-        active: "other"
+        active: "Other"
       },
-      onClick: () => {}
+      onClick: (button: ButtonsConfig) => {
+        button.changeIsActive();
+      }
     }),
     new ButtonsConfig({
       label: "animation",
       textInButton: {
         disable: "Default",
-        active: "other"
+        active: "Other"
       },
-      onClick: () => {}
+      onClick: (button: ButtonsConfig) => {
+        button.changeIsActive();
+      }
     }),
     new ButtonsConfig({
       label: "Exchange text",
@@ -51,15 +55,19 @@ export class Config {
         disable: "Lorem",
         active: "Chat"
       },
-      onClick: () => {}
+      onClick: (button: ButtonsConfig) => {
+        button.changeIsActive();
+      }
     }),
     new ButtonsConfig({
       label: "Remove text",
       textInButton: {
-        disable: "with",
-        active: "without"
+        disable: "With",
+        active: "Without"
       },
-      onClick: () => {}
+      onClick: (button: ButtonsConfig) => {
+        button.changeIsActive();
+      }
     })
   ];
 
