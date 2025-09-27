@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ButtonsConfig } from '../../models/buttons_config/buttons-config.model';
 import { ChangeConfig } from '../../services/changeConfig/change-config';
 import { Presets } from "./components/presets/presets";
+import { ChangeColor } from '../../services/change_color/change-color';
+import { ChangeColorI } from '../../interfaces/change-color-i';
 
 @Component({
   selector: 'app-config',
@@ -15,7 +17,10 @@ export class Config {
   activeResponsive: boolean = false;
   configIsOpen!: boolean;
 
-  constructor(private changeConfigService: ChangeConfig){
+  constructor(
+    private changeConfigService: ChangeConfig,
+    private changeColorService: ChangeColor
+  ){
     this.changeConfigService.$configVal.subscribe((val: boolean) => {
       if(!this.activeResponsive) this.openingConfig = val;
 
@@ -39,6 +44,15 @@ export class Config {
       },
       onClick: (button: ButtonsConfig) => {
         button.changeIsActive();
+
+        if(button.isActive) return;
+
+        this.changeColorService.setColorVal({
+          colorConfig: "darkred",
+          colorContent: "#2c2c2c",
+          colorText: "white",
+          colorIcon: "black"
+        })
       }
     }),
     new ButtonsConfig({

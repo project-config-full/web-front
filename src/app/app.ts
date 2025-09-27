@@ -2,6 +2,8 @@ import { Component, signal, HostListener } from '@angular/core';
 import { Config } from "./components/config/config";
 import { Conteudo } from "./components/conteudo/conteudo";
 import { CommonModule } from '@angular/common';
+import { ChangeColor } from './services/change_color/change-color';
+import { ChangeColorI } from './interfaces/change-color-i';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +17,17 @@ export class App {
   configIsOpen!: boolean;
   transitionOff: boolean = false;
 
-  constructor() {
+  colorOfConfig: string = "darkred";
+  colorOfContent: string = "#2c2c2c";
+
+  constructor(
+    private changeColorService: ChangeColor
+  ) {
+    this.changeColorService.$colorVal.subscribe((val: ChangeColorI)=>{
+      this.colorOfConfig = val.colorConfig ? val.colorConfig : this.colorOfConfig;
+      this.colorOfContent = val.colorContent ? val.colorContent : this.colorOfContent;
+    });
+
     const configIsOpenLS = localStorage.getItem('configIsOpen');
     this.configIsOpen = configIsOpenLS ? JSON.parse(configIsOpenLS) : false;
   }
