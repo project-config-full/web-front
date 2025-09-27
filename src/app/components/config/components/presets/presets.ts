@@ -16,7 +16,7 @@ export class Presets {
     new InputPresets({
       title: "Setting color",
       colorId: "color_config",
-      colorInput: "darkred",
+      colorInput: "#8B0000",
       changeColor: (color: string) => {
         this.changeColorService.setColorVal({
           colorConfig: color
@@ -36,7 +36,7 @@ export class Presets {
     new InputPresets({
       title: "Text color",
       colorId: "color_text",
-      colorInput: "white",
+      colorInput: "#FFFFFF",
       changeColor: (color: string) => {
         this.changeColorService.setColorVal({
           colorText: color
@@ -46,7 +46,7 @@ export class Presets {
     new InputPresets({
       title: "Settings icon color",
       colorId: "color_icon",
-      colorInput: "black",
+      colorInput: "#000000",
       changeColor: (color: string) => {
         this.changeColorService.setColorVal({
           colorIcon: color
