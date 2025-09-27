@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  height: 10rem;
+  height: 15rem;
 
   .container-inputs {
     width: 100%;
@@ -36,6 +36,127 @@
 
         label{
           width: 5rem;
+        }
+      }
+    }
+  }
+
+  .container-presets{
+    width: 100%;
+    height: 10rem;
+    margin-top: 1.5rem;
+    font-family: "Open Sans", sans-serif;
+    color: white;
+    display: flex;
+    flex-direction: column;
+
+    header{
+      height: 30%;
+      display: flex;
+      align-items: center;
+    }
+
+    .presets-wrapper{
+      width: 100%;
+      height: 70%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+
+      .preset{
+        width: 30%;
+        height: 50%;
+        background-color: red;
+        cursor: pointer;
+        display: flex;
+        transition: width .3s ease-in-out, height .3s ease-in-out;
+
+        &:hover{
+          width: 45%;
+          height: 65%;
+
+          .config-pre{
+            .button-pre-wrapper{
+              opacity: 1;
+            }
+          }
+        }
+
+        .config-pre{
+          width: 35%;
+          height: 100%;
+          background-color: green;
+
+          .button-pre-wrapper{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: opacity .3s ease-in-out;
+            opacity: 0;
+
+            .button-pre{
+              width: 70%;
+              height: 15%;
+              background-color: yellow;
+              border-radius: .5rem;
+              margin: .2rem auto;
+
+              .circle-pre{
+                width: 30%;
+                height: 100%;
+                background-color: red;
+                border-radius: 50%;
+              }
+
+              &.btn-active{
+                background-color: purple;
+                position: relative;
+
+                .circle-pre{
+                  position: absolute;
+                  right: 0;
+                }
+              }
+            }
+          }
+        }
+
+        .content-pre{
+          width: 65%;
+          height: 100%;
+          background-color: blue;
+
+          header{
+            width: 100%;
+            height: 35%;
+            background-color: blueviolet;
+            padding-left: .2rem;
+
+            .iconConfig-pre{
+              width: .6rem;
+              height: .6rem;
+              background-color: gold;
+              border-radius: 50%;
+            }
+          }
+
+          section{
+            width: 100%;
+            height: 65%;
+            background-color: coral;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .textContent-pre{
+              width: 80%;
+              height: .35rem;
+              background-color: black;
+            }
+          }
         }
       }
     }
