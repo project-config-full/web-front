@@ -3,6 +3,7 @@
   height: 100%;
   transform: translateY(100%);
   transition: transform .5s ease-in-out;
+  overflow-y: auto;
 
   &.openingConfig{
     transform: translate(0);
