@@ -24,28 +24,30 @@
     </header>
 
     <div class="presets-wrapper">
-      <div class="preset">
-        <div class="config-pre">
-          <div class="button-pre-wrapper">
-            <div class="button-pre">
-              <div class="circle-pre"></div><!-- circle-pre -->
-            </div><!-- button-pre -->
+      @for(preset of presets; track preset){
+        <div class="preset" [title]="preset.title">
+          <div class="config-pre" [style.backgroundColor]="preset.colorConfig">
+            <div class="button-pre-wrapper">
+              <div class="button-pre" [style.backgroundColor]="preset.colorAllButton.inactive.buttonColor">
+                <div class="circle-pre" [style.backgroundColor]="preset.colorAllButton.circleColor"></div><!-- circle-pre -->
+              </div><!-- button-pre -->
 
-            <div class="button-pre btn-active">
-              <div class="circle-pre"></div><!-- circle-pre -->
-            </div><!-- button-pre -->
-          </div><!-- button-pre-wrapper -->
-        </div><!-- config-pre -->
-        <div class="content-pre">
-          <header>
-            <div class="iconConfig-pre"></div><!-- iconConfig-pre -->
-          </header>
+              <div class="button-pre btn-active" [style.backgroundColor]="preset.colorAllButton.active.buttonColor">
+                <div class="circle-pre" [style.backgroundColor]="preset.colorAllButton.circleColor"></div><!-- circle-pre -->
+              </div><!-- button-pre -->
+            </div><!-- button-pre-wrapper -->
+          </div><!-- config-pre -->
+          <div class="content-pre" [style.backgroundColor]="preset.colorContent">
+            <header>
+              <div class="iconConfig-pre" [style.backgroundColor]="preset.colorIcon"></div><!-- iconConfig-pre -->
+            </header>
 
-          <section>
-            <div class="textContent-pre"></div><!-- textContent-pre -->
-          </section>
-        </div><!-- content-pre -->
-      </div><!-- preset -->
+            <section>
+              <div class="textContent-pre" [style.backgroundColor]="preset.colorText"></div><!-- textContent-pre -->
+            </section>
+          </div><!-- content-pre -->
+        </div><!-- preset -->
+      }
     </div><!-- preset-wrapper -->
   </div><!-- container-presets -->
 </div><!-- container -->

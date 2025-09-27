@@ -26,7 +26,7 @@
     header{
       h1{
         text-align: center;
-        font-size: clamp(.8rem, 5vw, 2rem);
+        font-size: clamp(.8rem, 30vw, 2rem);
       }
     }
 
@@ -35,7 +35,21 @@
         max-width: 700px;
         padding: 1.2rem 2rem 0 2rem;
         text-align: justify;
-        font-size: clamp(.5rem, 2.5vw, 1.1rem);
+        font-size: clamp(.5rem, 1.8vw, 1.1rem);
+      }
+    }
+
+    @media screen and (max-width: 700px){
+      header{
+        h1{
+          font-size: clamp(.8rem, 5vw, 2rem);
+        }
+      }
+
+      section{
+        p{
+          font-size: clamp(.5rem, 2.5vw, 1.1rem);
+        }
       }
     }
   }
