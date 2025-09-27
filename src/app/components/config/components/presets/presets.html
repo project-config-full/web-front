@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="container-inputs">
+    @for(input of inputs; track input){
+      <div class="input-wrapper">
+        <input
+          type="color"
+          [id]="input.colorId"
+          [(ngModel)]="input.colorInput"
+        >
+        <label
+          [for]="input.colorId"
+          [title]="input.title"
+          [style.backgroundColor]="input.colorInput"
+        ></label>
+      </div><!-- input-wrapper -->
+    }
+  </div><!-- container-inputs -->
+</div><!-- container -->

@@ -28,6 +28,12 @@
         </div><!-- textInButton -->
       </div><!-- button -->
      </div><!-- button-wrapper -->
+
+     @if(button.isActive && button.presets){
+      <div class="presets-wrapper">
+        <app-presets></app-presets>
+      </div><!-- presets-wrapper -->
+     }
     }
   </section><!-- config -->
 </div><!-- container -->

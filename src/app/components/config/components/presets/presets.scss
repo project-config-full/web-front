@@ -1,0 +1,43 @@
+.container {
+  width: 100%;
+  height: 10rem;
+
+  .container-inputs {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    column-gap: .5rem;
+    row-gap: 1rem;
+
+    .input-wrapper {
+      flex: 1 1 auto;
+
+      input {
+        display: none;
+      }
+
+      label {
+        width: clamp(3.5rem, 20vw, 4rem);
+        height: 2.5rem;
+        display: block;
+        border-radius: .2rem;
+        border: 1px solid whitesmoke;
+        cursor: pointer;
+        transition: background-color .3s ease-in-out;
+      }
+    }
+
+    @media screen and (max-width: 460px) {
+      .input-wrapper {
+        flex: 1 1 calc(50% - .5rem);
+        display: flex;
+        justify-content: center;
+
+        label{
+          width: 5rem;
+        }
+      }
+    }
+  }
+}

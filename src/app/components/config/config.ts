@@ -2,10 +2,11 @@ import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonsConfig } from '../../models/buttons_config/buttons-config.model';
 import { ChangeConfig } from '../../services/changeConfig/change-config';
+import { Presets } from "./components/presets/presets";
 
 @Component({
   selector: 'app-config',
-  imports: [CommonModule],
+  imports: [CommonModule, Presets],
   templateUrl: './config.html',
   styleUrl: './config.scss'
 })
@@ -31,6 +32,7 @@ export class Config {
   buttons: ButtonsConfig[] = [
     new ButtonsConfig({
       label: "Theme",
+      presets: true,
       textInButton: {
         disable: "Default",
         active: "Other"

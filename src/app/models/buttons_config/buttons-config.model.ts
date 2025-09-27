@@ -12,6 +12,7 @@ interface colorOfButtonInterface {
 interface ButtonsConfigInterface {
   label: string;
   isActive?: boolean;
+  presets?: boolean;
   textInButton: textInButtonInterface;
   color?: colorOfButtonInterface;
   onClick: (button: ButtonsConfig) => void;
@@ -20,6 +21,7 @@ interface ButtonsConfigInterface {
 export class ButtonsConfig {
   label: string;
   isActive: boolean;
+  presets: boolean;
   textInButton: textInButtonInterface;
   color: colorOfButtonInterface;
   onClick: (button: this) => void;
@@ -35,6 +37,7 @@ export class ButtonsConfig {
     label,
     isActive = false,
     textInButton,
+    presets = false,
     color = {
       colorOfCircle: '#f5deb3',
       colorOfText: '#bbbbbb',
@@ -44,6 +47,7 @@ export class ButtonsConfig {
   }: ButtonsConfigInterface){
     this.label = label;
     this.isActive = isActive;
+    this.presets = presets;
     this.textInButton = textInButton;
     this.color = color;
     this.onClick = onClick;
