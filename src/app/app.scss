@@ -36,7 +36,7 @@
   }
 
   .transitionOff{
-    transition: none !important;
+    transition: background-color .5s ease-in-out !important;
   }
 
   @media screen and (max-width: 1200px){
@@ -75,7 +75,7 @@
 
     app-conteudo{
       width: 100% !important;
-      transition: none !important;
+      transition: background-color .5s ease-in-out !important;
     }
   }
 
@@ -90,7 +90,7 @@
 
     app-conteudo{
       width: 100% !important;
-      transition: none !important;
+      transition: background-color .5s ease-in-out !important;
     }
   }
 }

@@ -5,35 +5,33 @@
 
   <section class="config">
     @for(button of buttons; track button){
-     <div class="button-wrapper">
-      <div class="label">
-        <h4>{{ button.label + ':'}}</h4>
-      </div><!-- label -->
-      <div class="button"
-        [style.backgroundColor]="button.isActive ? button.color!.active.buttonColor : button.color!.inactive.buttonColor"
-        (click)="button.onClick(button)"
-      >
-        <div class="circle"
-          [style.backgroundColor]="button.color!.circleColor"
-          [class.active]="button.isActive"
-        ></div><!-- circle -->
-        <div class="textInButton" [style.color]="button.isActive ? button.color!.active.textColor : button.color!.inactive.textColor">
-          <h5>
-            {{
-              button.isActive ?
-              button.textInButton.active :
-              button.textInButton.disable
-            }}
-          </h5>
-        </div><!-- textInButton -->
-      </div><!-- button -->
-     </div><!-- button-wrapper -->
+      <div class="button-wrapper">
+        <div class="label">
+          <h4>{{ button.label + ':'}}</h4>
+        </div><!-- label -->
+        <div class="button"
+          [style.backgroundColor]="button.isActive ? button.color!.active.buttonColor : button.color!.inactive.buttonColor"
+          (click)="button.onClick(button)"
+        >
+          <div class="circle"
+            [style.backgroundColor]="button.color!.circleColor"
+            [class.active]="button.isActive"
+          ></div><!-- circle -->
+          <div class="textInButton" [style.color]="button.isActive ? button.color!.active.textColor : button.color!.inactive.textColor">
+            <h5>
+              {{
+                button.isActive ?
+                button.textInButton.active :
+                button.textInButton.disable
+              }}
+            </h5>
+          </div><!-- textInButton -->
+        </div><!-- button -->
+      </div><!-- button-wrapper -->
 
-     @if(button.isActive && button.presets){
-      <div class="presets-wrapper">
+      <div class="presets-wrapper" [style.display]="button.isActive && button.presets ? 'flex' : 'none'">
         <app-presets></app-presets>
       </div><!-- presets-wrapper -->
-     }
     }
   </section><!-- config -->
 </div><!-- container -->

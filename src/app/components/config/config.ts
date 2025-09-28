@@ -1,10 +1,11 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonsConfig } from '../../models/buttons_config/buttons-config.model';
 import { ChangeConfig } from '../../services/changeConfig/change-config';
 import { Presets } from "./components/presets/presets";
 import { ChangeColor } from '../../services/change_color/change-color';
 import { ChangeColorI } from '../../interfaces/change-color-i';
+import { ChangeColorPre } from '../../models/change_color_pre/change-color-pre';
 
 @Component({
   selector: 'app-config',
@@ -12,7 +13,9 @@ import { ChangeColorI } from '../../interfaces/change-color-i';
   templateUrl: './config.html',
   styleUrl: './config.scss'
 })
-export class Config {
+export class Config{
+  @ViewChild(Presets) presetsChild!: Presets;
+
   openingConfig!: boolean;
   activeResponsive: boolean = false;
   configIsOpen!: boolean;
@@ -53,7 +56,30 @@ export class Config {
       onClick: (button: ButtonsConfig) => {
         button.changeIsActive();
 
-        if(button.isActive) return;
+        if(button.isActive){
+          const indexSelected = Math.floor(Math.random() * 3);
+          const preset = this.presetsChild.presets[indexSelected];
+
+          this.changeColorService.setColorVal({
+            colorConfig: preset.colorConfig,
+            colorContent: preset.colorContent,
+            colorText: preset.colorText,
+            colorIcon: preset.colorIcon,
+            colorAllButton: {
+              circleColor: preset.colorAllButton!.circleColor,
+              active: {
+                buttonColor: preset.colorAllButton!.active.buttonColor,
+                textColor: preset.colorAllButton!.active.textColor
+              },
+              inactive: {
+                buttonColor: preset.colorAllButton!.inactive.buttonColor,
+                textColor: preset.colorAllButton!.inactive.textColor
+              }
+            }
+          });
+
+          return;
+        };
 
         this.changeColorService.setColorVal({
           colorConfig: "darkred",
