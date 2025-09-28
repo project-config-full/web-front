@@ -10,14 +10,14 @@
         <h4>{{ button.label + ':'}}</h4>
       </div><!-- label -->
       <div class="button"
-        [style.backgroundColor]="button.color.backgroundColor"
+        [style.backgroundColor]="button.isActive ? button.color!.active.buttonColor : button.color!.inactive.buttonColor"
         (click)="button.onClick(button)"
       >
         <div class="circle"
-          [style.backgroundColor]="button.color.colorOfCircle"
+          [style.backgroundColor]="button.color!.circleColor"
           [class.active]="button.isActive"
         ></div><!-- circle -->
-        <div class="textInButton" [style.color]="button.color.colorOfText">
+        <div class="textInButton" [style.color]="button.isActive ? button.color!.active.textColor : button.color!.inactive.textColor">
           <h5>
             {{
               button.isActive ?

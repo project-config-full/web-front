@@ -25,15 +25,15 @@
 
     <div class="presets-wrapper">
       @for(preset of presets; track preset){
-        <div class="preset" [title]="preset.title">
+        <div class="preset" [title]="preset.title" (click)="preset.onClick()">
           <div class="config-pre" [style.backgroundColor]="preset.colorConfig">
             <div class="button-pre-wrapper">
-              <div class="button-pre" [style.backgroundColor]="preset.colorAllButton.inactive.buttonColor">
-                <div class="circle-pre" [style.backgroundColor]="preset.colorAllButton.circleColor"></div><!-- circle-pre -->
+              <div class="button-pre" [style.backgroundColor]="preset.colorAllButton!.inactive.buttonColor">
+                <div class="circle-pre" [style.backgroundColor]="preset.colorAllButton!.circleColor"></div><!-- circle-pre -->
               </div><!-- button-pre -->
 
-              <div class="button-pre btn-active" [style.backgroundColor]="preset.colorAllButton.active.buttonColor">
-                <div class="circle-pre" [style.backgroundColor]="preset.colorAllButton.circleColor"></div><!-- circle-pre -->
+              <div class="button-pre btn-active" [style.backgroundColor]="preset.colorAllButton!.active.buttonColor">
+                <div class="circle-pre" [style.backgroundColor]="preset.colorAllButton!.circleColor"></div><!-- circle-pre -->
               </div><!-- button-pre -->
             </div><!-- button-pre-wrapper -->
           </div><!-- config-pre -->

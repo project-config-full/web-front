@@ -27,6 +27,14 @@ export class Config {
       this.configIsOpen = val;
     });
 
+    this.changeColorService.$colorVal.subscribe((val: ChangeColorI) => {
+      if(!val.colorAllButton) return;
+
+      this.buttons.forEach(button => {
+        button.changeColor(val.colorAllButton);
+      });
+    });
+
     const configIsOpenLS = localStorage.getItem('configIsOpen');
     const configIsOpenVal = configIsOpenLS ? JSON.parse(configIsOpenLS) : false;
 
@@ -51,7 +59,18 @@ export class Config {
           colorConfig: "darkred",
           colorContent: "#2c2c2c",
           colorText: "white",
-          colorIcon: "black"
+          colorIcon: "black",
+          colorAllButton: {
+            circleColor: "#f5deb3",
+            active: {
+              buttonColor: "#C0C0C0",
+              textColor: "#2c2c2c"
+            },
+            inactive: {
+              buttonColor: "#2c2c2c",
+              textColor: "#C0C0C0"
+            }
+          }
         })
       }
     }),

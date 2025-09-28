@@ -1,12 +1,8 @@
+import { ChangeColorI } from "../../interfaces/change-color-i";
+
 interface textInButtonInterface {
   disable: string;
   active: string;
-}
-
-interface colorOfButtonInterface {
-  colorOfCircle: string;
-  colorOfText: string;
-  backgroundColor: string;
 }
 
 interface ButtonsConfigInterface {
@@ -14,7 +10,7 @@ interface ButtonsConfigInterface {
   isActive?: boolean;
   presets?: boolean;
   textInButton: textInButtonInterface;
-  color?: colorOfButtonInterface;
+  color?: ChangeColorI["colorAllButton"];
   onClick: (button: ButtonsConfig) => void;
 }
 
@@ -23,14 +19,15 @@ export class ButtonsConfig {
   isActive: boolean;
   presets: boolean;
   textInButton: textInButtonInterface;
-  color: colorOfButtonInterface;
+  color: ChangeColorI["colorAllButton"];
   onClick: (button: this) => void;
 
   public changeIsActive(): void {
     this.isActive = !this.isActive;
+  }
 
-    this.color.backgroundColor = this.isActive ? '#C0C0C0' : '#2c2c2c';
-    this.color.colorOfText = this.isActive ? '#2c2c2c' : '#C0C0C0';
+  public changeColor(color: ChangeColorI["colorAllButton"]): void {
+    this.color = color;
   }
 
   constructor({
@@ -39,9 +36,15 @@ export class ButtonsConfig {
     textInButton,
     presets = false,
     color = {
-      colorOfCircle: '#f5deb3',
-      colorOfText: '#bbbbbb',
-      backgroundColor: '#2c2c2c'
+      circleColor: '#f5deb3',
+      active: {
+        buttonColor: '#C0C0C0',
+        textColor: '#2c2c2c'
+      },
+      inactive: {
+        buttonColor: '#2c2c2c',
+        textColor: '#C0C0C0'
+      }
     },
     onClick
   }: ButtonsConfigInterface){

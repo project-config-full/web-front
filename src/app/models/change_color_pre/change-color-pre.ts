@@ -1,21 +1,9 @@
 import { ChangeColorI } from "../../interfaces/change-color-i";
+import { ChangeColor } from '../../services/change_color/change-color';
 
-interface ColorButtonInterface{
-  colorAllButton: {
-    circleColor: string;
-    active: {
-      buttonColor: string;
-      textColor: string;
-    },
-    inactive: {
-      buttonColor: string;
-      textColor: string;
-    }
-  }
-}
-
-interface ChangeColorPreInteraface extends ChangeColorI, ColorButtonInterface{
+interface ChangeColorPreInteraface extends ChangeColorI{
   title: string;
+  changeColorService: ChangeColor;
 }
 
 export class ChangeColorPre {
@@ -24,7 +12,8 @@ export class ChangeColorPre {
   colorContent: string;
   colorText: string;
   colorIcon: string;
-  colorAllButton: ColorButtonInterface["colorAllButton"];
+  colorAllButton: ChangeColorI["colorAllButton"];
+  changeColorService: ChangeColor;
 
   constructor(val: ChangeColorPreInteraface){
     this.title = val.title;
@@ -32,6 +21,17 @@ export class ChangeColorPre {
     this.colorContent = val.colorContent!;
     this.colorText = val.colorText!;
     this.colorIcon = val.colorIcon!;
-    this.colorAllButton = val.colorAllButton;
+    this.colorAllButton = val.colorAllButton!;
+    this.changeColorService = val.changeColorService;
+  }
+
+  onClick(){
+    this.changeColorService.setColorVal({
+      colorConfig: this.colorConfig,
+      colorContent: this.colorContent,
+      colorText: this.colorText,
+      colorIcon: this.colorIcon,
+      colorAllButton: this.colorAllButton
+    });
   }
 }
