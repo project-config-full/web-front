@@ -1,10 +1,6 @@
-@mixin animations_text($time: 5s){
+@mixin animations_text($time: 3s){
   //*  ANCT = ANimation Change Text
   //*  ANRT = ANimation Remove Text
-
-  //* O primeiro número representa o índice da animação
-  //* O segundo número indica se é a animação de entrada ou de saída
-  //* Se não houver o segundo número, é porque a animação de entrada e saída são a mesma
 
   @keyframes ANCT0{
     0%{
@@ -143,5 +139,171 @@
 
   &.ANCT3{
     animation: ANCT3 $time ease-in-out;
+  }
+
+  //* O primeiro número representa o índice da animação
+  //* O segundo número indica se é a animação de entrada ou de saída
+  //* 0 = entrada; 1 = saída
+
+  @keyframes ANRT00{
+    0%{
+      transform: translate(0);
+    }
+
+    100%{
+      transform: translate(-100%, 0);
+    }
+  }
+
+  @keyframes ANRT01{
+    0%{
+      transform: translate(100%, 0);
+    }
+
+    100%{
+      transform: translate(0);
+    }
+  }
+
+  @keyframes ANRT10{
+    0%{
+      transform: translate(0);
+      opacity: 0;
+    }
+
+    50%{
+      transform: translate(0, -20%);
+      filter: blur(20px);
+      opacity: 0;
+    }
+
+    100%{
+      opacity: 0;
+    }
+  }
+
+  @keyframes ANRT11 {
+    0%{
+      transform: translate(0, 100%);
+    }
+
+    50%{
+      transform: translate(0, -20%);
+    }
+
+    75%{
+      transform: translate(0, 20%);
+    }
+
+    100%{
+      transform: translate(0, 0);
+    }
+  }
+
+  @keyframes ANRT20{
+    0%{
+      transform: scale(1);
+    }
+
+    20%{
+      transform: scale(1.3);
+    }
+
+    40%{
+      transform: scale(1);
+    }
+
+    60%{
+      transform: scale(1.3);
+    }
+
+    80%{
+      transform: scale(1);
+    }
+
+    100%{
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
+
+  @keyframes ANRT21{
+    0%{
+      transform: scale(2);
+      opacity: 0;
+    }
+
+    50%{
+      transform: scale(.5);
+      opacity: 1;
+    }
+
+    75%{
+      transform: scale(1.5);
+    }
+
+    100%{
+      transform: scale(1);
+    }
+  }
+
+  @keyframes ANRT30{
+    0%{
+      transform: translate(0, 0) rotateX(0);
+    }
+
+    100%{
+      transform: translate(100%, 0) rotateZ(360deg);
+    }
+  }
+
+  @keyframes ANRT31{
+    0%{
+      transform: translate(-100%, 0) rotateX(0);
+    }
+
+    100%{
+      transform: translate(0, 0) rotateZ(360deg);
+    }
+  }
+
+  &.ANRT0{
+    &.enter{
+      animation: ANRT00 $time ease-in-out;
+    }
+
+    &.exit{
+      animation: ANRT01 $time ease-in-out;
+    }
+  }
+
+  &.ANRT1{
+    &.enter{
+      animation: ANRT10 $time ease-in-out;
+    }
+
+    &.exit{
+      animation: ANRT11 $time ease-in-out;
+    }
+  }
+
+  &.ANRT2{
+    &.enter{
+      animation: ANRT20 $time ease-in-out;
+    }
+
+    &.exit{
+      animation: ANRT21 $time ease-in-out;
+    }
+  }
+
+  &.ANRT3{
+    &.enter{
+      animation: ANRT30 $time ease-in-out;
+    }
+
+    &.exit{
+      animation: ANRT31 $time ease-in-out;
+    }
   }
 }
