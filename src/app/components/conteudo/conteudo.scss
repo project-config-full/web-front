@@ -1,3 +1,5 @@
+@use 'animations' as *;
+
 .openConfig{
   width: 2rem;
   height: 2rem;
@@ -18,10 +20,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  @include animations_text();
 
   .text-wrapper{
     font-family: "Open Sans", sans-serif;
     transition: color .5s ease-in-out;
+    display: none;
+
+    &.active{
+      display: block;
+    }
 
     header{
       h1{

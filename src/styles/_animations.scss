@@ -1,0 +1,147 @@
+@mixin animations_text($time: 5s){
+  //*  ANCT = ANimation Change Text
+  //*  ANRT = ANimation Remove Text
+
+  //* O primeiro número representa o índice da animação
+  //* O segundo número indica se é a animação de entrada ou de saída
+  //* Se não houver o segundo número, é porque a animação de entrada e saída são a mesma
+
+  @keyframes ANCT0{
+    0%{
+      opacity: 1;
+      transform: translate(0);
+    }
+
+    25%{
+      opacity: 0;
+      transform: translate(0, 100%);
+    }
+
+    75%{
+      opacity: 0;
+      transform: translate(0, -100%);
+    }
+
+    100%{
+      opacity: 1;
+      transform: translate(0);
+    }
+  }
+
+  @keyframes ANCT1{
+    0%{
+      opacity: 1;
+    }
+
+    50%{
+      opacity: 0;
+      filter: blur(100px);
+    }
+
+    100%{
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
+
+  @keyframes ANCT2{
+    0%{
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+
+    10%{
+      transform: translate(-20%, 0);
+    }
+
+    20%{
+      transform: translate(20%, 0);
+    }
+
+    30%{
+      transform: translate(-20%, 0);
+    }
+
+    40%{
+      transform: translate(20%, 0);
+    }
+
+    50%{
+      opacity: 0;
+      transform: translate(-20%, 0);
+    }
+
+    60%{
+      transform: translate(15%, 0);
+    }
+
+    70%{
+      opacity: 0;
+      transform: translate(-15%, 0);
+    }
+
+    80%{
+      transform: translate(15%, 0);
+    }
+
+    90%{
+      transform: translate(-15%, 0);
+    }
+
+    100%{
+      opacity: 1;
+      transform: translate(0);
+    }
+  }
+
+  @keyframes ANCT3{
+    0%{
+      opacity: 1;
+      transform: translate(0) scale(1);
+    }
+
+    25%{
+      transform: scale(.5);
+    }
+
+    40%{
+      transform: translate(100%, 0) scale(.5);
+    }
+
+    50%{
+      opacity: 0;
+      transform: translate(-100%,0) scale(.5);
+    }
+
+    75%{
+      transform: translate(0) scale(.5);
+    }
+
+    100%{
+      opacity: 1;
+      transform: translate(0) scale(1);
+    }
+  }
+
+  &.ANCT0{
+    &.enter{
+      animation: ANCT0 $time ease-in-out;
+    }
+
+    &.exit{
+      animation: ANCT0 $time ease-in-out reverse;
+    }
+  }
+
+  &.ANCT1{
+    animation: ANCT1 $time ease-in-out;
+  }
+
+  &.ANCT2{
+    animation: ANCT2 $time ease-in-out;
+  }
+
+  &.ANCT3{
+    animation: ANCT3 $time ease-in-out;
+  }
+}
