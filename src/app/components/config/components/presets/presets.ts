@@ -75,7 +75,7 @@ export class Presets implements OnInit{
         colorText: "#833434",
         colorIcon: "#873408",
         colorAllButton: {
-          circleColor: "#e97f42ff",
+          circleColor: "#f36a1bff",
           active: {
             buttonColor: "#573105ff",
             textColor: "#945c1bff",
@@ -94,7 +94,7 @@ export class Presets implements OnInit{
         colorText: "#FF006F",
         colorIcon: "#E9AEF9",
         colorAllButton: {
-          circleColor: "#ff7492ff",
+          circleColor: "#d310daff",
           active: {
             buttonColor: "#A909E8",
             textColor: "#E3009B",
