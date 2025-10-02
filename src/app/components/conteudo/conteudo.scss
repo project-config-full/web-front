@@ -1,4 +1,4 @@
-@use 'animations' as *;
+@use 'animationsMixin' as *;
 
 .openConfig{
   width: 2rem;
@@ -20,7 +20,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   @include animations_text();
 
   .text-wrapper{

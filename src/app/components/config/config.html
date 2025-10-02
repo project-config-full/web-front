@@ -32,6 +32,12 @@
       <div class="presets-wrapper" [style.display]="button.isActive && button.presets ? 'flex' : 'none'">
         <app-presets></app-presets>
       </div><!-- presets-wrapper -->
+
+      @if(button.isActive && button.animations){
+        <div class="animations-wrapper">
+          <app-animations></app-animations>
+        </div><!-- animations-wrapper -->
+      }
     }
   </section><!-- config -->
 </div><!-- container -->

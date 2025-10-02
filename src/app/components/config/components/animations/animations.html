@@ -1,0 +1,28 @@
+<div class="container">
+  @for(animation of animations; track animation){
+    <div class="animation-wrapper">
+      <div class="text-wrapper">
+        <div class="text"
+          [ngClass]="[animation.changeText]"
+          [class.enter]="animation.changeTextProprietys?.enter"
+          [class.exit]="animation.changeTextProprietys?.exit"
+        >
+          <h5>Lorem</h5>
+
+          <p>texto de exemplo texto de exemplo texto de exemplo texto de exemplo texto de exemplo</p>
+        </div><!-- text -->
+      </div><!-- text-wrapper -->
+      <div class="text-wrapper">
+        <div class="text"
+          [ngClass]="[animation.removeText]"
+          [class.enter]="animation.removeTextProprietys.enter"
+          [class.exit]="animation.removeTextProprietys.exit"
+        >
+          <h5>Chat</h5>
+
+          <p>texto de exemplo texto de exemplo texto de exemplo texto de exemplo texto de exemplo</p>
+        </div><!-- text -->
+      </div><!-- text-wrapper -->
+    </div><!-- animation-wrapper -->
+  }
+</div><!-- container -->

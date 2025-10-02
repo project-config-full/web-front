@@ -6,10 +6,11 @@ import { Presets } from "./components/presets/presets";
 import { ChangeColor } from '../../services/change_color/change-color';
 import { ChangeColorI } from '../../interfaces/change-color-i';
 import { ChangeColorPre } from '../../models/change_color_pre/change-color-pre';
+import { Animations } from "./components/animations/animations";
 
 @Component({
   selector: 'app-config',
-  imports: [CommonModule, Presets],
+  imports: [CommonModule, Presets, Animations],
   templateUrl: './config.html',
   styleUrl: './config.scss'
 })
@@ -106,6 +107,7 @@ export class Config{
         disable: "Default",
         active: "Other"
       },
+      animations: true,
       onClick: (button: ButtonsConfig) => {
         button.changeIsActive();
       }

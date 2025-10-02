@@ -1,26 +1,26 @@
-@mixin animations_text($time: 3s){
+@mixin animations_text($timeChange: 3s, $timeRemove: 3s, $interation-count: 1){
   //*  ANCT = ANimation Change Text
   //*  ANRT = ANimation Remove Text
 
   @keyframes ANCT0{
-    0%{
+    0%, 15% {
       opacity: 1;
-      transform: translate(0);
+      transform: translate(0, 0);
     }
 
-    25%{
+    25% {
       opacity: 0;
       transform: translate(0, 100%);
     }
 
-    75%{
+    75% {
       opacity: 0;
       transform: translate(0, -100%);
     }
 
-    100%{
+    100% {
       opacity: 1;
-      transform: translate(0);
+      transform: translate(0, 0);
     }
   }
 
@@ -121,24 +121,24 @@
 
   &.ANCT0{
     &.enter{
-      animation: ANCT0 $time ease-in-out;
+      animation: ANCT0 $timeChange ease-in-out $interation-count;
     }
 
     &.exit{
-      animation: ANCT0 $time ease-in-out reverse;
+      animation: ANCT0 $timeChange ease-in-out reverse $interation-count;
     }
   }
 
   &.ANCT1{
-    animation: ANCT1 $time ease-in-out;
+    animation: ANCT1 $timeChange ease-in-out $interation-count;
   }
 
   &.ANCT2{
-    animation: ANCT2 $time ease-in-out;
+    animation: ANCT2 $timeChange ease-in-out $interation-count;
   }
 
   &.ANCT3{
-    animation: ANCT3 $time ease-in-out;
+    animation: ANCT3 $timeChange ease-in-out $interation-count;
   }
 
   //* O primeiro número representa o índice da animação
@@ -152,15 +152,18 @@
 
     100%{
       transform: translate(-100%, 0);
+      opacity: 0;
     }
   }
 
   @keyframes ANRT01{
     0%{
+      opacity: 0;
       transform: translate(100%, 0);
     }
 
     100%{
+      opacity: 1;
       transform: translate(0);
     }
   }
@@ -168,7 +171,7 @@
   @keyframes ANRT10{
     0%{
       transform: translate(0);
-      opacity: 0;
+      opacity: 1;
     }
 
     50%{
@@ -269,41 +272,41 @@
 
   &.ANRT0{
     &.enter{
-      animation: ANRT00 $time ease-in-out;
+      animation: ANRT00 $timeRemove ease-in-out;
     }
 
     &.exit{
-      animation: ANRT01 $time ease-in-out;
+      animation: ANRT01 $timeRemove ease-in-out;
     }
   }
 
   &.ANRT1{
     &.enter{
-      animation: ANRT10 $time ease-in-out;
+      animation: ANRT10 $timeRemove ease-in-out;
     }
 
     &.exit{
-      animation: ANRT11 $time ease-in-out;
+      animation: ANRT11 $timeRemove ease-in-out;
     }
   }
 
   &.ANRT2{
     &.enter{
-      animation: ANRT20 $time ease-in-out;
+      animation: ANRT20 $timeRemove ease-in-out;
     }
 
     &.exit{
-      animation: ANRT21 $time ease-in-out;
+      animation: ANRT21 $timeRemove ease-in-out;
     }
   }
 
   &.ANRT3{
     &.enter{
-      animation: ANRT30 $time ease-in-out;
+      animation: ANRT30 $timeRemove ease-in-out;
     }
 
     &.exit{
-      animation: ANRT31 $time ease-in-out;
+      animation: ANRT31 $timeRemove ease-in-out;
     }
   }
 }
