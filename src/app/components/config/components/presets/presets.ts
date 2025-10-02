@@ -85,6 +85,12 @@ export class Presets implements OnInit{
             textColor: "#573105ff",
           }
         },
+        animationText: {
+          colorOfChange: "#573105ff",
+          colorOfRemove: "#B87333",
+          colorOfTextChange: "#B87333",
+          colorOfTextRemove: "#573105ff"
+        },
         changeColorService: this.changeColorService
       }),
       new ChangeColorPre({
@@ -104,6 +110,12 @@ export class Presets implements OnInit{
             textColor: "#A909E8",
           }
         },
+        animationText: {
+          colorOfChange: "#9300ceff",
+          colorOfRemove: "#800080",
+          colorOfTextChange: "#e30057ff",
+          colorOfTextRemove: "#FF006F"
+        },
         changeColorService: this.changeColorService
       }),
       new ChangeColorPre({
@@ -122,6 +134,12 @@ export class Presets implements OnInit{
             buttonColor: "#78a9b1ff",
             textColor: "#277679ff",
           }
+        },
+        animationText: {
+          colorOfChange: "#277679ff",
+          colorOfRemove: "#C0C0C0",
+          colorOfTextChange: "#C0C0C0",
+          colorOfTextRemove: "#277679ff"
         },
         changeColorService: this.changeColorService
       })

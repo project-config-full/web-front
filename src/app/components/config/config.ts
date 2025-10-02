@@ -76,7 +76,8 @@ export class Config{
                 buttonColor: preset.colorAllButton!.inactive.buttonColor,
                 textColor: preset.colorAllButton!.inactive.textColor
               }
-            }
+            },
+            animationText: preset.animationText
           });
 
           return;
@@ -97,6 +98,12 @@ export class Config{
               buttonColor: "#2c2c2c",
               textColor: "#C0C0C0"
             }
+          },
+          animationText: {
+            colorOfChange: "#C0C0C0",
+            colorOfRemove: "#2c2c2c",
+            colorOfTextChange: "#2c2c2c",
+            colorOfTextRemove: "#C0C0C0"
           }
         })
       }

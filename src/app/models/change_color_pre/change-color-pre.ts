@@ -13,6 +13,7 @@ export class ChangeColorPre {
   colorText: string;
   colorIcon: string;
   colorAllButton: ChangeColorI["colorAllButton"];
+  animationText: ChangeColorI["animationText"];
   changeColorService: ChangeColor;
 
   constructor(val: ChangeColorPreInteraface){
@@ -22,6 +23,7 @@ export class ChangeColorPre {
     this.colorText = val.colorText!;
     this.colorIcon = val.colorIcon!;
     this.colorAllButton = val.colorAllButton!;
+    this.animationText = val.animationText!;
     this.changeColorService = val.changeColorService;
   }
 
@@ -31,7 +33,8 @@ export class ChangeColorPre {
       colorContent: this.colorContent,
       colorText: this.colorText,
       colorIcon: this.colorIcon,
-      colorAllButton: this.colorAllButton
+      colorAllButton: this.colorAllButton,
+      animationText: this.animationText
     });
   }
 }

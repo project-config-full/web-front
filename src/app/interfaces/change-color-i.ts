@@ -13,5 +13,11 @@ export interface ChangeColorI {
       buttonColor: string;
       textColor: string;
     }
+  },
+  animationText?: {
+    colorOfChange: string;
+    colorOfRemove: string;
+    colorOfTextChange: string;
+    colorOfTextRemove: string;
   }
 }

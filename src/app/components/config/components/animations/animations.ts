@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AnimationsText } from '../../../../models/animations_text/animations-text.model';
 import { CommonModule } from '@angular/common';
+import { ChangeColor } from '../../../../services/change_color/change-color';
+import { ChangeColorI } from '../../../../interfaces/change-color-i';
 
 @Component({
   selector: 'app-animations',
@@ -9,6 +11,27 @@ import { CommonModule } from '@angular/common';
   styleUrl: './animations.scss'
 })
 export class Animations implements OnInit{
+  //* CBGRT = color background remove text
+  //* CBGCT = color background change text
+  //* CTR = color text remove
+  //* CTC = color text change
+
+  CBGRT: string = "#C0C0C0";
+  CBGCT: string = "#2c2c2c";
+  CTR: string = "#000000";
+  CTC: string = "#FFFFFF";
+
+  constructor(private changeColor: ChangeColor){
+    this.changeColor.$colorVal.subscribe((color: ChangeColorI) => {
+      if(color.animationText){
+        this.CBGRT = color.animationText.colorOfRemove;
+        this.CBGCT = color.animationText.colorOfChange;
+        this.CTR = color.animationText.colorOfTextRemove;
+        this.CTC = color.animationText.colorOfTextChange;
+      }
+    });
+  }
+
   animations: AnimationsText[] = [
     new AnimationsText({
       changeText: "ANCT0",

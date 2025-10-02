@@ -1,7 +1,10 @@
 <div class="container">
   @for(animation of animations; track animation){
     <div class="animation-wrapper">
-      <div class="text-wrapper">
+      <div class="text-wrapper"
+        [style.backgroundColor]="CBGCT"
+        [style.color]="CTC"
+      >
         <div class="text"
           [ngClass]="[animation.changeText]"
           [class.enter]="animation.changeTextProprietys?.enter"
@@ -12,7 +15,10 @@
           <p>texto de exemplo texto de exemplo texto de exemplo texto de exemplo texto de exemplo</p>
         </div><!-- text -->
       </div><!-- text-wrapper -->
-      <div class="text-wrapper">
+      <div class="text-wrapper"
+        [style.backgroundColor]="CBGRT"
+        [style.color]="CTR"
+      >
         <div class="text"
           [ngClass]="[animation.removeText]"
           [class.enter]="animation.removeTextProprietys.enter"
