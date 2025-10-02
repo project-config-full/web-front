@@ -11,10 +11,15 @@
     width: clamp(6rem, 20vw, 43%);
     height: 3.5rem;
     cursor: pointer;
-    border: 1px solid whitesmoke;
+    border: 2px solid whitesmoke;
     display: flex;
     font-family: "Open Sans", sans-serif;
     color: whitesmoke;
+    transition: transform .2s ease-in-out;
+
+    &:hover{
+      transform: scale(1.1);
+    }
 
     .text-wrapper{
       width: 50%;
