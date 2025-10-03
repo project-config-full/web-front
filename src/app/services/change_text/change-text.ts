@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { ActiveChangeTextS } from '../../interfaces/active-change-text-s';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ChangeText {
   $classChangeText = this.changeText.asObservable();
   $classRemoveText = this.removeText.asObservable();
 
-  private activeChangeText = new BehaviorSubject<boolean>(false);
+  private activeChangeText = new BehaviorSubject<ActiveChangeTextS>({active: false, enterAndExit: false});
   private activeRemoveText = new BehaviorSubject<boolean>(false);
   private buttonIsActive = new BehaviorSubject<boolean>(false);
 
@@ -29,7 +30,7 @@ export class ChangeText {
     }
   }
 
-  setActiveChangeText(changeText: boolean, removeText: boolean, buttonIsActive: boolean){
+  setActiveChangeText(changeText: ActiveChangeTextS, removeText: boolean, buttonIsActive: boolean){
     this.activeChangeText.next(changeText);
     this.activeRemoveText.next(removeText);
     this.buttonIsActive.next(buttonIsActive);
