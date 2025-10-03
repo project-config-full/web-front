@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ActiveChangeTextS } from '../../interfaces/active-change-text-s';
+import { ParamsSetActiveChangeTextS } from '../../interfaces/params-set-active-change-text-s';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,11 @@ export class ChangeText {
     }
   }
 
-  setActiveChangeText(changeText: ActiveChangeTextS, removeText: boolean, buttonIsActive: boolean){
+  setActiveChangeText({
+    changeText = { active: false, enterAndExit: false },
+    removeText = false,
+    buttonIsActive
+  }: ParamsSetActiveChangeTextS): void{
     this.activeChangeText.next(changeText);
     this.activeRemoveText.next(removeText);
     this.buttonIsActive.next(buttonIsActive);
