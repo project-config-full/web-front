@@ -5,7 +5,6 @@ import { ChangeConfig } from '../../services/changeConfig/change-config';
 import { Presets } from "./components/presets/presets";
 import { ChangeColor } from '../../services/change_color/change-color';
 import { ChangeColorI } from '../../interfaces/change-color-i';
-import { ChangeColorPre } from '../../models/change_color_pre/change-color-pre';
 import { Animations } from "./components/animations/animations";
 
 @Component({
