@@ -365,3 +365,20 @@
     }
   }
 }
+
+@mixin reload_button(){
+  @keyframes reload {
+    0%{
+      opacity: 0.3;
+    }
+
+    100%{
+      opacity: 1;
+    }
+  }
+
+  &.reload-button{
+    pointer-events: none;
+    animation: reload 3s ease-in-out;
+  }
+}

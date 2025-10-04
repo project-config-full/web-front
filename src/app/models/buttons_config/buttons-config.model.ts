@@ -10,6 +10,7 @@ interface ButtonsConfigInterface {
   isActive?: boolean;
   presets?: boolean;
   animations?: boolean;
+  reload?: boolean;
   textInButton: textInButtonInterface;
   color?: ChangeColorI["colorAllButton"];
   onClick: (button: ButtonsConfig) => void;
@@ -20,6 +21,7 @@ export class ButtonsConfig {
   isActive: boolean;
   presets: boolean;
   animations: boolean;
+  reload: boolean;
   textInButton: textInButtonInterface;
   color: ChangeColorI["colorAllButton"];
   onClick: (button: this) => void;
@@ -38,6 +40,7 @@ export class ButtonsConfig {
     textInButton,
     presets = false,
     animations = false,
+    reload = false,
     color = {
       circleColor: '#f5deb3',
       active: {
@@ -55,6 +58,7 @@ export class ButtonsConfig {
     this.isActive = isActive;
     this.presets = presets;
     this.animations = animations;
+    this.reload = reload;
     this.textInButton = textInButton;
     this.color = color;
     this.onClick = onClick;

@@ -12,6 +12,7 @@
         <div class="button"
           [style.backgroundColor]="button.isActive ? button.color!.active.buttonColor : button.color!.inactive.buttonColor"
           (click)="button.onClick(button)"
+          [class.reload-button]="reloadButtons && button.reload"
         >
           <div class="circle"
             [style.backgroundColor]="button.color!.circleColor"
@@ -33,7 +34,11 @@
         <app-presets></app-presets>
       </div><!-- presets-wrapper -->
 
-      <div class="animations-wrapper" [style.display]="button.isActive && button.animations ? 'flex' : 'none'">
+      <div
+        class="animations-wrapper"
+        [style.display]="button.isActive && button.animations ? 'flex' : 'none'"
+        [class.reload-button]="reloadButtons && button.reload"
+      >
         <app-animations></app-animations>
       </div><!-- animations-wrapper -->
     }

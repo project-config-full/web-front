@@ -22,6 +22,8 @@ export class Config{
   activeResponsive: boolean = false;
   configIsOpen!: boolean;
 
+  reloadButtons: boolean = false;
+
   animationSelected: AnimationSelectedC = {
     change: {
       name: "change_default",
@@ -56,6 +58,12 @@ export class Config{
 
     this.openingConfig = configIsOpenVal;
     this.configIsOpen = configIsOpenVal;
+  }
+
+  changeReloadButtons(): void{
+    this.reloadButtons = !this.reloadButtons;
+
+    setTimeout(() => this.reloadButtons = false ,3000);
   }
 
   buttons: ButtonsConfig[] = [
@@ -127,6 +135,7 @@ export class Config{
         active: "Other"
       },
       animations: true,
+      reload: true,
       onClick: (button: ButtonsConfig) => button.changeIsActive()
     }),
     new ButtonsConfig({
@@ -135,8 +144,11 @@ export class Config{
         disable: "Lorem",
         active: "Chat"
       },
+      reload: true,
       onClick: (button: ButtonsConfig) => {
         button.changeIsActive();
+
+        this.changeReloadButtons();
 
         this.changeTextService.setClassesText({
           classChange: this.animationSelected.change.name,
@@ -157,8 +169,11 @@ export class Config{
         disable: "With",
         active: "Without"
       },
+      reload: true,
       onClick: (button: ButtonsConfig) => {
         button.changeIsActive();
+
+        this.changeReloadButtons();
 
         this.changeTextService.setClassesText({
           classRemove: this.animationSelected.remove.name
