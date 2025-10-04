@@ -9,7 +9,8 @@
         <div class="label">
           <h4>{{ button.label + ':'}}</h4>
         </div><!-- label -->
-        <div class="button"
+        <div
+          class="button"
           [style.backgroundColor]="button.isActive ? button.color!.active.buttonColor : button.color!.inactive.buttonColor"
           (click)="button.onClick(button)"
           [class.reload-button]="reloadButtons && button.reload"
@@ -35,7 +36,7 @@
       </div><!-- presets-wrapper -->
 
       <div
-        class="animations-wrapper"
+        class="animations-wrapper reload-button"
         [style.display]="button.isActive && button.animations ? 'flex' : 'none'"
         [class.reload-button]="reloadButtons && button.reload"
       >

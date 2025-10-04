@@ -20,6 +20,8 @@
   app-config{
     width: 0;
     height: 100%;
+    position: relative;
+    z-index: 100;
   }
 
   app-config.isOpenConfig{
