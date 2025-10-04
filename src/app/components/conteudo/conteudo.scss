@@ -21,43 +21,45 @@
   align-items: center;
   justify-content: center;
 
-  @include animations_text();
+  .container-text-wrapper-animation{
+    @include animations_text();
 
-  .text-wrapper{
-    font-family: "Open Sans", sans-serif;
-    transition: color .5s ease-in-out;
-    display: none;
+    .text-wrapper{
+      font-family: "Open Sans", sans-serif;
+      transition: color .5s ease-in-out;
+      display: none;
 
-    &.active{
-      display: block;
-    }
-
-    header{
-      h1{
-        text-align: center;
-        font-size: clamp(.8rem, 30vw, 2rem);
+      &.active{
+        display: block;
       }
-    }
 
-    section{
-      p{
-        max-width: 700px;
-        padding: 1.2rem 2rem 0 2rem;
-        text-align: justify;
-        font-size: clamp(.5rem, 1.8vw, 1.1rem);
-      }
-    }
-
-    @media screen and (max-width: 700px){
       header{
         h1{
-          font-size: clamp(.8rem, 5vw, 2rem);
+          text-align: center;
+          font-size: clamp(.8rem, 30vw, 2rem);
         }
       }
 
       section{
         p{
-          font-size: clamp(.5rem, 2.5vw, 1.1rem);
+          max-width: 700px;
+          padding: 1.2rem 2rem 0 2rem;
+          text-align: justify;
+          font-size: clamp(.5rem, 1.8vw, 1.1rem);
+        }
+      }
+
+      @media screen and (max-width: 700px){
+        header{
+          h1{
+            font-size: clamp(.8rem, 5vw, 2rem);
+          }
+        }
+
+        section{
+          p{
+            font-size: clamp(.5rem, 2.5vw, 1.1rem);
+          }
         }
       }
     }

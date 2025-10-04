@@ -2,42 +2,53 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ActiveChangeTextS } from '../../interfaces/active-change-text-s';
 import { ParamsSetActiveChangeTextS } from '../../interfaces/params-set-active-change-text-s';
+import { TextPropertiesCTS } from '../../interfaces/text-properties-cts';
+import { ClassesTextChangeCTS } from '../../interfaces/classes-text-change-cts';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChangeText {
-  private changeText = new BehaviorSubject<string>('');
-  private removeText = new BehaviorSubject<string>('');
+  private classesTextChange = new BehaviorSubject<ClassesTextChangeCTS>({
+    $classChangeText: '',
+    $classRemoveText: ''
+  });
 
-  $classChangeText = this.changeText.asObservable();
-  $classRemoveText = this.removeText.asObservable();
+  private textProperties = new BehaviorSubject<TextPropertiesCTS>({
+    $activeChangeText: { active: false, enterAndExit: false },
+    $activeRemoveText: { changing: false, enter: false, exit: false },
+    $buttonIsActive: false
+  });
 
-  private activeChangeText = new BehaviorSubject<ActiveChangeTextS>({active: false, enterAndExit: false});
-  private activeRemoveText = new BehaviorSubject<boolean>(false);
-  private buttonIsActive = new BehaviorSubject<boolean>(false);
+  //* CTC = ChangeTextChange
+  //* TP = TextProperties
 
-  $activeChangeText = this.activeChangeText.asObservable();
-  $activeRemoveText = this.activeRemoveText.asObservable();
-  $buttonIsActive = this.buttonIsActive.asObservable();
+  $CTCListen = this.classesTextChange.asObservable();
+  $TPListen = this.textProperties.asObservable();
 
   setClassesText(classChange?: string, classRemove?: string){
     if(classChange){
-      this.changeText.next(classChange);
+      this.classesTextChange.next({
+        $classChangeText: classChange,
+      });
     }
 
     if(classRemove){
-      this.removeText.next(classRemove);
+      this.classesTextChange.next({
+        $classRemoveText: classRemove
+      });
     }
   }
 
   setActiveChangeText({
     changeText = { active: false, enterAndExit: false },
-    removeText = false,
+    removeText = { changing: false, enter: false, exit: false },
     buttonIsActive
-  }: ParamsSetActiveChangeTextS): void{
-    this.activeChangeText.next(changeText);
-    this.activeRemoveText.next(removeText);
-    this.buttonIsActive.next(buttonIsActive);
+  }: ParamsSetActiveChangeTextS): void {
+    this.textProperties.next({
+      $activeChangeText: changeText,
+      $activeRemoveText: removeText,
+      $buttonIsActive: buttonIsActive
+    });
   }
 }

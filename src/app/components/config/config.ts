@@ -6,6 +6,8 @@ import { Presets } from "./components/presets/presets";
 import { ChangeColor } from '../../services/change_color/change-color';
 import { ChangeColorI } from '../../interfaces/change-color-i';
 import { Animations } from "./components/animations/animations";
+import { ChangeText } from '../../services/change_text/change-text';
+import { AnimationSelectedC } from '../../interfaces/animation-selected-c';
 
 @Component({
   selector: 'app-config',
@@ -20,9 +22,20 @@ export class Config{
   activeResponsive: boolean = false;
   configIsOpen!: boolean;
 
+  animationSelected: AnimationSelectedC = {
+    change: {
+      name: "change_default",
+      enterAndExit: false
+    },
+    remove: {
+      name: "remove_default"
+    }
+  };
+
   constructor(
     private changeConfigService: ChangeConfig,
-    private changeColorService: ChangeColor
+    private changeColorService: ChangeColor,
+    private changeTextService: ChangeText
   ){
     this.changeConfigService.$configVal.subscribe((val: boolean) => {
       if(!this.activeResponsive) this.openingConfig = val;
@@ -114,9 +127,7 @@ export class Config{
         active: "Other"
       },
       animations: true,
-      onClick: (button: ButtonsConfig) => {
-        button.changeIsActive();
-      }
+      onClick: (button: ButtonsConfig) => button.changeIsActive()
     }),
     new ButtonsConfig({
       label: "Exchange text",
@@ -126,6 +137,18 @@ export class Config{
       },
       onClick: (button: ButtonsConfig) => {
         button.changeIsActive();
+
+        this.changeTextService.setClassesText(
+          this.animationSelected.change.name,
+        );
+
+        this.changeTextService.setActiveChangeText({
+          changeText: {
+            active: true,
+            enterAndExit: this.animationSelected.change.enterAndExit
+          },
+          buttonIsActive: button.isActive
+        });
       }
     }),
     new ButtonsConfig({

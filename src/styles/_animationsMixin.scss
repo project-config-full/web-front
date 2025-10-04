@@ -1,4 +1,37 @@
 @mixin animations_text($timeChange: 3s, $timeRemove: 3s, $interation-count: 1){
+  //* ANIMATIONS DEFAULT
+
+  @keyframes change_default{
+    0%{
+      opacity: 1;
+      transform: rotateY(0deg);
+    }
+
+    25%{
+      opacity: 0.5;
+    }
+
+    40%{
+      opacity: 0;
+    }
+
+    60%{
+      opacity: 0;
+    }
+
+    80%{
+      opacity: 1;
+    }
+
+    100%{
+      transform: rotateY(360deg);
+    }
+  }
+
+  &.change_default{
+    animation: change_default $timeChange ease-in-out $interation-count;
+  }
+
   //*  ANCT = ANimation Change Text
   //*  ANRT = ANimation Remove Text
 
