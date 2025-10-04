@@ -138,9 +138,9 @@ export class Config{
       onClick: (button: ButtonsConfig) => {
         button.changeIsActive();
 
-        this.changeTextService.setClassesText(
-          this.animationSelected.change.name,
-        );
+        this.changeTextService.setClassesText({
+          classChange: this.animationSelected.change.name,
+        });
 
         this.changeTextService.setActiveChangeText({
           changeText: {
@@ -159,6 +159,19 @@ export class Config{
       },
       onClick: (button: ButtonsConfig) => {
         button.changeIsActive();
+
+        this.changeTextService.setClassesText({
+          classRemove: this.animationSelected.remove.name
+        })
+
+        this.changeTextService.setActiveChangeText({
+          removeText: {
+            changing: true,
+            enter: !button.isActive,
+            exit: button.isActive
+          },
+          buttonIsActive: button.isActive
+        });
       }
     })
   ];

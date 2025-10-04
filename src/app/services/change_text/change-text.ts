@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { ActiveChangeTextS } from '../../interfaces/active-change-text-s';
 import { ParamsSetActiveChangeTextS } from '../../interfaces/params-set-active-change-text-s';
 import { TextPropertiesCTS } from '../../interfaces/text-properties-cts';
 import { ClassesTextChangeCTS } from '../../interfaces/classes-text-change-cts';
+import { SetClassTextParams } from '../../interfaces/set-class-text-params';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,10 @@ export class ChangeText {
   $CTCListen = this.classesTextChange.asObservable();
   $TPListen = this.textProperties.asObservable();
 
-  setClassesText(classChange?: string, classRemove?: string){
+  setClassesText({
+    classChange,
+    classRemove
+  }: SetClassTextParams): void {
     if(classChange){
       this.classesTextChange.next({
         $classChangeText: classChange,

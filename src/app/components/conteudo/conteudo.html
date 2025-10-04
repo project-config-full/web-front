@@ -9,7 +9,10 @@
     class="container-text-wrapper-animation"
     [ngClass]="[animationChange, animationRemove]"
   >
-    <div class="text-wrapper active">
+    <div
+      class="text-wrapper active"
+      [class.active]="isTextActive && firtTextActive"
+    >
       <header>
         <h1>Lorem</h1>
       </header>
@@ -21,7 +24,10 @@
       </section>
     </div><!-- text-wrapper -->
 
-    <div class="text-wrapper">
+    <div
+      class="text-wrapper"
+      [class.active]="isTextActive && !firtTextActive"
+    >
       <header>
         <h1>Chat</h1>
       </header>

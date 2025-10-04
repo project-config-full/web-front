@@ -28,8 +28,30 @@
     }
   }
 
+  @keyframes remove_default{
+    0%{
+      opacity: 1;
+      transform: scale(1) rotateZ(0deg);
+    }
+
+    100%{
+      opacity: 0;
+      transform: scale(0) rotateZ(360deg);
+    }
+  }
+
   &.change_default{
     animation: change_default $timeChange ease-in-out $interation-count;
+  }
+
+  &.remove_default{
+    &.enter{
+      animation: remove_default $timeRemove ease-in-out $interation-count;
+    }
+
+    &.exit{
+      animation: remove_default $timeRemove ease-in-out reverse $interation-count;
+    }
   }
 
   //*  ANCT = ANimation Change Text

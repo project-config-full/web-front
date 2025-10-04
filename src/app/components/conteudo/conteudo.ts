@@ -6,7 +6,6 @@ import { ChangeColorI } from '../../interfaces/change-color-i';
 import { ChangeText } from '../../services/change_text/change-text';
 import { ClassesTextChangeCTS } from '../../interfaces/classes-text-change-cts';
 import { TextPropertiesCTS } from '../../interfaces/text-properties-cts';
-import { AnimationSelectedC } from '../../interfaces/animation-selected-c';
 import { AnimationSetClassCont } from '../../interfaces/animation-set-class-cont';
 
 @Component({
@@ -35,6 +34,10 @@ export class Conteudo {
 
   animationChange: string = "";
   animationRemove: string = "";
+
+  isTextActive: boolean = true;
+
+  firtTextActive: boolean = true;
 
   constructor(
     private changeConfigService: ChangeConfig,
@@ -66,8 +69,13 @@ export class Conteudo {
         return;
       };
 
-      this.animations.remove.enterActive = val.$activeRemoveText.enter;
+      if(!val.$activeRemoveText.changing) return;
+
+      this.animations.remove.enterActive = !val.$activeRemoveText.enter;
       this.animations.remove.exitActive = val.$activeRemoveText.exit;
+
+      if(this.animations.remove.enterActive) this.removeText();
+      if(!this.animations.remove.enterActive) this.addText();
     });
   }
 
@@ -75,7 +83,30 @@ export class Conteudo {
     this.animationChange = this.animations.change.name;
 
     setTimeout(() => {
+      this.firtTextActive = !this.firtTextActive;
+    }, 1500)
+
+    setTimeout(() => {
       this.animationChange = "";
+    }, 3000)
+  }
+
+  removeText(): void{
+    this.animationRemove = `${this.animations.remove.name} enter`;
+
+    setTimeout(() => {
+      this.isTextActive = !this.isTextActive;
+
+      setTimeout(() => this.animationRemove = "", 200)
+    }, 2800)
+  }
+
+  addText(): void{
+    this.isTextActive = !this.isTextActive;
+    this.animationRemove = `${this.animations.remove.name} exit`;
+
+    setTimeout(() => {
+      this.animationRemove = "";
     }, 3000)
   }
 
