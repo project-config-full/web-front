@@ -6,7 +6,15 @@ import { AnimationSelectedC } from '../../interfaces/animation-selected-c';
   providedIn: 'root'
 })
 export class ChangeAnimationText {
-  private animations = new BehaviorSubject<AnimationSelectedC>({} as AnimationSelectedC);
+  private animations = new BehaviorSubject<AnimationSelectedC>({
+    change: {
+      name: "change_default",
+      enterAndExit: false
+    },
+    remove: {
+      name: "remove_default"
+    }
+  } as AnimationSelectedC);
   $animations = this.animations.asObservable();
 
   setAnimations(animations: AnimationSelectedC) {
