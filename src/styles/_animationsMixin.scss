@@ -58,19 +58,23 @@
   //*  ANRT = ANimation Remove Text
 
   @keyframes ANCT0{
-    0%, 15% {
+    0% {
       opacity: 1;
       transform: translate(0, 0);
     }
 
+    15%{
+      opacity: 1;
+    }
+
     25% {
       opacity: 0;
-      transform: translate(0, 100%);
+      transform: translate(0, 150%);
     }
 
     75% {
       opacity: 0;
-      transform: translate(0, -100%);
+      transform: translate(0, -150%);
     }
 
     100% {
@@ -206,7 +210,7 @@
     }
 
     100%{
-      transform: translate(-100%, 0);
+      transform: translate(-200%, 0);
       opacity: 0;
     }
   }
@@ -214,7 +218,7 @@
   @keyframes ANRT01{
     0%{
       opacity: 0;
-      transform: translate(100%, 0);
+      transform: translate(200%, 0);
     }
 
     100%{
@@ -242,11 +246,11 @@
 
   @keyframes ANRT11 {
     0%{
-      transform: translate(0, 100%);
+      transform: translate(0, 200%);
     }
 
     50%{
-      transform: translate(0, -20%);
+      transform: translate(0, -30%);
     }
 
     75%{
@@ -311,13 +315,13 @@
     }
 
     100%{
-      transform: translate(100%, 0) rotateZ(360deg);
+      transform: translate(150%, 0) rotateZ(360deg);
     }
   }
 
   @keyframes ANRT31{
     0%{
-      transform: translate(-100%, 0) rotateX(0);
+      transform: translate(-150%, 0) rotateX(0);
     }
 
     100%{
