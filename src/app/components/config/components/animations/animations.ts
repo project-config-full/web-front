@@ -94,6 +94,17 @@ export class Animations implements OnInit{
     ];
   }
 
+  selectAnimation(animationSelec: AnimationsText): void{
+    this.animations.forEach((animation: AnimationsText) => {
+      animation.active = false;
+    });
+
+    animationSelec.active = true;
+
+    animationSelec.onClick();
+
+    console.log(this.animations);
+  }
 
   ngOnInit(): void {
     this.animations.forEach((AT: AnimationsText) => {

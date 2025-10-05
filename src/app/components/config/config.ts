@@ -10,6 +10,7 @@ import { ChangeText } from '../../services/change_text/change-text';
 import { AnimationSelectedC } from '../../interfaces/animation-selected-c';
 import { ChangeAnimationText } from '../../services/change_animation_text/change-animation-text';
 import { ActiveChangeTextS } from '../../interfaces/active-change-text-s';
+import { AnimationsText } from '../../models/animations_text/animations-text.model';
 
 @Component({
   selector: 'app-config',
@@ -19,6 +20,7 @@ import { ActiveChangeTextS } from '../../interfaces/active-change-text-s';
 })
 export class Config{
   @ViewChild(Presets) presetsChild!: Presets;
+  @ViewChild(Animations) animationsChild!: Animations;
 
   openingConfig!: boolean;
   activeResponsive: boolean = false;
@@ -143,7 +145,30 @@ export class Config{
       },
       animations: true,
       reload: true,
-      onClick: (button: ButtonsConfig) => button.changeIsActive()
+      onClick: (button: ButtonsConfig) => {
+        button.changeIsActive();
+
+        const indexSelected: number = Math.floor(Math.random() * this.animationsChild.animations.length);
+
+        if(button.isActive){
+          this.animationsChild.animations.forEach((animation: AnimationsText) => {
+            animation.active = false;
+          });
+
+          this.animationsChild.animations[indexSelected].onClick();
+          this.animationsChild.animations[indexSelected].active = true;
+          return;
+        }
+
+        this.changeAnimationTextService.setAnimations({
+          change: {
+            name: "change_default"
+          },
+          remove: {
+            name: "remove_default"
+          }
+        });
+      }
     }),
     new ButtonsConfig({
       label: "Exchange text",

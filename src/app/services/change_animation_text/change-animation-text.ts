@@ -9,7 +9,6 @@ export class ChangeAnimationText {
   private animations = new BehaviorSubject<AnimationSelectedC>({
     change: {
       name: "change_default",
-      enterAndExit: false
     },
     remove: {
       name: "remove_default"

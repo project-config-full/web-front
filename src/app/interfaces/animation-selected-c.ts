@@ -1,7 +1,7 @@
 export interface AnimationSelectedC {
   change: {
     name: string,
-    enterAndExit: boolean
+    enterAndExit?: boolean;
   },
   remove: {
     name: string;
