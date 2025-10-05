@@ -23,6 +23,9 @@ export class AnimationsText {
   removeTextProprietys: proprietys;
   durationProprietys: durationProprietys;
 
+  //* CPRT = change proprietys remove text
+  //* CPCT = change proprietys change text
+
   public CPRT(): void{
     if(this.removeTextProprietys.enter){
       this.removeTextProprietys.enter = false;
