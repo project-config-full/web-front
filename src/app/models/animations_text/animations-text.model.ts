@@ -1,3 +1,5 @@
+import { ChangeAnimationText } from "../../services/change_animation_text/change-animation-text";
+
 interface proprietys{
   enter: boolean;
   exit: boolean;
@@ -14,6 +16,8 @@ interface AnimationsTextInterface {
   changeTextProprietys?: proprietys;
   removeTextProprietys: proprietys;
   durationProprietys: durationProprietys;
+  changeAnimationText: ChangeAnimationText;
+  active?: boolean;
 }
 
 export class AnimationsText {
@@ -22,6 +26,9 @@ export class AnimationsText {
   changeTextProprietys?: proprietys;
   removeTextProprietys: proprietys;
   durationProprietys: durationProprietys;
+  active: boolean;
+
+  private changeAnimationText: ChangeAnimationText;
 
   //* CPRT = change proprietys remove text
   //* CPCT = change proprietys change text
@@ -48,17 +55,33 @@ export class AnimationsText {
     this.changeTextProprietys!.exit = false;
   }
 
+  public onClick(): void{
+    this.changeAnimationText.setAnimations({
+      change: {
+        name: this.changeText,
+        enterAndExit: !!this.changeTextProprietys,
+      },
+      remove: {
+        name: this.removeText,
+      }
+    });
+  }
+
   constructor({
     changeText,
     removeText,
     changeTextProprietys,
     removeTextProprietys,
-    durationProprietys
+    durationProprietys,
+    changeAnimationText,
+    active = false,
   }: AnimationsTextInterface) {
     this.changeText = changeText;
     this.removeText = removeText;
     this.changeTextProprietys = changeTextProprietys;
     this.removeTextProprietys = removeTextProprietys;
     this.durationProprietys = durationProprietys;
+    this.active = active;
+    this.changeAnimationText = changeAnimationText;
   }
 }

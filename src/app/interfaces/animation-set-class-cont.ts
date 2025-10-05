@@ -1,7 +1,10 @@
 export interface AnimationSetClassCont {
   change: {
     name: string;
-    enterAndExit: boolean;
+    enterAndExit?: {
+      enter: boolean;
+      exit: boolean;
+    };
   },
   remove: {
     name: string;

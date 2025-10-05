@@ -1,4 +1,7 @@
 export interface ActiveChangeTextS {
   active: boolean;
-  enterAndExit?: boolean;
+  enterAndExit?: {
+    enter: boolean;
+    exit: boolean;
+  };
 }

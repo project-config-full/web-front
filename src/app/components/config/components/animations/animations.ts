@@ -3,6 +3,7 @@ import { AnimationsText } from '../../../../models/animations_text/animations-te
 import { CommonModule } from '@angular/common';
 import { ChangeColor } from '../../../../services/change_color/change-color';
 import { ChangeColorI } from '../../../../interfaces/change-color-i';
+import { ChangeAnimationText } from '../../../../services/change_animation_text/change-animation-text';
 
 @Component({
   selector: 'app-animations',
@@ -21,7 +22,12 @@ export class Animations implements OnInit{
   CTR: string = "#000000";
   CTC: string = "#FFFFFF";
 
-  constructor(private changeColor: ChangeColor){
+  animations: AnimationsText[] = [];
+
+  constructor(
+    private changeColor: ChangeColor,
+    private changeAnimationTextService: ChangeAnimationText,
+  ){
     this.changeColor.$colorVal.subscribe((color: ChangeColorI) => {
       if(color.animationText){
         this.CBGRT = color.animationText.colorOfRemove;
@@ -30,59 +36,64 @@ export class Animations implements OnInit{
         this.CTC = color.animationText.colorOfTextChange;
       }
     });
+
+    this.animations = [
+      new AnimationsText({
+        changeText: "ANCT0",
+        removeText: "ANRT0",
+        changeTextProprietys: {
+          enter: true,
+          exit: false
+        },
+        removeTextProprietys: {
+          enter: true,
+          exit: false
+        },
+        durationProprietys: {
+          remove: 2000,
+          change: 5000
+        },
+        changeAnimationText: this.changeAnimationTextService
+      }),
+      new AnimationsText({
+        changeText: "ANCT1",
+        removeText: "ANRT1",
+        removeTextProprietys: {
+          enter: true,
+          exit: false
+        },
+        durationProprietys: {
+          remove: 1900,
+        },
+        changeAnimationText: this.changeAnimationTextService
+      }),
+      new AnimationsText({
+        changeText: "ANCT2",
+        removeText: "ANRT2",
+        removeTextProprietys: {
+          enter: true,
+          exit: false
+        },
+        durationProprietys: {
+          remove: 1900,
+        },
+        changeAnimationText: this.changeAnimationTextService
+      }),
+      new AnimationsText({
+        changeText: "ANCT3",
+        removeText: "ANRT3",
+        removeTextProprietys: {
+          enter: true,
+          exit: false
+        },
+        durationProprietys: {
+          remove: 1900,
+        },
+        changeAnimationText: this.changeAnimationTextService
+      })
+    ];
   }
 
-  animations: AnimationsText[] = [
-    new AnimationsText({
-      changeText: "ANCT0",
-      removeText: "ANRT0",
-      changeTextProprietys: {
-        enter: true,
-        exit: false
-      },
-      removeTextProprietys: {
-        enter: true,
-        exit: false
-      },
-      durationProprietys: {
-        remove: 2000,
-        change: 5000
-      }
-    }),
-    new AnimationsText({
-      changeText: "ANCT1",
-      removeText: "ANRT1",
-      removeTextProprietys: {
-        enter: true,
-        exit: false
-      },
-      durationProprietys: {
-        remove: 1900,
-      }
-    }),
-    new AnimationsText({
-      changeText: "ANCT2",
-      removeText: "ANRT2",
-      removeTextProprietys: {
-        enter: true,
-        exit: false
-      },
-      durationProprietys: {
-        remove: 1900,
-      }
-    }),
-    new AnimationsText({
-      changeText: "ANCT3",
-      removeText: "ANRT3",
-      removeTextProprietys: {
-        enter: true,
-        exit: false
-      },
-      durationProprietys: {
-        remove: 1900,
-      }
-    })
-  ];
 
   ngOnInit(): void {
     this.animations.forEach((AT: AnimationsText) => {

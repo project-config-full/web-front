@@ -8,6 +8,8 @@ import { ChangeColorI } from '../../interfaces/change-color-i';
 import { Animations } from "./components/animations/animations";
 import { ChangeText } from '../../services/change_text/change-text';
 import { AnimationSelectedC } from '../../interfaces/animation-selected-c';
+import { ChangeAnimationText } from '../../services/change_animation_text/change-animation-text';
+import { ActiveChangeTextS } from '../../interfaces/active-change-text-s';
 
 @Component({
   selector: 'app-config',
@@ -37,7 +39,8 @@ export class Config{
   constructor(
     private changeConfigService: ChangeConfig,
     private changeColorService: ChangeColor,
-    private changeTextService: ChangeText
+    private changeTextService: ChangeText,
+    private changeAnimationTextService: ChangeAnimationText,
   ){
     this.changeConfigService.$configVal.subscribe((val: boolean) => {
       if(!this.activeResponsive) this.openingConfig = val;
@@ -58,6 +61,10 @@ export class Config{
 
     this.openingConfig = configIsOpenVal;
     this.configIsOpen = configIsOpenVal;
+
+    this.changeAnimationTextService.$animations.subscribe((val: AnimationSelectedC) => {
+      this.animationSelected = val;
+    });
   }
 
   changeReloadButtons(): void{
@@ -154,10 +161,17 @@ export class Config{
           classChange: this.animationSelected.change.name,
         });
 
+        const enterAndExitAlpha = this.animationSelected.change.enterAndExit;
+
+        const enterAndExitProps = enterAndExitAlpha ? {
+          enter: button.isActive,
+          exit: !button.isActive
+        } : {} as ActiveChangeTextS["enterAndExit"];
+
         this.changeTextService.setActiveChangeText({
           changeText: {
             active: true,
-            enterAndExit: this.animationSelected.change.enterAndExit
+            enterAndExit: enterAndExitProps
           },
           buttonIsActive: button.isActive
         });

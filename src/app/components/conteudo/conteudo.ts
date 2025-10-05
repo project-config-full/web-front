@@ -23,7 +23,10 @@ export class Conteudo {
   animations: AnimationSetClassCont = {
     change: {
       name: "",
-      enterAndExit: false
+      enterAndExit: {
+        enter: false,
+        exit: false
+      }
     },
     remove: {
       name: "",
@@ -80,7 +83,9 @@ export class Conteudo {
   }
 
   changeText(): void{
-    this.animationChange = this.animations.change.name;
+    const enterAndExit = this.animations.change.enterAndExit;
+
+    this.animationChange = `${this.animations.change.name} ${enterAndExit ? enterAndExit.enter ? "enter" : enterAndExit.exit ? "exit" : "" : ""}`;
 
     setTimeout(() => {
       this.firtTextActive = !this.firtTextActive;

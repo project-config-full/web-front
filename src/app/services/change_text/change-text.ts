@@ -15,7 +15,7 @@ export class ChangeText {
   });
 
   private textProperties = new BehaviorSubject<TextPropertiesCTS>({
-    $activeChangeText: { active: false, enterAndExit: false },
+    $activeChangeText: { active: false, enterAndExit: { enter: false, exit: false } },
     $activeRemoveText: { changing: false, enter: false, exit: false },
     $buttonIsActive: false
   });
@@ -44,7 +44,7 @@ export class ChangeText {
   }
 
   setActiveChangeText({
-    changeText = { active: false, enterAndExit: false },
+    changeText = { active: false, enterAndExit: { enter: false, exit: false } },
     removeText = { changing: false, enter: false, exit: false },
     buttonIsActive
   }: ParamsSetActiveChangeTextS): void {
