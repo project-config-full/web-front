@@ -11,10 +11,15 @@
     width: clamp(6rem, 20vw, 43%);
     height: 3.5rem;
     cursor: pointer;
-    border: 2px solid whitesmoke;
+    border: 2px solid;
+    border-color: black;
     display: flex;
     font-family: "Open Sans", sans-serif;
-    transition: transform .2s ease-in-out;
+    transition: transform .2s ease-in-out, border-color .3s ease-in-out;
+
+    &.selected{
+      border-color: whitesmoke;
+    }
 
     &:hover{
       transform: scale(1.1);
