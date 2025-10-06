@@ -11,6 +11,8 @@ import { AnimationSelectedC } from '../../interfaces/animation-selected-c';
 import { ChangeAnimationText } from '../../services/change_animation_text/change-animation-text';
 import { ActiveChangeTextS } from '../../interfaces/active-change-text-s';
 import { AnimationsText } from '../../models/animations_text/animations-text.model';
+import { ChangeActiveAnimations } from '../../interfaces/change-active-animations';
+import { ChangeAnimationsService } from '../../services/changeActiveAnimationsService/change-animations-service';
 
 @Component({
   selector: 'app-config',
@@ -43,6 +45,7 @@ export class Config{
     private changeColorService: ChangeColor,
     private changeTextService: ChangeText,
     private changeAnimationTextService: ChangeAnimationText,
+    private changeAnimationsService: ChangeAnimationsService,
   ){
     this.changeConfigService.$configVal.subscribe((val: boolean) => {
       if(!this.activeResponsive) this.openingConfig = val;
@@ -155,8 +158,15 @@ export class Config{
             animation.active = false;
           });
 
-          this.animationsChild.animations[indexSelected].onClick();
           this.animationsChild.animations[indexSelected].active = true;
+
+          this.animationsChild.animations[indexSelected].onClick();
+
+          this.changeAnimationsService.setChangeActiveAnimations({
+            animations: this.animationsChild.animations,
+            change: true
+          });
+
           return;
         }
 

@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { ChangeColor } from '../../../../services/change_color/change-color';
 import { ChangeColorI } from '../../../../interfaces/change-color-i';
 import { ChangeAnimationText } from '../../../../services/change_animation_text/change-animation-text';
+import { ChangeActiveAnimations } from '../../../../interfaces/change-active-animations';
+import { ChangeAnimationsService } from '../../../../services/changeActiveAnimationsService/change-animations-service';
 
 @Component({
   selector: 'app-animations',
@@ -27,6 +29,7 @@ export class Animations implements OnInit{
   constructor(
     private changeColor: ChangeColor,
     private changeAnimationTextService: ChangeAnimationText,
+    private changeAnimationsService: ChangeAnimationsService,
   ){
     this.changeColor.$colorVal.subscribe((color: ChangeColorI) => {
       if(color.animationText){
@@ -35,6 +38,12 @@ export class Animations implements OnInit{
         this.CTR = color.animationText.colorOfTextRemove;
         this.CTC = color.animationText.colorOfTextChange;
       }
+    });
+
+    this.changeAnimationsService.$animations.subscribe((val: ChangeActiveAnimations) => {
+      if(!val.change) return;
+
+      this.animations = val.animations;
     });
 
     this.animations = [
