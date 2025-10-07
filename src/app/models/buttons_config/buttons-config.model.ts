@@ -1,4 +1,5 @@
 import { ChangeColorI } from "../../interfaces/change-color-i";
+import { LocalStorage } from "../../services/localStorage/local-storage";
 
 interface textInButtonInterface {
   disable: string;
@@ -13,6 +14,7 @@ interface ButtonsConfigInterface {
   reload?: boolean;
   textInButton: textInButtonInterface;
   color?: ChangeColorI["colorAllButton"];
+  localStorageService: LocalStorage;
   onClick: (button: ButtonsConfig) => void;
 }
 
@@ -26,8 +28,15 @@ export class ButtonsConfig {
   color: ChangeColorI["colorAllButton"];
   onClick: (button: this) => void;
 
-  public changeIsActive(): void {
+  private localStorageService: LocalStorage;
+
+  public changeIsActive(indexOfButton: number): void {
     this.isActive = !this.isActive;
+
+    this.localStorageService.setActiveButtons({
+      indexOfButton,
+      isActive: this.isActive
+    });
   }
 
   public changeColor(color: ChangeColorI["colorAllButton"]): void {
@@ -52,6 +61,7 @@ export class ButtonsConfig {
         textColor: '#C0C0C0'
       }
     },
+    localStorageService,
     onClick
   }: ButtonsConfigInterface){
     this.label = label;
@@ -61,6 +71,7 @@ export class ButtonsConfig {
     this.reload = reload;
     this.textInButton = textInButton;
     this.color = color;
+    this.localStorageService = localStorageService;
     this.onClick = onClick;
   }
 }
