@@ -132,10 +132,10 @@ export class Config{
             }
           },
           animationText: {
-            colorOfChange: "#C0C0C0",
-            colorOfRemove: "#2c2c2c",
-            colorOfTextChange: "#2c2c2c",
-            colorOfTextRemove: "#C0C0C0"
+            colorOfChange: "#2c2c2c",
+            colorOfRemove: "#C0C0C0",
+            colorOfTextChange: "#C0C0C0",
+            colorOfTextRemove: "#2c2c2c"
           }
         })
       }
