@@ -11,7 +11,6 @@ import { AnimationSelectedC } from '../../interfaces/animation-selected-c';
 import { ChangeAnimationText } from '../../services/change_animation_text/change-animation-text';
 import { ActiveChangeTextS } from '../../interfaces/active-change-text-s';
 import { AnimationsText } from '../../models/animations_text/animations-text.model';
-import { ChangeActiveAnimations } from '../../interfaces/change-active-animations';
 import { ChangeAnimationsService } from '../../services/changeActiveAnimationsService/change-animations-service';
 import { LocalStorage } from '../../services/localStorage/local-storage';
 
