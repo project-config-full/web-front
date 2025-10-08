@@ -1,4 +1,4 @@
-import { Component, HostListener, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonsConfig } from '../../models/buttons_config/buttons-config.model';
 import { ChangeConfig } from '../../services/changeConfig/change-config';
@@ -13,6 +13,7 @@ import { ActiveChangeTextS } from '../../interfaces/active-change-text-s';
 import { AnimationsText } from '../../models/animations_text/animations-text.model';
 import { ChangeAnimationsService } from '../../services/changeActiveAnimationsService/change-animations-service';
 import { LocalStorage } from '../../services/localStorage/local-storage';
+import { SetButtonLocalStorage } from '../../interfaces/set-button-local-storage';
 
 @Component({
   selector: 'app-config',
@@ -20,7 +21,7 @@ import { LocalStorage } from '../../services/localStorage/local-storage';
   templateUrl: './config.html',
   styleUrl: './config.scss'
 })
-export class Config{
+export class Config implements OnInit{
   @ViewChild(Presets) presetsChild!: Presets;
   @ViewChild(Animations) animationsChild!: Animations;
 
@@ -71,7 +72,14 @@ export class Config{
     this.changeAnimationTextService.$animations.subscribe((val: AnimationSelectedC) => {
       this.animationSelected = val;
     });
+  }
 
+  ngOnInit(): void {
+    this.createButtons();
+    this.changeButtonsStateLS();
+  }
+
+  private createButtons(): void{
     this.buttons = [
       new ButtonsConfig({
         label: "Theme",
@@ -237,6 +245,20 @@ export class Config{
         }
       })
     ];
+  }
+
+  changeButtonsStateLS(): void{
+    const buttonsLS = this.localStorageService.getActiveButtons();
+
+    if(buttonsLS.length < 1) return;
+
+    buttonsLS.forEach((btnLs: SetButtonLocalStorage) => {
+      this.buttons.forEach((button: ButtonsConfig, i: number) => {
+        if(i != btnLs.indexOfButton) return;
+
+        button.isActive = btnLs.isActive;
+      });
+    });
   }
 
   changeReloadButtons(): void{
