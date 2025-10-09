@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SetButtonLocalStorage } from '../../interfaces/set-button-local-storage';
+import { ChangeColorPre } from '../../models/change_color_pre/change-color-pre';
+import { ParamsSetPresetsLs } from '../../interfaces/params-set-presets-ls';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +34,31 @@ export class LocalStorage {
 
   getActiveButtons(): SetButtonLocalStorage[]{
     return JSON.parse(localStorage.getItem("buttons") || "[]");
+  }
+
+  private safeStringify(obj: any): string {
+    const seen = new WeakSet();
+    return JSON.stringify(obj, (key, value) => {
+      if (typeof value === 'object' && value !== null) {
+        if (seen.has(value)) return;
+        seen.add(value);
+      }
+      return value;
+    });
+  }
+
+  setPreset(preset: ChangeColorPre, btnThemeActive: boolean): void{
+    const presetLS: ParamsSetPresetsLs = {
+      ...preset,
+      btnThemeActive
+    }
+
+    localStorage.setItem("preset", this.safeStringify(presetLS));
+  }
+
+  getPreset(): ParamsSetPresetsLs{
+    const presetLs = localStorage.getItem("preset");
+
+    return presetLs ? JSON.parse(presetLs) : {} as ParamsSetPresetsLs;
   }
 }

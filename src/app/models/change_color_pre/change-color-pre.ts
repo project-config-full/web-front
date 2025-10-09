@@ -1,7 +1,7 @@
 import { ChangeColorI } from "../../interfaces/change-color-i";
 import { ChangeColor } from '../../services/change_color/change-color';
 
-interface ChangeColorPreInteraface extends ChangeColorI{
+export interface ChangeColorPreInteraface extends ChangeColorI{
   title: string;
   changeColorService: ChangeColor;
 }

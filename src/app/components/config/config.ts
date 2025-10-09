@@ -14,6 +14,8 @@ import { AnimationsText } from '../../models/animations_text/animations-text.mod
 import { ChangeAnimationsService } from '../../services/changeActiveAnimationsService/change-animations-service';
 import { LocalStorage } from '../../services/localStorage/local-storage';
 import { SetButtonLocalStorage } from '../../interfaces/set-button-local-storage';
+import { ParamsSetPresetsLs } from '../../interfaces/params-set-presets-ls';
+import { ChangeColorPre } from '../../models/change_color_pre/change-color-pre';
 
 @Component({
   selector: 'app-config',
@@ -96,6 +98,8 @@ export class Config implements OnInit{
             const indexSelected = Math.floor(Math.random() * 3);
             const preset = this.presetsChild.presets[indexSelected];
 
+            this.localStorageService.setPreset(preset, button.isActive);
+
             this.changeColorService.setColorVal({
               colorConfig: preset.colorConfig,
               colorContent: preset.colorContent,
@@ -117,6 +121,12 @@ export class Config implements OnInit{
 
             return;
           };
+
+          const presetLs: ParamsSetPresetsLs = this.localStorageService.getPreset();
+
+          const presetFromChild = this.presetsChild.presets.find((preset: ChangeColorPre) => preset.title === presetLs.title);
+
+          this.localStorageService.setPreset(presetFromChild!, button.isActive);
 
           this.changeColorService.setColorVal({
             colorConfig: "darkred",
