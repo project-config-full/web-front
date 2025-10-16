@@ -79,6 +79,29 @@ export class Config implements OnInit{
   ngOnInit(): void {
     this.createButtons();
     this.changeButtonsStateLS();
+
+    const presetActive = this.localStorageService.getPreset();
+
+    if(!presetActive.btnThemeActive) return;
+
+    this.changeColorService.setColorVal({
+      colorConfig: presetActive.colorConfig,
+      colorContent: presetActive.colorContent,
+      colorText: presetActive.colorText,
+      colorIcon: presetActive.colorIcon,
+      colorAllButton: {
+        circleColor: presetActive.colorAllButton!.circleColor,
+        active: {
+          buttonColor: presetActive.colorAllButton!.active.buttonColor,
+          textColor: presetActive.colorAllButton!.active.textColor
+        },
+        inactive: {
+          buttonColor: presetActive.colorAllButton!.inactive.buttonColor,
+          textColor: presetActive.colorAllButton!.inactive.textColor
+        }
+      },
+      animationText: presetActive.animationText
+    });
   }
 
   private createButtons(): void{
