@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ChangeColor } from '../../../../services/change_color/change-color';
 import { ChangeColorPre } from '../../../../models/change_color_pre/change-color-pre';
 import { ChangeColorI } from '../../../../interfaces/change-color-i';
+import { LocalStorage } from '../../../../services/localStorage/local-storage';
 
 @Component({
   selector: 'app-presets',
@@ -12,7 +13,10 @@ import { ChangeColorI } from '../../../../interfaces/change-color-i';
   styleUrl: './presets.scss'
 })
 export class Presets implements OnInit{
-  constructor(private changeColorService: ChangeColor){
+  constructor(
+    private changeColorService: ChangeColor,
+    private localStorageService: LocalStorage
+  ){
     this.changeColorService.$colorVal.subscribe((val: ChangeColorI) => {
       this.inputs[0].colorInput = val.colorConfig ? val.colorConfig : this.inputs[0].colorInput;
       this.inputs[1].colorInput = val.colorContent ? val.colorContent : this.inputs[1].colorInput;
@@ -91,7 +95,8 @@ export class Presets implements OnInit{
           colorOfTextChange: "#B87333",
           colorOfTextRemove: "#573105ff"
         },
-        changeColorService: this.changeColorService
+        changeColorService: this.changeColorService,
+        localStorageService: this.localStorageService
       }),
       new ChangeColorPre({
         title: "Violet Candy",
@@ -116,7 +121,8 @@ export class Presets implements OnInit{
           colorOfTextChange: "#e30057ff",
           colorOfTextRemove: "#FF006F"
         },
-        changeColorService: this.changeColorService
+        changeColorService: this.changeColorService,
+        localStorageService: this.localStorageService
       }),
       new ChangeColorPre({
         title: "Steel & Silver",
@@ -141,7 +147,8 @@ export class Presets implements OnInit{
           colorOfTextChange: "#C0C0C0",
           colorOfTextRemove: "#277679ff"
         },
-        changeColorService: this.changeColorService
+        changeColorService: this.changeColorService,
+        localStorageService: this.localStorageService
       })
     ];
   }

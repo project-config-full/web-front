@@ -1,9 +1,11 @@
 import { ChangeColorI } from "../../interfaces/change-color-i";
 import { ChangeColor } from '../../services/change_color/change-color';
+import { LocalStorage } from '../../services/localStorage/local-storage';
 
 export interface ChangeColorPreInteraface extends ChangeColorI{
   title: string;
   changeColorService: ChangeColor;
+  localStorageService: LocalStorage;
 }
 
 export class ChangeColorPre {
@@ -15,6 +17,7 @@ export class ChangeColorPre {
   colorAllButton: ChangeColorI["colorAllButton"];
   animationText: ChangeColorI["animationText"];
   changeColorService: ChangeColor;
+  localStorageService: LocalStorage;
 
   constructor(val: ChangeColorPreInteraface){
     this.title = val.title;
@@ -25,9 +28,12 @@ export class ChangeColorPre {
     this.colorAllButton = val.colorAllButton!;
     this.animationText = val.animationText!;
     this.changeColorService = val.changeColorService;
+    this.localStorageService = val.localStorageService;
   }
 
   onClick(){
+    this.localStorageService.setPreset(this, true);
+
     this.changeColorService.setColorVal({
       colorConfig: this.colorConfig,
       colorContent: this.colorContent,
