@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonsConfig } from '../../models/buttons_config/buttons-config.model';
 import { ChangeConfig } from '../../services/changeConfig/change-config';
@@ -23,7 +23,7 @@ import { ChangeColorPre } from '../../models/change_color_pre/change-color-pre';
   templateUrl: './config.html',
   styleUrl: './config.scss'
 })
-export class Config implements OnInit{
+export class Config implements OnInit, AfterViewInit{
   @ViewChild(Presets) presetsChild!: Presets;
   @ViewChild(Animations) animationsChild!: Animations;
 
@@ -101,6 +101,24 @@ export class Config implements OnInit{
         }
       },
       animationText: presetActive.animationText
+    });
+  }
+
+  ngAfterViewInit(): void {
+    const animationLs = this.localStorageService.getAnimations();
+
+    if(!animationLs.btnThemeActive) return;
+
+    const animationLsFromChild = this.animationsChild.animations.find((animation: AnimationsText) => {
+      return animation.changeText === animationLs.changeText && animation.removeText === animationLs.removeText;
+    })
+
+    animationLsFromChild!.active = true;
+    animationLsFromChild!.onClick();
+
+    this.changeAnimationsService.setChangeActiveAnimations({
+      animations: this.animationsChild.animations,
+      change: true
     });
   }
 
@@ -206,6 +224,14 @@ export class Config implements OnInit{
 
             return;
           }
+
+          const animationLS = this.localStorageService.getAnimations();
+
+          const animationFromChild = this.animationsChild.animations.find((animation: AnimationsText) => {
+            return animation.changeText === animationLS.changeText && animation.removeText === animationLS.removeText;
+          });
+
+          this.localStorageService.setAnimations(animationFromChild!, button.isActive);
 
           this.changeAnimationTextService.setAnimations({
             change: {

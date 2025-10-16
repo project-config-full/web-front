@@ -6,6 +6,7 @@ import { ChangeColorI } from '../../../../interfaces/change-color-i';
 import { ChangeAnimationText } from '../../../../services/change_animation_text/change-animation-text';
 import { ChangeActiveAnimations } from '../../../../interfaces/change-active-animations';
 import { ChangeAnimationsService } from '../../../../services/changeActiveAnimationsService/change-animations-service';
+import { LocalStorage } from '../../../../services/localStorage/local-storage';
 
 @Component({
   selector: 'app-animations',
@@ -30,6 +31,7 @@ export class Animations implements OnInit{
     private changeColor: ChangeColor,
     private changeAnimationTextService: ChangeAnimationText,
     private changeAnimationsService: ChangeAnimationsService,
+    private localStorageService: LocalStorage
   ){
     this.changeColor.$colorVal.subscribe((color: ChangeColorI) => {
       if(color.animationText){
@@ -62,7 +64,8 @@ export class Animations implements OnInit{
           remove: 2000,
           change: 5000
         },
-        changeAnimationText: this.changeAnimationTextService
+        changeAnimationText: this.changeAnimationTextService,
+        localStorageService: this.localStorageService
       }),
       new AnimationsText({
         changeText: "ANCT1",
@@ -74,7 +77,8 @@ export class Animations implements OnInit{
         durationProprietys: {
           remove: 1900,
         },
-        changeAnimationText: this.changeAnimationTextService
+        changeAnimationText: this.changeAnimationTextService,
+        localStorageService: this.localStorageService
       }),
       new AnimationsText({
         changeText: "ANCT2",
@@ -86,7 +90,8 @@ export class Animations implements OnInit{
         durationProprietys: {
           remove: 1900,
         },
-        changeAnimationText: this.changeAnimationTextService
+        changeAnimationText: this.changeAnimationTextService,
+        localStorageService: this.localStorageService
       }),
       new AnimationsText({
         changeText: "ANCT3",
@@ -98,7 +103,8 @@ export class Animations implements OnInit{
         durationProprietys: {
           remove: 1900,
         },
-        changeAnimationText: this.changeAnimationTextService
+        changeAnimationText: this.changeAnimationTextService,
+        localStorageService: this.localStorageService
       })
     ];
   }

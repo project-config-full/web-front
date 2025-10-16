@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { SetButtonLocalStorage } from '../../interfaces/set-button-local-storage';
 import { ChangeColorPre } from '../../models/change_color_pre/change-color-pre';
 import { ParamsSetPresetsLs } from '../../interfaces/params-set-presets-ls';
+import { AnimationSelectedC } from '../../interfaces/animation-selected-c';
+import { AnimationsText } from '../../models/animations_text/animations-text.model';
+import { ParamsSetAnimationTextLs } from '../../interfaces/params-set-animation-text-ls';
 
 @Injectable({
   providedIn: 'root'
@@ -60,5 +63,20 @@ export class LocalStorage {
     const presetLs = localStorage.getItem("preset");
 
     return presetLs ? JSON.parse(presetLs) : {} as ParamsSetPresetsLs;
+  }
+
+  setAnimations(animation: AnimationsText, btnThemeActive: boolean): void{
+    const animationLS: ParamsSetAnimationTextLs = {
+      ...animation,
+      btnThemeActive,
+    }
+
+    localStorage.setItem("animation", this.safeStringify(animationLS));
+  }
+
+  getAnimations(): ParamsSetAnimationTextLs{
+    const animationLs = localStorage.getItem("animation");
+
+    return animationLs ? JSON.parse(animationLs) : {} as ParamsSetAnimationTextLs;
   }
 }

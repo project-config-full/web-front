@@ -1,4 +1,5 @@
 import { ChangeAnimationText } from "../../services/change_animation_text/change-animation-text";
+import { LocalStorage } from "../../services/localStorage/local-storage";
 
 interface proprietys{
   enter: boolean;
@@ -10,13 +11,14 @@ interface durationProprietys{
   change?: number;
 }
 
-interface AnimationsTextInterface {
+export interface AnimationsTextInterface {
   changeText: string;
   removeText: string;
   changeTextProprietys?: proprietys;
   removeTextProprietys: proprietys;
   durationProprietys: durationProprietys;
   changeAnimationText: ChangeAnimationText;
+  localStorageService: LocalStorage;
   active?: boolean;
 }
 
@@ -29,6 +31,7 @@ export class AnimationsText {
   active: boolean;
 
   private changeAnimationText: ChangeAnimationText;
+  private localStorageService: LocalStorage;
 
   //* CPRT = change proprietys remove text
   //* CPCT = change proprietys change text
@@ -56,6 +59,8 @@ export class AnimationsText {
   }
 
   public onClick(): void{
+    this.localStorageService.setAnimations(this, true);
+
     this.changeAnimationText.setAnimations({
       change: {
         name: this.changeText,
@@ -74,6 +79,7 @@ export class AnimationsText {
     removeTextProprietys,
     durationProprietys,
     changeAnimationText,
+    localStorageService,
     active = false,
   }: AnimationsTextInterface) {
     this.changeText = changeText;
@@ -83,5 +89,6 @@ export class AnimationsText {
     this.durationProprietys = durationProprietys;
     this.active = active;
     this.changeAnimationText = changeAnimationText;
+    this.localStorageService = localStorageService;
   }
 }
