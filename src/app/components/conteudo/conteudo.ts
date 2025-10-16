@@ -7,6 +7,8 @@ import { ChangeText } from '../../services/change_text/change-text';
 import { ClassesTextChangeCTS } from '../../interfaces/classes-text-change-cts';
 import { TextPropertiesCTS } from '../../interfaces/text-properties-cts';
 import { AnimationSetClassCont } from '../../interfaces/animation-set-class-cont';
+import { LocalStorage } from '../../services/localStorage/local-storage';
+import { SetButtonLocalStorage } from '../../interfaces/set-button-local-storage';
 
 @Component({
   selector: 'app-conteudo',
@@ -45,7 +47,8 @@ export class Conteudo {
   constructor(
     private changeConfigService: ChangeConfig,
     private changeColorService: ChangeColor,
-    private changeTextService: ChangeText
+    private changeTextService: ChangeText,
+    private localStorageService: LocalStorage
   ){
     this.changeColorService.$colorVal.subscribe((val: ChangeColorI) => {
       this.colorOfIconConfig = val.colorIcon ? val.colorIcon : this.colorOfIconConfig;
@@ -80,6 +83,12 @@ export class Conteudo {
       if(this.animations.remove.enterActive) this.removeText();
       if(!this.animations.remove.enterActive) this.addText();
     });
+
+    const buttonChangeText = this.localStorageService.getActiveButtons().find((button: SetButtonLocalStorage) => button.indexOfButton === 2);
+    const buttonRemoveText = this.localStorageService.getActiveButtons().find((button: SetButtonLocalStorage) => button.indexOfButton === 3);
+
+    this.isTextActive = buttonRemoveText ? !buttonRemoveText.isActive : true;
+    this.firtTextActive = buttonChangeText ? !buttonChangeText.isActive : true;
   }
 
   changeText(): void{
