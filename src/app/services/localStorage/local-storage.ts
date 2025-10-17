@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { SetButtonLocalStorage } from '../../interfaces/set-button-local-storage';
 import { ChangeColorPre } from '../../models/change_color_pre/change-color-pre';
 import { ParamsSetPresetsLs } from '../../interfaces/params-set-presets-ls';
-import { AnimationSelectedC } from '../../interfaces/animation-selected-c';
 import { AnimationsText } from '../../models/animations_text/animations-text.model';
 import { ParamsSetAnimationTextLs } from '../../interfaces/params-set-animation-text-ls';
-import { consumerPollProducersForChange } from '@angular/core/primitives/signals';
 
 @Injectable({
   providedIn: 'root'
