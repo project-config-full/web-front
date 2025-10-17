@@ -5,6 +5,7 @@ import { ParamsSetPresetsLs } from '../../interfaces/params-set-presets-ls';
 import { AnimationSelectedC } from '../../interfaces/animation-selected-c';
 import { AnimationsText } from '../../models/animations_text/animations-text.model';
 import { ParamsSetAnimationTextLs } from '../../interfaces/params-set-animation-text-ls';
+import { consumerPollProducersForChange } from '@angular/core/primitives/signals';
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +27,8 @@ export class LocalStorage {
       buttons.push(val);
     }
 
-    buttons.forEach((button: SetButtonLocalStorage, i: number) => {
-      if(i !== val.indexOfButton) return;
+    buttons.forEach((button: SetButtonLocalStorage) => {
+      if(button.indexOfButton !== val.indexOfButton) return;
 
       button.isActive = val.isActive;
     });
