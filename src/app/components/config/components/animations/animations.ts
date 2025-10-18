@@ -117,8 +117,6 @@ export class Animations implements OnInit{
     animationSelec.active = true;
 
     animationSelec.onClick();
-
-    console.log(this.animations);
   }
 
   ngOnInit(): void {
