@@ -16,10 +16,11 @@ import { LocalStorage } from '../../services/localStorage/local-storage';
 import { SetButtonLocalStorage } from '../../interfaces/set-button-local-storage';
 import { ParamsSetPresetsLs } from '../../interfaces/params-set-presets-ls';
 import { ChangeColorPre } from '../../models/change_color_pre/change-color-pre';
+import { SettingsSide } from "./components/settings-side/settings-side";
 
 @Component({
   selector: 'app-config',
-  imports: [CommonModule, Presets, Animations],
+  imports: [CommonModule, Presets, Animations, SettingsSide],
   templateUrl: './config.html',
   styleUrl: './config.scss'
 })
@@ -241,6 +242,18 @@ export class Config implements OnInit, AfterViewInit{
               name: "remove_default"
             }
           });
+        }
+      }),
+      new ButtonsConfig({
+        label: "Settings side",
+        textInButton: {
+          disable: "Default",
+          active: "Other"
+        },
+        settings_side: true,
+        localStorageService: this.localStorageService,
+        onClick: (button: ButtonsConfig) => {
+          button.changeIsActive(this.buttons.indexOf(button))
         }
       }),
       new ButtonsConfig({

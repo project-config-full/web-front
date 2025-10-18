@@ -42,6 +42,13 @@
       >
         <app-animations></app-animations>
       </div><!-- animations-wrapper -->
+
+      <div
+        class="settings-side-wrapper"
+        [style.display]="button.isActive && button.settings_side ? 'flex' : 'none'"
+      >
+        <app-settings-side></app-settings-side>
+      </div><!-- settings-side-wrapper -->
     }
   </section><!-- config -->
 </div><!-- container -->

@@ -1,0 +1,104 @@
+.container{
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .5rem;
+
+  .content-wrapper{
+    width: 5.5rem;
+    height: 45%;
+    cursor: pointer;
+    border: 1px solid white;
+    display: flex;
+    transition: width .3s ease-in-out, height .3s ease-in-out;
+
+    &.rigth{
+      flex-direction: row-reverse;
+    }
+
+    &.top, &.bottom{
+      flex-direction: column;
+
+      .conteudo{
+        width: 100%;
+      }
+
+      .config{
+        width: 100%;
+        flex-direction: row;
+
+        .button{
+          width: 20%;
+          height: 25%;
+        }
+      }
+    }
+
+    &.bottom{
+      flex-direction: column-reverse;
+    }
+
+    &:hover{
+      width: 9rem;
+      height: 70%;
+
+      .config{
+        .button{
+          opacity: 1;
+        }
+      }
+    }
+
+    .config{
+      width: 30%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.13);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: .5rem;
+
+      .button{
+        width: 70%;
+        height: 15%;
+        opacity: 0;
+        transition: opacity .3s ease-in-out;
+        border-radius: 1rem;
+        position: relative;
+
+        &:last-child{
+          .circle{
+            position: absolute;
+            right: 0;
+          }
+        }
+
+        .circle{
+          width: 30%;
+          height: 100%;
+          border-radius: 50%;
+        }
+      }
+    }
+
+    .conteudo{
+      width: 70%;
+      height: 100%;
+    }
+  }
+
+  @media screen and (max-width: 800px){
+    .content-wrapper{
+      width: 4rem;
+      height: 40%;
+
+      &:hover{
+        width: 7rem;
+        height: 60%;
+      }
+    }
+  }
+}

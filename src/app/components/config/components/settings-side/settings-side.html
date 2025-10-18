@@ -1,0 +1,31 @@
+<div class="container">
+  @for(settingSide of settings_side; track settingSide){
+    <div class="content-wrapper"
+      [class]="settingSide.side"
+    >
+      <div class="config">
+        <div
+          class="button"
+          [style.backgroundColor]="settingSide.colors.button!.inactive.buttonColor"
+        >
+          <div
+            class="circle"
+            [style.backgroundColor]="settingSide.colors.button!.circleColor"
+          ></div><!-- circle-->
+        </div><!-- button-wrapper -->
+
+        <div
+          class="button"
+          [style.backgroundColor]="settingSide.colors.button!.active.buttonColor"
+        >
+          <div
+            class="circle"
+            [style.backgroundColor]="settingSide.colors.button!.circleColor"
+          ></div><!-- circle-->
+        </div><!-- button-wrapper -->
+      </div><!-- config -->
+
+      <div class="conteudo" [style.backgroundColor]="settingSide.colors.conteudo"></div><!-- conteudo -->
+    </div><!-- content-wrapper -->
+  }
+</div><!-- container -->
