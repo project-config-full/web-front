@@ -84,8 +84,8 @@ export class Conteudo {
       if(!this.animations.remove.enterActive) this.addText();
     });
 
-    const buttonChangeText = this.localStorageService.getActiveButtons().find((button: SetButtonLocalStorage) => button.indexOfButton === 2);
-    const buttonRemoveText = this.localStorageService.getActiveButtons().find((button: SetButtonLocalStorage) => button.indexOfButton === 3);
+    const buttonChangeText = this.localStorageService.getActiveButtons().find((button: SetButtonLocalStorage) => button.indexOfButton === 3);
+    const buttonRemoveText = this.localStorageService.getActiveButtons().find((button: SetButtonLocalStorage) => button.indexOfButton === 4);
 
     this.isTextActive = buttonRemoveText ? !buttonRemoveText.isActive : true;
     this.firtTextActive = buttonChangeText ? !buttonChangeText.isActive : true;
