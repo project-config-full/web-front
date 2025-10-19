@@ -2,6 +2,7 @@
   @for(settingSide of settings_side; track settingSide){
     <div class="content-wrapper"
       [class]="settingSide.side"
+      [class.active]="settingSide.active"
       (click)="selectSettingSide(settingSide)"
     >
       <div class="config">
