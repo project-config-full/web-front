@@ -17,6 +17,7 @@ export class App implements AfterViewInit{
   protected readonly title = signal('project-config');
 
   configIsOpen!: boolean;
+  activeChangeSideConfig!: boolean;
   transitionOff: boolean = false;
 
   colorOfConfig: string = "darkred";
@@ -43,6 +44,8 @@ export class App implements AfterViewInit{
       this.transitionOff = true;
 
       setTimeout(() => this.transitionOff = false, 100);
+
+      this.activeChangeSideConfig = (val.side && val.side !== "left" && val.side !== "rigth") as boolean;
 
       this.sideAll = val.side || "left";
     });

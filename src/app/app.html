@@ -5,12 +5,14 @@
   <app-config
     [class.transitionOff]="transitionOff"
     [class.isOpenConfig]="configIsOpen"
+    [class.changeSideConfig]="activeChangeSideConfig"
     [style.backgroundColor]="colorOfConfig"
   ></app-config>
 
   <app-conteudo
     [class.transitionOff]="transitionOff"
     [class.isOpenConfig]="configIsOpen"
+    [class.changeSideConfig]="activeChangeSideConfig"
     (changeConfigEnv)="configIsOpen = $event"
     [style.backgroundColor]="colorOfContent"
   ></app-conteudo>
