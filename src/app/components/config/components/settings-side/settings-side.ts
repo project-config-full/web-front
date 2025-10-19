@@ -26,6 +26,7 @@ export class SettingsSide implements OnInit{
           conteudo: "#2c2c2c",
           colorIcon: "#000000",
           colorText: "#FFFFFF",
+          colorConfig: "darkred",
           button: {
             circleColor: "#f5deb3",
             active: {
@@ -47,6 +48,7 @@ export class SettingsSide implements OnInit{
           conteudo: "#2c2c2c",
           colorIcon: "#000000",
           colorText: "#FFFFFF",
+          colorConfig: "darkred",
           button: {
             circleColor: "#f5deb3",
             active: {
@@ -69,6 +71,7 @@ export class SettingsSide implements OnInit{
           conteudo: "#2c2c2c",
           colorIcon: "#000000",
           colorText: "#FFFFFF",
+          colorConfig: "darkred",
           button: {
             circleColor: "#f5deb3",
             active: {
@@ -97,6 +100,7 @@ export class SettingsSide implements OnInit{
         settingSide.colors.button!.active.buttonColor = val.colorAllButton?.active.buttonColor ? val.colorAllButton.active.buttonColor : "#C0C0C0";
         settingSide.colors.button!.inactive.buttonColor = val.colorAllButton?.inactive.buttonColor ? val.colorAllButton.inactive.buttonColor : "#2c2c2c";
         settingSide.colors.colorText = val.colorText ? val.colorText : "#FFFFFF";
+        settingSide.colors.colorConfig = val.colorConfig ? val.colorConfig : "darkred";
       });
     })
 

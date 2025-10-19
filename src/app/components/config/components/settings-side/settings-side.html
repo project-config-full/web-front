@@ -5,7 +5,10 @@
       [class.active]="settingSide.active"
       (click)="selectSettingSide(settingSide)"
     >
-      <div class="config">
+      <div
+        class="config"
+        [style.backgroundColor]="settingSide.colors.colorConfig"
+      >
         <div
           class="button"
           [style.backgroundColor]="settingSide.colors.button!.inactive.buttonColor"

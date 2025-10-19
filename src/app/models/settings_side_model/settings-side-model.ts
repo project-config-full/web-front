@@ -7,6 +7,7 @@ interface SettingsSideInterface {
     conteudo: string;
     colorIcon: string;
     colorText: string;
+    colorConfig: string;
     button: ChangeColorI["colorAllButton"];
   },
   side: string;
