@@ -106,22 +106,59 @@
   }
 
   @media screen and (max-width: 700px){
+    &.rigth{
+      app-config{
+        left: inherit;
+        right: 0;
+      }
+    }
+
+    &.top, &.bottom{
+      flex-direction: row;
+
+      app-config{
+        bottom: 0;
+        top: inherit;
+      }
+    }
+
+    &.bottom{
+      app-config{
+        left: inherit;
+        right: 0;
+        order: 1;
+      }
+
+      app-conteudo{
+        order: 2;
+      }
+    }
+
     app-config{
       position: absolute;
       top: 0;
       left: 0;
       width: 18rem;
       height: 0;
-    }
 
-    app-config.isOpenConfig{
-      width: 18rem;
-      height: 24rem;
+      &.isOpenConfig{
+        width: 18rem;
+        height: 24rem;
+
+        &.changeSideConfig{
+          width: 18rem !important;
+          height: 24rem !important;
+        }
+      }
     }
 
     app-conteudo{
       width: 100% !important;
       transition: background-color .5s ease-in-out !important;
+
+      &.changeSideConfig.isOpenConfig{
+        height: 100% !important;
+      }
     }
   }
 
