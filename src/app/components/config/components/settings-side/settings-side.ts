@@ -116,8 +116,6 @@ export class SettingsSide implements OnInit{
       settingSide.active = false;
     });
 
-    settingSide.active = true;
-
     settingSide.onClick();
   }
 }
