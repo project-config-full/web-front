@@ -1,9 +1,11 @@
-import { Component, signal, HostListener } from '@angular/core';
+import { Component, signal, HostListener, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Config } from "./components/config/config";
 import { Conteudo } from "./components/conteudo/conteudo";
 import { CommonModule } from '@angular/common';
 import { ChangeColor } from './services/change_color/change-color';
 import { ChangeColorI } from './interfaces/change-color-i';
+import { SettingSide } from './services/settingSide/setting-side';
+import { SettingsSideModel } from './models/settings_side_model/settings-side-model';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +13,7 @@ import { ChangeColorI } from './interfaces/change-color-i';
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
+export class App implements AfterViewInit{
   protected readonly title = signal('project-config');
 
   configIsOpen!: boolean;
@@ -20,9 +22,15 @@ export class App {
   colorOfConfig: string = "darkred";
   colorOfContent: string = "#2c2c2c";
 
+  sideAll: string = "left";
+
   constructor(
-    private changeColorService: ChangeColor
-  ) {
+    private changeColorService: ChangeColor,
+    private settingSideService: SettingSide,
+    private cdr: ChangeDetectorRef,
+  ) {}
+
+  ngAfterViewInit(): void {
     this.changeColorService.$colorVal.subscribe((val: ChangeColorI)=>{
       this.colorOfConfig = val.colorConfig ? val.colorConfig : this.colorOfConfig;
       this.colorOfContent = val.colorContent ? val.colorContent : this.colorOfContent;
@@ -30,6 +38,16 @@ export class App {
 
     const configIsOpenLS = localStorage.getItem('configIsOpen');
     this.configIsOpen = configIsOpenLS ? JSON.parse(configIsOpenLS) : false;
+
+    this.settingSideService.$settingSideVal.subscribe((val: SettingsSideModel) => {
+      this.transitionOff = true;
+
+      setTimeout(() => this.transitionOff = false, 100);
+
+      this.sideAll = val.side || "left";
+    });
+
+    this.cdr.detectChanges();
   }
 
   @HostListener('window:resize', ['$event'])

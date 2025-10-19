@@ -2,6 +2,7 @@
   @for(settingSide of settings_side; track settingSide){
     <div class="content-wrapper"
       [class]="settingSide.side"
+      (click)="selectSettingSide(settingSide)"
     >
       <div class="config">
         <div
@@ -25,7 +26,24 @@
         </div><!-- button-wrapper -->
       </div><!-- config -->
 
-      <div class="conteudo" [style.backgroundColor]="settingSide.colors.conteudo"></div><!-- conteudo -->
+      <div
+        class="conteudo"
+        [style.backgroundColor]="settingSide.colors.conteudo"
+      >
+        <div class="openConfig-wrapper">
+          <div
+            class="openConfig"
+            [style.backgroundColor]="settingSide.colors.colorIcon"
+          ></div><!-- openConfig -->
+        </div><!-- openConfig-wrapper -->
+
+        <div class="text-wrapper">
+          <div
+          class="text"
+          [style.backgroundColor]="settingSide.colors.colorText"
+          ></div><!-- text -->
+        </div><!-- text-wrapper -->
+      </div><!-- conteudo -->
     </div><!-- content-wrapper -->
   }
 </div><!-- container -->

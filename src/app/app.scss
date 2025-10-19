@@ -8,6 +8,33 @@
     flex: 0 0 auto;
   }
 
+  &.rigth{
+    flex-direction: row-reverse;
+  }
+
+  &.top, &.bottom{
+    flex-direction: column;
+
+    app-conteudo{
+      width: 100% !important;
+    }
+
+    app-config{
+      width: 100% !important;
+      height: 30% !important;
+    }
+  }
+
+  &.bottom{
+    app-config{
+      order: 2;
+    }
+
+    app-conteudo{
+      order: 1;
+    }
+  }
+
   app-config, app-conteudo{
     transition:
         width .5s ease-in-out,

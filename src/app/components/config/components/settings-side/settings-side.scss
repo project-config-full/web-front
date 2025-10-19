@@ -23,15 +23,21 @@
 
       .conteudo{
         width: 100%;
+        height: 70%;
+
+        .text-wrapper{
+          padding-top: .4rem;
+        }
       }
 
       .config{
         width: 100%;
+        height: 30%;
         flex-direction: row;
 
         .button{
           width: 20%;
-          height: 25%;
+          height: 40%;
         }
       }
     }
@@ -41,14 +47,21 @@
     }
 
     &:hover{
-      width: 9rem;
-      height: 70%;
+      width: 8rem;
+      height: 65%;
 
       .config{
         .button{
           opacity: 1;
         }
       }
+    }
+
+    .config,
+    .conteudo,
+    .config .button,
+    .button .circle{
+      transition: background-color .3s ease-in-out;
     }
 
     .config{
@@ -87,6 +100,34 @@
     .conteudo{
       width: 70%;
       height: 100%;
+      display: flex;
+      flex-direction: column;
+
+      .openConfig-wrapper{
+        width: 100%;
+        height: 35%;
+
+        .openConfig{
+          width: .5rem;
+          height: .5rem;
+          margin: .15rem;
+          border-radius: 50%;
+        }
+      }
+
+      .text-wrapper{
+        width: 100%;
+        height: 65%;
+        display: flex;
+        justify-content: center;
+        padding-top: .5rem;
+
+        .text{
+          width: 70%;
+          height: .2rem;
+          background-color: white;
+        }
+      }
     }
   }
 

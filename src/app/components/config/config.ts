@@ -17,6 +17,8 @@ import { SetButtonLocalStorage } from '../../interfaces/set-button-local-storage
 import { ParamsSetPresetsLs } from '../../interfaces/params-set-presets-ls';
 import { ChangeColorPre } from '../../models/change_color_pre/change-color-pre';
 import { SettingsSide } from "./components/settings-side/settings-side";
+import { SettingSide } from '../../services/settingSide/setting-side';
+import { SettingsSideModel } from '../../models/settings_side_model/settings-side-model';
 
 @Component({
   selector: 'app-config',
@@ -27,6 +29,7 @@ import { SettingsSide } from "./components/settings-side/settings-side";
 export class Config implements OnInit, AfterViewInit{
   @ViewChild(Presets) presetsChild!: Presets;
   @ViewChild(Animations) animationsChild!: Animations;
+  @ViewChild(SettingsSide) settingsSideChild!: SettingsSide;
 
   openingConfig!: boolean;
   activeResponsive: boolean = false;
@@ -51,6 +54,7 @@ export class Config implements OnInit, AfterViewInit{
     private changeAnimationTextService: ChangeAnimationText,
     private changeAnimationsService: ChangeAnimationsService,
     private localStorageService: LocalStorage,
+    private settingSideService: SettingSide,
   ){
     this.changeConfigService.$configVal.subscribe((val: boolean) => {
       if(!this.activeResponsive) this.openingConfig = val;
@@ -254,6 +258,12 @@ export class Config implements OnInit, AfterViewInit{
         localStorageService: this.localStorageService,
         onClick: (button: ButtonsConfig) => {
           button.changeIsActive(this.buttons.indexOf(button))
+
+          this.settingSideService.setSettingSideVal({} as SettingsSideModel);
+
+          if(!button.isActive) return;
+
+          this.settingsSideChild.settings_side[0].onClick(this.settingsSideChild.settings_side[0]);
         }
       }),
       new ButtonsConfig({
