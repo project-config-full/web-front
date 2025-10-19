@@ -4,6 +4,8 @@ import { ChangeColorPre } from '../../models/change_color_pre/change-color-pre';
 import { ParamsSetPresetsLs } from '../../interfaces/params-set-presets-ls';
 import { AnimationsText } from '../../models/animations_text/animations-text.model';
 import { ParamsSetAnimationTextLs } from '../../interfaces/params-set-animation-text-ls';
+import { SettingsSideModel } from '../../models/settings_side_model/settings-side-model';
+import { ParamsSetSideConfig } from '../../interfaces/params-set-side-config';
 
 @Injectable({
   providedIn: 'root'
@@ -77,5 +79,22 @@ export class LocalStorage {
     const animationLs = localStorage.getItem("animation");
 
     return animationLs ? JSON.parse(animationLs) : {} as ParamsSetAnimationTextLs;
+  }
+
+  setSideConfig(side: SettingsSideModel): void{
+    const btnActive = this.getActiveButtons().find((button: SetButtonLocalStorage) => button.indexOfButton === 2);
+
+    const sideConfigLS: ParamsSetSideConfig = {
+      vals: side,
+      btnActive: btnActive!.isActive
+    }
+
+    localStorage.setItem("sideConfig", this.safeStringify(sideConfigLS));
+  }
+
+  getSideConfig(): ParamsSetSideConfig{
+    const sideConfigLs = localStorage.getItem("sideConfig");
+
+    return sideConfigLs ? JSON.parse(sideConfigLs) : {} as ParamsSetSideConfig;
   }
 }

@@ -269,7 +269,7 @@ export class Config implements OnInit, AfterViewInit{
 
           if(!button.isActive) return;
 
-          this.settingsSideChild.settings_side[0].onClick(this.settingsSideChild.settings_side[0]);
+          this.settingsSideChild.settings_side[0].onClick();
         }
       }),
       new ButtonsConfig({

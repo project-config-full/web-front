@@ -3,6 +3,8 @@ import { SettingsSideModel } from '../../../../models/settings_side_model/settin
 import { SettingSide } from '../../../../services/settingSide/setting-side';
 import { ChangeColor } from '../../../../services/change_color/change-color';
 import { ChangeColorI } from '../../../../interfaces/change-color-i';
+import { LocalStorage } from '../../../../services/localStorage/local-storage';
+import { ParamsSetSideConfig } from '../../../../interfaces/params-set-side-config';
 
 @Component({
   selector: 'app-settings-side',
@@ -15,7 +17,8 @@ export class SettingsSide implements OnInit{
 
   constructor(
     private settingSideService: SettingSide,
-    private ChangeColorService: ChangeColor
+    private ChangeColorService: ChangeColor,
+    private localStorageService: LocalStorage,
   ){
     this.settings_side = [
       new SettingsSideModel({
@@ -37,6 +40,7 @@ export class SettingsSide implements OnInit{
         },
         side: 'rigth',
         settingSideService: this.settingSideService,
+        localStorageService: this.localStorageService
       }),
       new SettingsSideModel({
         colors: {
@@ -58,6 +62,7 @@ export class SettingsSide implements OnInit{
         side: 'top',
         active: false,
         settingSideService: this.settingSideService,
+        localStorageService: this.localStorageService
       }),
           new SettingsSideModel({
         colors: {
@@ -78,6 +83,7 @@ export class SettingsSide implements OnInit{
         },
         side: 'bottom',
         settingSideService: this.settingSideService,
+        localStorageService: this.localStorageService
       })
     ];
   }
@@ -93,6 +99,16 @@ export class SettingsSide implements OnInit{
         settingSide.colors.colorText = val.colorText ? val.colorText : "#FFFFFF";
       });
     })
+
+    const sideConfigLS: ParamsSetSideConfig = this.localStorageService.getSideConfig();
+
+    if(!sideConfigLS) return;
+
+    this.settings_side.forEach((settingSide: SettingsSideModel) => {
+      if(settingSide.side !== sideConfigLS.vals?.side) return;
+
+      settingSide.onClick();
+    });
   }
 
   selectSettingSide(settingSide: SettingsSideModel): void{
@@ -102,6 +118,6 @@ export class SettingsSide implements OnInit{
 
     settingSide.active = true;
 
-    settingSide.onClick(settingSide);
+    settingSide.onClick();
   }
 }
