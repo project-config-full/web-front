@@ -28,12 +28,24 @@
     padding: 2.5rem 0 1rem 0;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 1.5rem;
+
+    &.activeSideConfigButtomTop{
+      .button-wrapper{
+        width: 80%;
+
+        .label{
+          min-width: 10% !important;
+        }
+      }
+    }
 
     .button-wrapper{
       width: 100%;
       display: flex;
-      justify-content: space-evenly;
+      justify-content: center;
+      gap: clamp(2rem, 5vw, 3rem);
 
       .label{
         display: flex;
@@ -97,7 +109,12 @@
       app-presets,
       app-animations,
       app-settings-side{
-        min-width: 90%;
+        min-width: 50%;
+      }
+
+      .activeSideConfigButtomTop{
+        min-width: 30% !important;
+        max-width: 30% !important;
       }
     }
 

@@ -3,7 +3,10 @@
     <h1>Settings</h1>
   </header>
 
-  <section class="config">
+  <section
+    class="config"
+    [class.activeSideConfigButtomTop]="activeSideConfigBottomTop"
+  >
     @for(button of buttons; track button){
       <div class="button-wrapper">
         <div class="label">
@@ -31,8 +34,13 @@
         </div><!-- button -->
       </div><!-- button-wrapper -->
 
-      <div class="presets-wrapper" [style.display]="button.isActive && button.presets ? 'flex' : 'none'">
-        <app-presets></app-presets>
+      <div
+        class="presets-wrapper"
+        [style.display]="button.isActive && button.presets ? 'flex' : 'none'"
+      >
+        <app-presets
+          [class.activeSideConfigButtomTop]="activeSideConfigBottomTop"
+        ></app-presets>
       </div><!-- presets-wrapper -->
 
       <div
@@ -40,14 +48,18 @@
         [style.display]="button.isActive && button.animations ? 'flex' : 'none'"
         [class.reload-button]="reloadButtons && button.reload"
       >
-        <app-animations></app-animations>
+        <app-animations
+          [class.activeSideConfigButtomTop]="activeSideConfigBottomTop"
+        ></app-animations>
       </div><!-- animations-wrapper -->
 
       <div
         class="settings-side-wrapper"
         [style.display]="button.isActive && button.settings_side ? 'flex' : 'none'"
       >
-        <app-settings-side></app-settings-side>
+        <app-settings-side
+          [class.activeSideConfigButtomTop]="activeSideConfigBottomTop"
+        ></app-settings-side>
       </div><!-- settings-side-wrapper -->
     }
   </section><!-- config -->

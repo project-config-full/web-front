@@ -37,6 +37,8 @@ export class Config implements OnInit, AfterViewInit{
 
   reloadButtons: boolean = false;
 
+  activeSideConfigBottomTop: boolean = false;
+
   animationSelected: AnimationSelectedC = {
     change: {
       name: "change_default",
@@ -78,6 +80,10 @@ export class Config implements OnInit, AfterViewInit{
 
     this.changeAnimationTextService.$animations.subscribe((val: AnimationSelectedC) => {
       this.animationSelected = val;
+    });
+
+    this.settingSideService.$settingSideVal.subscribe((val: SettingsSideModel) => {
+      this.activeSideConfigBottomTop = val.side === "bottom" || val.side === "top";
     });
   }
 
