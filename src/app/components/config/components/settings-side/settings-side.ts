@@ -5,6 +5,9 @@ import { ChangeColor } from '../../../../services/change_color/change-color';
 import { ChangeColorI } from '../../../../interfaces/change-color-i';
 import { LocalStorage } from '../../../../services/localStorage/local-storage';
 import { ParamsSetSideConfig } from '../../../../interfaces/params-set-side-config';
+import { ChangeActiveSettingSide } from '../../../../services/changeActiveSettingSide/change-active-setting-side';
+import { ChangeActiveAnimations } from '../../../../interfaces/change-active-animations';
+import { ChangeActiveSettingSideInterface } from '../../../../interfaces/change-active-setting-side-interface';
 
 @Component({
   selector: 'app-settings-side',
@@ -19,6 +22,7 @@ export class SettingsSide implements OnInit{
     private settingSideService: SettingSide,
     private ChangeColorService: ChangeColor,
     private localStorageService: LocalStorage,
+    private changeActiveSettingSideService: ChangeActiveSettingSide,
   ){
     this.settings_side = [
       new SettingsSideModel({
@@ -62,7 +66,6 @@ export class SettingsSide implements OnInit{
           }
         },
         side: 'top',
-        active: false,
         settingSideService: this.settingSideService,
         localStorageService: this.localStorageService
       }),
@@ -111,7 +114,15 @@ export class SettingsSide implements OnInit{
     this.settings_side.forEach((settingSide: SettingsSideModel) => {
       if(settingSide.side !== sideConfigLS.vals?.side) return;
 
-      settingSide.onClick();
+      if(sideConfigLS.btnActive){
+        settingSide.onClick();
+      }
+    });
+
+    this.changeActiveSettingSideService.$settingSide.subscribe((val: ChangeActiveSettingSideInterface) => {
+      if(!val.change) return;
+
+      this.settings_side = val.settingSide;
     });
   }
 

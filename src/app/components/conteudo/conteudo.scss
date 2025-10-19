@@ -19,7 +19,7 @@
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;;
+  justify-content: center;
 
   .container-text-wrapper-animation{
     @include animations_text();
@@ -70,5 +70,10 @@
   .openConfig{
     top: 0;
     right: 0;
+
+    &.rigth{
+      right: inherit;
+      left: 0;
+    }
   }
 }

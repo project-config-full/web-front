@@ -19,6 +19,7 @@ import { ChangeColorPre } from '../../models/change_color_pre/change-color-pre';
 import { SettingsSide } from "./components/settings-side/settings-side";
 import { SettingSide } from '../../services/settingSide/setting-side';
 import { SettingsSideModel } from '../../models/settings_side_model/settings-side-model';
+import { ChangeActiveSettingSide } from '../../services/changeActiveSettingSide/change-active-setting-side';
 
 @Component({
   selector: 'app-config',
@@ -57,6 +58,7 @@ export class Config implements OnInit, AfterViewInit{
     private changeAnimationsService: ChangeAnimationsService,
     private localStorageService: LocalStorage,
     private settingSideService: SettingSide,
+    private changeActiveSettingSideService: ChangeActiveSettingSide,
   ){
     this.changeConfigService.$configVal.subscribe((val: boolean) => {
       if(!this.activeResponsive) this.openingConfig = val;
@@ -267,9 +269,28 @@ export class Config implements OnInit, AfterViewInit{
 
           this.settingSideService.setSettingSideVal({} as SettingsSideModel);
 
-          if(!button.isActive) return;
+          const sideConfigLS = this.localStorageService.getSideConfig();
 
-          this.settingsSideChild.settings_side[0].onClick();
+          if(sideConfigLS){
+            const sideConfigSelected = this.settingsSideChild.settings_side.find((side: SettingsSideModel) => {
+              return side.side === sideConfigLS.vals?.side;
+            });
+
+            this.localStorageService.setSideConfig(sideConfigSelected!, button.isActive);
+          }
+
+          if(button.isActive) {
+            this.settingsSideChild.settings_side.forEach((settingSide: SettingsSideModel) => {
+              settingSide.active = false;
+            });
+
+            this.settingsSideChild.settings_side[0].onClick();
+
+            this.changeActiveSettingSideService.setChangeActivesettingSide({
+              settingSide: this.settingsSideChild.settings_side,
+              change: true
+            });
+          }
         }
       }),
       new ButtonsConfig({

@@ -81,12 +81,10 @@ export class LocalStorage {
     return animationLs ? JSON.parse(animationLs) : {} as ParamsSetAnimationTextLs;
   }
 
-  setSideConfig(side: SettingsSideModel): void{
-    const btnActive = this.getActiveButtons().find((button: SetButtonLocalStorage) => button.indexOfButton === 2);
-
+  setSideConfig(side: SettingsSideModel, btnActive?: boolean): void{
     const sideConfigLS: ParamsSetSideConfig = {
       vals: side,
-      btnActive: btnActive!.isActive
+      btnActive: btnActive ?? true
     }
 
     localStorage.setItem("sideConfig", this.safeStringify(sideConfigLS));

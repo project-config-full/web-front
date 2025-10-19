@@ -9,6 +9,8 @@ import { TextPropertiesCTS } from '../../interfaces/text-properties-cts';
 import { AnimationSetClassCont } from '../../interfaces/animation-set-class-cont';
 import { LocalStorage } from '../../services/localStorage/local-storage';
 import { SetButtonLocalStorage } from '../../interfaces/set-button-local-storage';
+import { SettingSide } from '../../services/settingSide/setting-side';
+import { SettingsSideModel } from '../../models/settings_side_model/settings-side-model';
 
 @Component({
   selector: 'app-conteudo',
@@ -44,11 +46,14 @@ export class Conteudo {
 
   firtTextActive: boolean = true;
 
+  sideConfig: string = "left";
+
   constructor(
     private changeConfigService: ChangeConfig,
     private changeColorService: ChangeColor,
     private changeTextService: ChangeText,
-    private localStorageService: LocalStorage
+    private localStorageService: LocalStorage,
+    private settingSideService: SettingSide,
   ){
     this.changeColorService.$colorVal.subscribe((val: ChangeColorI) => {
       this.colorOfIconConfig = val.colorIcon ? val.colorIcon : this.colorOfIconConfig;
@@ -89,6 +94,12 @@ export class Conteudo {
 
     this.isTextActive = buttonRemoveText ? !buttonRemoveText.isActive : true;
     this.firtTextActive = buttonChangeText ? !buttonChangeText.isActive : true;
+
+    if(!this.localStorageService.getSideConfig().btnActive) return;
+
+    this.settingSideService.$settingSideVal.subscribe((val: SettingsSideModel) => {
+      this.sideConfig = val.side;
+    });
   }
 
   changeText(): void{

@@ -25,7 +25,7 @@ export class SettingsSideModel {
   private localStorageService: LocalStorage;
 
   onClick(): void{
-    this.active = !this.active;
+    this.active = true;
 
     this.settingSideService.setSettingSideVal(this);
 
