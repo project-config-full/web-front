@@ -19,5 +19,16 @@ export interface ChangeColorI {
     colorOfRemove: string;
     colorOfTextChange: string;
     colorOfTextRemove: string;
+  },
+  previewConfigSide?: {
+    config: string;
+    content: string;
+    text: string;
+    icon: string;
+    allButton: {
+      circleColor: string;
+      activeBtn: string;
+      inactiveBtn: string;
+    }
   }
 }

@@ -97,13 +97,15 @@ export class SettingsSide implements OnInit{
   ngOnInit(): void {
     this.ChangeColorService.$colorVal.subscribe((val: ChangeColorI) => {
       this.settings_side.forEach((settingSide: SettingsSideModel) => {
-        settingSide.colors.conteudo = val.colorContent ? val.colorContent : "#2c2c2c";
-        settingSide.colors.colorIcon = val.colorIcon ? val.colorIcon : "#000000";
-        settingSide.colors.button!.circleColor = val.colorAllButton?.circleColor ? val.colorAllButton.circleColor : "#f5deb3";
-        settingSide.colors.button!.active.buttonColor = val.colorAllButton?.active.buttonColor ? val.colorAllButton.active.buttonColor : "#C0C0C0";
-        settingSide.colors.button!.inactive.buttonColor = val.colorAllButton?.inactive.buttonColor ? val.colorAllButton.inactive.buttonColor : "#2c2c2c";
-        settingSide.colors.colorText = val.colorText ? val.colorText : "#FFFFFF";
-        settingSide.colors.colorConfig = val.colorConfig ? val.colorConfig : "darkred";
+        if(!val.previewConfigSide) return;
+
+        settingSide.colors.conteudo = val.previewConfigSide!.content;
+        settingSide.colors.colorIcon = val.previewConfigSide!.icon;
+        settingSide.colors.colorText = val.previewConfigSide!.text;
+        settingSide.colors.colorConfig = val.previewConfigSide!.config;
+        settingSide.colors.button!.circleColor = val.previewConfigSide!.allButton.circleColor;
+        settingSide.colors.button!.active.buttonColor = val.previewConfigSide!.allButton.activeBtn;
+        settingSide.colors.button!.inactive.buttonColor = val.previewConfigSide!.allButton.inactiveBtn;
       });
     })
 

@@ -113,7 +113,8 @@ export class Config implements OnInit, AfterViewInit{
           textColor: presetActive.colorAllButton!.inactive.textColor
         }
       },
-      animationText: presetActive.animationText
+      animationText: presetActive.animationText,
+      previewConfigSide: presetActive.previewConfigSide
     });
   }
 
@@ -170,7 +171,8 @@ export class Config implements OnInit, AfterViewInit{
                   textColor: preset.colorAllButton!.inactive.textColor
                 }
               },
-              animationText: preset.animationText
+              animationText: preset.animationText,
+              previewConfigSide: preset.previewConfigSide
             });
 
             return;
@@ -203,7 +205,18 @@ export class Config implements OnInit, AfterViewInit{
               colorOfRemove: "#C0C0C0",
               colorOfTextChange: "#C0C0C0",
               colorOfTextRemove: "#2c2c2c"
-            }
+            },
+            previewConfigSide: {
+              config: "darkred",
+              content: "#2c2c2c",
+              text: "white",
+              icon: "black",
+              allButton: {
+                circleColor: "#f5deb3",
+                activeBtn: "#C0C0C0",
+                inactiveBtn: "#2c2c2c",
+              }
+            },
           })
         }
       }),
