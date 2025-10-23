@@ -16,6 +16,7 @@ export class ChangeColorPre {
   colorIcon: string;
   colorAllButton: ChangeColorI["colorAllButton"];
   animationText: ChangeColorI["animationText"];
+  previewConfigSide: ChangeColorI["previewConfigSide"];
   changeColorService: ChangeColor;
   localStorageService: LocalStorage;
 
@@ -27,6 +28,7 @@ export class ChangeColorPre {
     this.colorIcon = val.colorIcon!;
     this.colorAllButton = val.colorAllButton!;
     this.animationText = val.animationText!;
+    this.previewConfigSide = val.previewConfigSide!;
     this.changeColorService = val.changeColorService;
     this.localStorageService = val.localStorageService;
   }
@@ -40,7 +42,8 @@ export class ChangeColorPre {
       colorText: this.colorText,
       colorIcon: this.colorIcon,
       colorAllButton: this.colorAllButton,
-      animationText: this.animationText
+      animationText: this.animationText,
+      previewConfigSide: this.previewConfigSide
     });
   }
 }

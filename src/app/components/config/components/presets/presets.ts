@@ -95,6 +95,17 @@ export class Presets implements OnInit{
           colorOfTextChange: "#B87333",
           colorOfTextRemove: "#573105ff"
         },
+        previewConfigSide: {
+          config: "#5ACF5D",
+          content: "#B87333",
+          text: "#833434",
+          icon: "#873408",
+          allButton: {
+            circleColor: "#f36a1bff",
+            activeBtn: "#573105ff",
+            inactiveBtn: "#945c1bff",
+          }
+        },
         changeColorService: this.changeColorService,
         localStorageService: this.localStorageService
       }),
@@ -121,6 +132,17 @@ export class Presets implements OnInit{
           colorOfTextChange: "#e30057ff",
           colorOfTextRemove: "#FF006F"
         },
+        previewConfigSide: {
+          config: "#FF69B4",
+          content: "#800080",
+          text: "#FF006F",
+          icon: "#E9AEF9",
+          allButton: {
+            circleColor: "#d310daff",
+            activeBtn: "#A909E8",
+            inactiveBtn: "#E3009B",
+          }
+        },
         changeColorService: this.changeColorService,
         localStorageService: this.localStorageService
       }),
@@ -146,6 +168,17 @@ export class Presets implements OnInit{
           colorOfRemove: "#C0C0C0",
           colorOfTextChange: "#C0C0C0",
           colorOfTextRemove: "#277679ff"
+        },
+        previewConfigSide: {
+          config: "#4682B4",
+          content: "#C0C0C0",
+          text: "#000000",
+          icon: "#3E2723",
+          allButton: {
+            circleColor: "#3E2723",
+            activeBtn: "#277679ff",
+            inactiveBtn: "#78a9b1ff",
+          }
         },
         changeColorService: this.changeColorService,
         localStorageService: this.localStorageService
