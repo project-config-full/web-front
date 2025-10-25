@@ -163,18 +163,22 @@
       transform: translate(100%, 0) scale(.5);
     }
 
+    45%{
+      opacity: 0;
+    }
+
     50%{
       opacity: 0;
       transform: translate(-100%,0) scale(.5);
     }
 
     75%{
-      transform: translate(0) scale(.5);
+      transform: translate(0, 0) scale(.5);
     }
 
     100%{
       opacity: 1;
-      transform: translate(0) scale(1);
+      transform: translate(0, 0) scale(1);
     }
   }
 
