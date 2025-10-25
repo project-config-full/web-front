@@ -99,13 +99,13 @@ export class SettingsSide implements OnInit{
       this.settings_side.forEach((settingSide: SettingsSideModel) => {
         if(!val.previewConfigSide) return;
 
-        settingSide.colors.conteudo = val.previewConfigSide!.content;
-        settingSide.colors.colorIcon = val.previewConfigSide!.icon;
-        settingSide.colors.colorText = val.previewConfigSide!.text;
-        settingSide.colors.colorConfig = val.previewConfigSide!.config;
-        settingSide.colors.button!.circleColor = val.previewConfigSide!.allButton.circleColor;
-        settingSide.colors.button!.active.buttonColor = val.previewConfigSide!.allButton.activeBtn;
-        settingSide.colors.button!.inactive.buttonColor = val.previewConfigSide!.allButton.inactiveBtn;
+        settingSide.colors.conteudo = val.previewConfigSide.content ?? settingSide.colors.conteudo;
+        settingSide.colors.colorIcon = val.previewConfigSide.icon ?? settingSide.colors.colorIcon;
+        settingSide.colors.colorText = val.previewConfigSide.text ?? settingSide.colors.colorText;
+        settingSide.colors.colorConfig = val.previewConfigSide.config ?? settingSide.colors.colorConfig;
+        settingSide.colors.button!.circleColor = val.previewConfigSide.allButton?.circleColor ?? settingSide.colors.button!.circleColor;
+        settingSide.colors.button!.active.buttonColor = val.previewConfigSide.allButton?.activeBtn ?? settingSide.colors.button!.active.buttonColor;
+        settingSide.colors.button!.inactive.buttonColor = val.previewConfigSide.allButton?.inactiveBtn ?? settingSide.colors.button!.inactive.buttonColor;
       });
     })
 
