@@ -1,38 +1,91 @@
 <div class="container">
-  @for(animation of animations; track animation){
-    <div
-      class="animation-wrapper"
-      (click)="selectAnimation(animation)"
-      [class.selected]="animation.active"
-    >
-      <div class="text-wrapper"
-        [style.backgroundColor]="CBGCT"
-        [style.color]="CTC"
-      >
-        <div class="text"
-          [ngClass]="[animation.changeText]"
-          [class.enter]="animation.changeTextProprietys?.enter"
-          [class.exit]="animation.changeTextProprietys?.exit"
-        >
-          <h5>Lorem</h5>
+  <div class="content-title">
+    <h6>Text animations</h6>
+  </div><!-- content-title -->
 
-          <p>texto de exemplo texto de exemplo texto de exemplo texto de exemplo texto de exemplo</p>
-        </div><!-- text -->
-      </div><!-- text-wrapper -->
-      <div class="text-wrapper"
-        [style.backgroundColor]="CBGRT"
-        [style.color]="CTR"
+  <div class="container-text-animations">
+    @for(animation of animations; track animation){
+      <div
+        class="animation-wrapper"
+        (click)="selectAnimation(animation)"
+        [class.selected]="animation.active"
       >
-        <div class="text"
-          [ngClass]="[animation.removeText]"
-          [class.enter]="animation.removeTextProprietys.enter"
-          [class.exit]="animation.removeTextProprietys.exit"
+        <div class="text-wrapper"
+          [style.backgroundColor]="CBGCT"
+          [style.color]="CTC"
         >
-          <h5>Chat</h5>
+          <div class="text"
+            [ngClass]="[animation.changeText]"
+            [class.enter]="animation.changeTextProprietys?.enter"
+            [class.exit]="animation.changeTextProprietys?.exit"
+          >
+            <h5>Lorem</h5>
 
-          <p>texto de exemplo texto de exemplo texto de exemplo texto de exemplo texto de exemplo</p>
-        </div><!-- text -->
-      </div><!-- text-wrapper -->
-    </div><!-- animation-wrapper -->
-  }
+            <p>texto de exemplo texto de exemplo texto de exemplo texto de exemplo texto de exemplo</p>
+          </div><!-- text -->
+        </div><!-- text-wrapper -->
+        <div class="text-wrapper"
+          [style.backgroundColor]="CBGRT"
+          [style.color]="CTR"
+        >
+          <div class="text"
+            [ngClass]="[animation.removeText]"
+            [class.enter]="animation.removeTextProprietys.enter"
+            [class.exit]="animation.removeTextProprietys.exit"
+          >
+            <h5>Chat</h5>
+
+            <p>texto de exemplo texto de exemplo texto de exemplo texto de exemplo texto de exemplo</p>
+          </div><!-- text -->
+        </div><!-- text-wrapper -->
+      </div><!-- animation-wrapper -->
+    }
+  </div><!-- container-text-animations -->
+
+  <div class="content-title">
+    <h6>Config animations</h6>
+  </div><!-- content-title -->
+
+  <div class="container-config-animations">
+    @for(ANConfig of animationsConfig; track ANConfig){
+      <div class="config-animation-wrapper">
+        <div
+          class="conteudo"
+          [style.backgroundColor]="colorConfigAnimation.content"
+        >
+          <div class="openConfig-wrapper">
+            <div
+              class="openConfig"
+              [style.backgroundColor]="colorConfigAnimation.icon"
+            ></div><!-- openConfig -->
+          </div><!-- openConfig-wrapper -->
+
+          <div class="text-wrapper">
+            <div
+              class="text"
+              [style.backgroundColor]="colorConfigAnimation.text"
+            ></div><!-- text -->
+          </div><!-- text-wrapper -->
+        </div><!-- conteudo -->
+
+        <div
+          class="config"
+          [style.backgroundColor]="colorConfigAnimation.config"
+        >
+          @for(btnConfig of ANConfig.buttons; track btnConfig){
+            <div
+              class="button"
+              [style.backgroundColor]="btnConfig.active ? btnConfig.colors.background.active : btnConfig.colors.background.inactive"
+            >
+            <div
+              class="circle"
+              [style.backgroundColor]="btnConfig.colors.circle"
+              [class.active]="btnConfig.active"
+            ></div><!-- circle -->
+            </div><!-- button -->
+          }
+        </div><!-- config -->
+      </div><!-- config-animation-wrapper -->
+    }
+  </div><!-- container-config-animations -->
 </div><!-- container -->
