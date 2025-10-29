@@ -45,7 +45,7 @@ export class App implements AfterViewInit{
 
       setTimeout(() => this.transitionOff = false, 100);
 
-      this.activeChangeSideConfig = (val.side && val.side !== "left" && val.side !== "rigth") as boolean;
+      this.activeChangeSideConfig = (val.side && val.side !== "left" && val.side !== "right") as boolean;
 
       this.sideAll = val.side || "left";
     });
