@@ -20,6 +20,7 @@ import { SettingsSide } from "./components/settings-side/settings-side";
 import { SettingSide } from '../../services/settingSide/setting-side';
 import { SettingsSideModel } from '../../models/settings_side_model/settings-side-model';
 import { ChangeActiveSettingSide } from '../../services/changeActiveSettingSide/change-active-setting-side';
+import { ChangeButtonConfigAnimation } from '../../services/changeButtonConfigAnimation/change-button-config-animation';
 
 @Component({
   selector: 'app-config',
@@ -59,6 +60,7 @@ export class Config implements OnInit, AfterViewInit{
     private localStorageService: LocalStorage,
     private settingSideService: SettingSide,
     private changeActiveSettingSideService: ChangeActiveSettingSide,
+    private changeButtonConfigAnimation: ChangeButtonConfigAnimation
   ){
     this.changeConfigService.$configVal.subscribe((val: boolean) => {
       if(!this.activeResponsive) this.openingConfig = val;
@@ -146,6 +148,7 @@ export class Config implements OnInit, AfterViewInit{
           active: "Other"
         },
         localStorageService: this.localStorageService,
+        changeButtonConfigAnimationService: this.changeButtonConfigAnimation,
         onClick: (button: ButtonsConfig) => {
           button.changeIsActive(this.buttons.indexOf(button));
 
@@ -229,6 +232,7 @@ export class Config implements OnInit, AfterViewInit{
         animations: true,
         reload: true,
         localStorageService: this.localStorageService,
+        changeButtonConfigAnimationService: this.changeButtonConfigAnimation,
         onClick: (button: ButtonsConfig) => {
           button.changeIsActive(this.buttons.indexOf(button));
 
@@ -277,6 +281,7 @@ export class Config implements OnInit, AfterViewInit{
         },
         settings_side: true,
         localStorageService: this.localStorageService,
+        changeButtonConfigAnimationService: this.changeButtonConfigAnimation,
         onClick: (button: ButtonsConfig) => {
           button.changeIsActive(this.buttons.indexOf(button))
 
@@ -314,6 +319,7 @@ export class Config implements OnInit, AfterViewInit{
         },
         reload: true,
         localStorageService: this.localStorageService,
+        changeButtonConfigAnimationService: this.changeButtonConfigAnimation,
         onClick: (button: ButtonsConfig) => {
           button.changeIsActive(this.buttons.indexOf(button));
 
@@ -347,6 +353,7 @@ export class Config implements OnInit, AfterViewInit{
         },
         reload: true,
         localStorageService: this.localStorageService,
+        changeButtonConfigAnimationService: this.changeButtonConfigAnimation,
         onClick: (button: ButtonsConfig) => {
           button.changeIsActive(this.buttons.indexOf(button));
 

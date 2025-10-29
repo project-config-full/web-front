@@ -1,0 +1,204 @@
+@mixin configPreviewStyle(
+  $isSettingSide: true,
+  $width: 5.5rem,
+  $height: 45%,
+  $marginOpenConfig: .15rem
+){
+  &{
+    width: $width;
+    height: $height;
+    cursor: pointer;
+    border: 2px solid;
+    border-color: black;
+    display: flex;
+    transition: width .3s ease-in-out,
+          height .3s ease-in-out,
+          border-color .3s ease-in-out,
+          transform .2s ease-in-out;
+
+    &.active{
+      border-color: whitesmoke;
+    }
+
+    &.rigth{
+      flex-direction: row-reverse;
+    }
+
+    &.top, &.bottom{
+      flex-direction: column;
+
+      .conteudo{
+        width: 100%;
+        height: 70%;
+
+        .text-wrapper{
+          padding-top: .4rem;
+        }
+      }
+
+      .config{
+        width: 100%;
+        height: 30%;
+
+        @if $isSettingSide {
+          flex-direction: row;
+        }
+
+        .button{
+          width: 20%;
+          height: 40%;
+        }
+      }
+    }
+
+    &.bottom{
+      flex-direction: column-reverse;
+    }
+
+    &:hover{
+      @if $isSettingSide {
+        width: 8rem;
+        height: 65%;
+
+        .config{
+          .button{
+            opacity: 1;
+          }
+        }
+      } @else {
+        transform: scale(1.1);
+      }
+    }
+
+    .config,
+    .conteudo,
+    .config .button,
+    .button .circle{
+      transition: background-color .3s ease-in-out;
+    }
+
+    .config{
+      width: 30%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+
+      @if $isSettingSide {
+        justify-content: center;
+        align-items: center;
+        gap: .5rem;
+      }
+
+      .button{
+        width: 70%;
+        height: 15%;
+        opacity: if($isSettingSide, 0, 1);
+        transition: opacity .3s ease-in-out, background-color .3s ease-in-out;
+        border-radius: 1rem;
+        position: relative;
+
+        @if $isSettingSide {
+          &:last-child{
+            .circle{
+              position: absolute;
+              right: 0;
+            }
+          }
+        }@else {
+          .circle.active{
+            position: absolute;
+            right: 0;
+          }
+        }
+
+        .circle{
+          width: 30%;
+          height: 100%;
+          border-radius: 50%;
+          transition: right .3s ease-in-out;
+        }
+      }
+    }
+
+    .conteudo{
+      width: 70%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+
+      .openConfig-wrapper{
+        width: 100%;
+        height: 35%;
+
+        .openConfig{
+          width: .5rem;
+          height: .5rem;
+          margin: $marginOpenConfig;
+          border-radius: 50%;
+        }
+      }
+
+      .text-wrapper{
+        width: 100%;
+        height: 65%;
+        display: flex;
+        justify-content: center;
+        padding-top: .5rem;
+
+        .text{
+          width: 70%;
+          height: .2rem;
+          background-color: white;
+        }
+      }
+    }
+
+    @media screen and (max-width: 700px){
+      &.top, &.bottom, &.rigth{
+        flex-direction: row;
+        position: relative;
+
+        .conteudo{
+          width: 100%;
+          height: 100%;
+        }
+
+        .config{
+          width: 30%;
+          height: 70%;
+          position: absolute;
+          bottom: 0;
+          flex-direction: column;
+          gap: .2rem;
+
+          .button{
+            width: 70%;
+            height: 15%;
+          }
+        }
+      }
+
+      &.top{
+        .conteudo{
+          .openConfig-wrapper{
+            display: flex;
+            justify-content: end;
+          }
+        }
+      }
+
+      &.rigth{
+        .config{
+          right: 0;
+          bottom: inherit;
+        }
+      }
+
+      &.bottom{
+        .config{
+          right: 0;
+        }
+      }
+    }
+  }
+}

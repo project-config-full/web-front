@@ -7,6 +7,11 @@ import { ChangeAnimationText } from '../../../../services/change_animation_text/
 import { ChangeActiveAnimations } from '../../../../interfaces/change-active-animations';
 import { ChangeAnimationsService } from '../../../../services/changeActiveAnimationsService/change-animations-service';
 import { LocalStorage } from '../../../../services/localStorage/local-storage';
+import { ButtonConfigAnimation, ConfigAnimation, especialButtons, SideEnum } from '../../../../models/configAnimation/config-animation';
+import { ColorsConfigAnimation } from '../../../../interfaces/colors-config-animation';
+import { SetButtonLocalStorage } from '../../../../interfaces/set-button-local-storage';
+import { ChangeButtonConfigAnimation } from '../../../../services/changeButtonConfigAnimation/change-button-config-animation';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-animations',
@@ -26,12 +31,17 @@ export class Animations implements OnInit{
   CTC: string = "#FFFFFF";
 
   animations: AnimationsText[] = [];
+  animationsConfig: ConfigAnimation[] = [];
+
+  colorConfigAnimation: ColorsConfigAnimation = {} as ColorsConfigAnimation;
 
   constructor(
     private changeColor: ChangeColor,
     private changeAnimationTextService: ChangeAnimationText,
     private changeAnimationsService: ChangeAnimationsService,
-    private localStorageService: LocalStorage
+    private localStorageService: LocalStorage,
+    private changeButtonConfigAnimationService: ChangeButtonConfigAnimation,
+    private cdr: ChangeDetectorRef
   ){
     this.changeColor.$colorVal.subscribe((color: ChangeColorI) => {
       if(color.animationText){
@@ -40,6 +50,11 @@ export class Animations implements OnInit{
         this.CTR = color.animationText.colorOfTextRemove;
         this.CTC = color.animationText.colorOfTextChange;
       }
+
+      this.colorConfigAnimation.content = color.colorContent ?? this.colorConfigAnimation.content ?? "#2c2c2c";
+      this.colorConfigAnimation.config = color.colorConfig ?? this.colorConfigAnimation.config ?? "darkred";
+      this.colorConfigAnimation.text = color.colorText ?? this.colorConfigAnimation.text ?? "white";
+      this.colorConfigAnimation.icon = color.colorIcon ?? this.colorConfigAnimation.icon ?? "black";
     });
 
     this.changeAnimationsService.$animations.subscribe((val: ChangeActiveAnimations) => {
@@ -107,6 +122,47 @@ export class Animations implements OnInit{
         localStorageService: this.localStorageService
       })
     ];
+
+    this.animationsConfig = [
+      new ConfigAnimation({
+        side: SideEnum.LEFT,
+        buttons: [
+          new ButtonConfigAnimation({
+            active: false,
+            especial: especialButtons.PRESETS,
+            colors: {
+              circle: "#f5deb3",
+              background: {
+                active: "#C0C0C0",
+                inactive: "#2c2c2c"
+              }
+            }
+          }),
+          new ButtonConfigAnimation({
+            active: false,
+            especial: especialButtons.ANIMATION,
+            colors: {
+              circle: "#f5deb3",
+              background: {
+                active: "#C0C0C0",
+                inactive: "#2c2c2c"
+              }
+            }
+          }),
+          new ButtonConfigAnimation({
+            active: false,
+            especial: especialButtons.SETTING_SIDE,
+            colors: {
+              circle: "#f5deb3",
+              background: {
+                active: "#C0C0C0",
+                inactive: "#2c2c2c"
+              }
+            }
+          })
+        ]
+      })
+    ]
   }
 
   selectAnimation(animationSelec: AnimationsText): void{
@@ -120,6 +176,34 @@ export class Animations implements OnInit{
   }
 
   ngOnInit(): void {
+    this.changeColor.$colorVal.subscribe((color: ChangeColorI) => {
+      this.animationsConfig.forEach((config: ConfigAnimation) => {
+        config.buttons.forEach((button: ButtonConfigAnimation) => {
+          const buttonsLS = this.localStorageService.getActiveButtons();
+
+          button.active = buttonsLS.find((buttonLS: SetButtonLocalStorage) => {
+            return buttonLS.indexOfButton === config.buttons.indexOf(button);
+          })?.isActive ?? false;
+
+          button.colors.circle = color.colorAllButton?.circleColor ?? button.colors.circle;
+          button.colors.background.active = color.colorAllButton?.active.buttonColor ?? button.colors.background.active;
+          button.colors.background.inactive = color.colorAllButton?.inactive.buttonColor ?? button.colors.background.inactive;
+        });
+      });
+    });
+
+    this.changeButtonConfigAnimationService.$buttonConfigAnimationVal.subscribe((val: SetButtonLocalStorage) => {
+      this.animationsConfig.forEach((config: ConfigAnimation) => {
+        config.buttons.forEach((button: ButtonConfigAnimation, i: number) => {
+          const buttonsLS = this.localStorageService.getActiveButtons();
+
+          button.active = buttonsLS.find((buttonLS: SetButtonLocalStorage) => {
+            return buttonLS.indexOfButton === config.buttons.indexOf(button);
+          })?.isActive ?? false;
+        });
+      });
+    });
+
     this.animations.forEach((AT: AnimationsText) => {
       if(AT.durationProprietys.change){
         setInterval(() => {
