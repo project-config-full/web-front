@@ -8,6 +8,7 @@ import { ParamsSetSideConfig } from '../../../../interfaces/params-set-side-conf
 import { ChangeActiveSettingSide } from '../../../../services/changeActiveSettingSide/change-active-setting-side';
 import { ChangeActiveAnimations } from '../../../../interfaces/change-active-animations';
 import { ChangeActiveSettingSideInterface } from '../../../../interfaces/change-active-setting-side-interface';
+import { SideEnum } from '../../../../models/configAnimation/config-animation';
 
 @Component({
   selector: 'app-settings-side',
@@ -43,7 +44,7 @@ export class SettingsSide implements OnInit{
             }
           }
         },
-        side: 'right',
+        side: SideEnum.RIGHT,
         settingSideService: this.settingSideService,
         localStorageService: this.localStorageService
       }),
@@ -65,7 +66,7 @@ export class SettingsSide implements OnInit{
             }
           }
         },
-        side: 'top',
+        side: SideEnum.TOP,
         settingSideService: this.settingSideService,
         localStorageService: this.localStorageService
       }),
@@ -87,7 +88,7 @@ export class SettingsSide implements OnInit{
             }
           }
         },
-        side: 'bottom',
+        side: SideEnum.BOTTOM,
         settingSideService: this.settingSideService,
         localStorageService: this.localStorageService
       })

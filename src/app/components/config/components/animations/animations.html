@@ -48,7 +48,28 @@
 
   <div class="container-config-animations">
     @for(ANConfig of animationsConfig; track ANConfig){
-      <div class="config-animation-wrapper">
+      <div
+        class="config-animation-wrapper"
+        [ngClass]="ANConfig.side"
+      >
+        <div
+          class="config"
+          [style.backgroundColor]="colorConfigAnimation.config"
+        >
+          @for(btnConfig of ANConfig.buttons; track btnConfig){
+            <div
+              class="button"
+              [style.backgroundColor]="btnConfig.active ? btnConfig.colors.background.active : btnConfig.colors.background.inactive"
+            >
+            <div
+              class="circle"
+              [style.backgroundColor]="btnConfig.colors.circle"
+              [class.active]="btnConfig.active"
+            ></div><!-- circle -->
+            </div><!-- button -->
+          }
+        </div><!-- config -->
+
         <div
           class="conteudo"
           [style.backgroundColor]="colorConfigAnimation.content"
@@ -67,24 +88,6 @@
             ></div><!-- text -->
           </div><!-- text-wrapper -->
         </div><!-- conteudo -->
-
-        <div
-          class="config"
-          [style.backgroundColor]="colorConfigAnimation.config"
-        >
-          @for(btnConfig of ANConfig.buttons; track btnConfig){
-            <div
-              class="button"
-              [style.backgroundColor]="btnConfig.active ? btnConfig.colors.background.active : btnConfig.colors.background.inactive"
-            >
-            <div
-              class="circle"
-              [style.backgroundColor]="btnConfig.colors.circle"
-              [class.active]="btnConfig.active"
-            ></div><!-- circle -->
-            </div><!-- button -->
-          }
-        </div><!-- config -->
       </div><!-- config-animation-wrapper -->
     }
   </div><!-- container-config-animations -->
