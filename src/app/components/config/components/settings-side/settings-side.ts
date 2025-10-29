@@ -43,7 +43,7 @@ export class SettingsSide implements OnInit{
             }
           }
         },
-        side: 'rigth',
+        side: 'right',
         settingSideService: this.settingSideService,
         localStorageService: this.localStorageService
       }),
