@@ -89,6 +89,11 @@ export class Config implements OnInit, AfterViewInit{
     this.settingSideService.$settingSideVal.subscribe((val: SettingsSideModel) => {
       this.activeSideConfigBottomTop = val.side === "bottom" || val.side === "top";
     });
+
+    if(window.innerWidth < 700){
+      this.activeResponsive = true;
+      this.openingConfig = true;
+    }
   }
 
   ngOnInit(): void {
