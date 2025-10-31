@@ -71,8 +71,9 @@
     top: 0;
     right: 0;
 
-    &.rigth{
-      right: inherit;
+    &.right,
+    &.bottom{
+      right: inherit !important;
       left: 0;
     }
   }

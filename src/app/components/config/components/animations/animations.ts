@@ -11,7 +11,8 @@ import { ButtonConfigAnimation, ConfigAnimation, especialButtons, SideEnum } fro
 import { ColorsConfigAnimation } from '../../../../interfaces/colors-config-animation';
 import { SetButtonLocalStorage } from '../../../../interfaces/set-button-local-storage';
 import { ChangeButtonConfigAnimation } from '../../../../services/changeButtonConfigAnimation/change-button-config-animation';
-import { ChangeDetectorRef } from '@angular/core';
+import { SettingSide } from '../../../../services/settingSide/setting-side';
+import { SettingsSideModel } from '../../../../models/settings_side_model/settings-side-model';
 
 @Component({
   selector: 'app-animations',
@@ -41,7 +42,7 @@ export class Animations implements OnInit{
     private changeAnimationsService: ChangeAnimationsService,
     private localStorageService: LocalStorage,
     private changeButtonConfigAnimationService: ChangeButtonConfigAnimation,
-    private cdr: ChangeDetectorRef
+    private SettingSideService: SettingSide
   ){
     this.changeColor.$colorVal.subscribe((color: ChangeColorI) => {
       if(color.animationText){
@@ -125,7 +126,7 @@ export class Animations implements OnInit{
 
     this.animationsConfig = [
       new ConfigAnimation({
-        side: SideEnum.LEFT,
+        side: SideEnum.RIGHT,
         buttons: [
           new ButtonConfigAnimation({
             active: false,
@@ -176,6 +177,12 @@ export class Animations implements OnInit{
   }
 
   ngOnInit(): void {
+    this.SettingSideService.$settingSideVal.subscribe((val: SettingsSideModel) => {
+      this.animationsConfig.forEach((config: ConfigAnimation) => {
+        config.side = val.side;
+      });
+    })
+
     this.changeColor.$colorVal.subscribe((color: ChangeColorI) => {
       this.animationsConfig.forEach((config: ConfigAnimation) => {
         config.buttons.forEach((button: ButtonConfigAnimation) => {
