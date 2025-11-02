@@ -6,6 +6,7 @@
   cursor: pointer;
   margin: .5rem;
   position: absolute;
+  z-index: 100;
 
   svg{
     width: 100%;
@@ -20,9 +21,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  perspective: 800px;
+  transform-style: preserve-3d;
 
   .container-text-wrapper-animation{
     @include animations_text();
+    transform-style: preserve-3d;
 
     .text-wrapper{
       font-family: "Open Sans", sans-serif;
