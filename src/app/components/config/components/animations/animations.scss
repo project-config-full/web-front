@@ -69,7 +69,11 @@
           align-items: center;
           gap: .25rem;
 
-          @include animations_text($timeChange: 5s, $timeRemove: 2s, $interation-count: infinite);
+          @include animations_text(
+            $timeChange: 5s,
+            $timeRemove: 2s,
+            $interation-count: infinite
+          );
 
           h5{
             font-size: .7rem;
@@ -98,6 +102,8 @@
         $height: 40%,
         $marginOpenConfig: .3rem
       );
+
+      @include animations_config();
 
       .config{
         justify-content: space-evenly;
