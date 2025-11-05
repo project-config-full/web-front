@@ -390,3 +390,82 @@
     animation: reload 3s ease-in-out;
   }
 }
+
+@mixin animations_config(){
+  //* ANIMAÇÕES GERAIS
+
+  /**/
+
+  @keyframes conteudo_close {
+    0%{
+      width: 70%;
+    }
+
+    38%{
+      width: 100%;
+    }
+
+    70%{
+      width: 100%;
+    }
+
+    100%{
+      width: 70%;
+    }
+  }
+
+  @keyframes config_close {
+    0%{
+      width: 30%;
+    }
+
+    38%{
+      width: 0;
+    }
+
+    70%{
+      width: 0;
+    }
+
+    100%{
+      width: 30%;
+    }
+  }
+
+  /***/
+
+  //* ANIMAÇÕES COM ID
+
+  /**/
+
+  //* ANCC = ANimation Config Close
+  //* ANCO = ANimation Config Open
+
+  @keyframes ANCC00 {
+    0%{
+      transform: scale(1);
+    }
+
+    100%{
+      transform: scale(0);
+    }
+  }
+
+  /***/
+
+  .config{
+    animation: config_close 1.5s ease-in infinite;
+
+    &.ANCC00{
+      animation: config_close 1.5s ease-in infinite, ANCC00 .75s ease-in infinite;
+    }
+
+    &.ANCO01{
+      animation: config_close 1.5s ease-in infinite, ANCC00 .75s ease-in infinite reverse;
+    }
+  }
+
+  .conteudo{
+    animation: conteudo_close 1.5s ease-in infinite;
+  }
+}

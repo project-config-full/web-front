@@ -161,7 +161,20 @@ export class Animations implements OnInit{
               }
             }
           })
-        ]
+        ],
+        animationProps:{
+          enter: {
+            name: "ANCC00",
+            duration: .75,
+            active: true
+          },
+          exit: {
+            name: "ANCO01",
+            duration: .75,
+            active: false
+          }
+        },
+        active: true
       })
     ]
   }
@@ -222,5 +235,11 @@ export class Animations implements OnInit{
         AT.CPRT();
       }, AT.durationProprietys.remove);
     })
+
+    this.animationsConfig.forEach((config: ConfigAnimation) => {
+      setInterval(() => {
+        config.CPAC();
+      }, config.animationProps.enter.duration * 1000)
+    });
   }
 }

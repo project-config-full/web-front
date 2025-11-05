@@ -25,9 +25,22 @@ interface button {
   }
 }
 
+interface modelProps {
+  name: string;
+  active: boolean;
+  duration: number;
+}
+
+interface animationsProps {
+  enter: modelProps;
+  exit: modelProps;
+}
+
 export interface ConfigAnimationInterface {
   side: SideEnum;
   buttons: button[];
+  animationProps: animationsProps;
+  active: boolean;
 }
 
 export class ButtonConfigAnimation {
@@ -49,12 +62,31 @@ export class ButtonConfigAnimation {
 export class ConfigAnimation {
   side: SideEnum;
   buttons: ButtonConfigAnimation[];
+  animationProps: animationsProps;
+  active: boolean;
+
+  //* CPAC = Change Proprietys Animation Config
+
+  public CPAC(): void{
+    if(this.animationProps.enter.active){
+      this.animationProps.enter.active = false;
+      this.animationProps.exit.active = true;
+      return;
+    }
+
+    this.animationProps.enter.active = true;
+    this.animationProps.exit.active = false;
+  }
 
   constructor({
     side,
-    buttons
+    buttons,
+    animationProps,
+    active,
   }: ConfigAnimationInterface){
     this.side = side;
     this.buttons = buttons;
+    this.animationProps = animationProps;
+    this.active = active;
   }
 }
