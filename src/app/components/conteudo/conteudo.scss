@@ -25,8 +25,8 @@
   transform-style: preserve-3d;
 
   .container-text-wrapper-animation{
-    @include animations_text();
     transform-style: preserve-3d;
+    @include animations_text();
 
     .text-wrapper{
       font-family: "Open Sans", sans-serif;
