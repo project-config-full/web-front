@@ -55,7 +55,7 @@
         <div
           class="config"
           [style.backgroundColor]="colorConfigAnimation.config"
-          [ngClass]="[ANConfig.animationProps.enter.active ? ANConfig.animationProps.enter.name : ANConfig.animationProps.exit.name]"
+          [ngClass]="[ANConfig.animationProps.enter.name]"
         >
           @for(btnConfig of ANConfig.buttons; track btnConfig){
             <div

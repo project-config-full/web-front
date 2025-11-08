@@ -391,7 +391,7 @@
   }
 }
 
-@mixin animations_config(){
+@mixin animations_config($preview: true){
   //* ANIMAÇÕES GERAIS
 
   /**/
@@ -414,54 +414,39 @@
     }
   }
 
-  @keyframes config_close {
+  @keyframes config_close_ANC0 {
     0%{
-      width: 30%;
-    }
-
-    38%{
-      width: 0;
-    }
-
-    70%{
-      width: 0;
-    }
-
-    100%{
-      width: 30%;
-    }
-  }
-
-  /***/
-
-  //* ANIMAÇÕES COM ID
-
-  /**/
-
-  //* ANCC = ANimation Config Close
-  //* ANCO = ANimation Config Open
-
-  @keyframes ANCC00 {
-    0%{
+      @if($preview){
+        width: 30%;
+      }
       transform: scale(1);
     }
 
+    @if($preview){
+      38%, 70%{
+        width: 0;
+      }
+
+      50%{
+        transform: scale(0);
+      }
+    }
+
     100%{
-      transform: scale(0);
+      @if($preview){
+        width: 30%;
+        transform: scale(1);
+      }@else{
+        transform: scale(0);
+      }
     }
   }
 
   /***/
 
   .config{
-    animation: config_close 1.5s ease-in infinite;
-
     &.ANCC00{
-      animation: config_close 1.5s ease-in infinite, ANCC00 .75s ease-in infinite;
-    }
-
-    &.ANCO01{
-      animation: config_close 1.5s ease-in infinite, ANCC00 .75s ease-in infinite reverse;
+      animation: config_close_ANC0 1.5s ease-in infinite;
     }
   }
 
