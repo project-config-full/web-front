@@ -41,9 +41,13 @@
         height: 30%;
         flex-direction: row;
 
-        .button{
-          width: 20%;
-          height: 40%;
+        .container-buttons{
+          flex-direction: row;
+
+          .button{
+            width: 20%;
+            height: 40%;
+          }
         }
       }
     }
@@ -58,8 +62,10 @@
         height: 65%;
 
         .config{
-          .button{
-            opacity: 1;
+          .container-buttons{
+            .button{
+              opacity: 1;
+            }
           }
         }
       } @else {
@@ -79,40 +85,45 @@
       height: 100%;
       display: flex;
       flex-direction: column;
+      overflow: hidden;
 
-      @if $isSettingSide {
+      .container-buttons{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         gap: .5rem;
-      }
 
-      .button{
-        width: 70%;
-        height: 15%;
-        opacity: if($isSettingSide, 0, 1);
-        transition: opacity .3s ease-in-out, background-color .3s ease-in-out;
-        border-radius: 1rem;
-        position: relative;
+        .button{
+          width: 70%;
+          height: 15%;
+          opacity: if($isSettingSide, 0, 1);
+          transition: opacity .3s ease-in-out, background-color .3s ease-in-out;
+          border-radius: 1rem;
+          position: relative;
 
-        @if $isSettingSide {
-          &:last-child{
-            .circle{
+          @if $isSettingSide {
+            &:last-child{
+              .circle{
+                position: absolute;
+                right: 0;
+              }
+            }
+          }@else {
+            .circle.active{
               position: absolute;
               right: 0;
             }
           }
-        }@else {
-          .circle.active{
-            position: absolute;
-            right: 0;
-          }
-        }
 
-        .circle{
-          width: 30%;
-          height: 100%;
-          border-radius: 50%;
-          transition: right .3s ease-in-out;
+          .circle{
+            width: 30%;
+            height: 100%;
+            border-radius: 50%;
+            transition: right .3s ease-in-out;
+          }
         }
       }
     }
@@ -165,12 +176,16 @@
           height: 70%;
           position: absolute;
           bottom: 0;
-          flex-direction: column;
-          gap: .2rem;
+          z-index: 100000;
 
-          .button{
-            width: 70%;
-            height: 15%;
+          .container-buttons{
+            flex-direction: column;
+            gap: .2rem;
+
+            .button{
+              width: 70%;
+              height: 15%;
+            }
           }
         }
       }
