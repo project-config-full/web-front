@@ -535,33 +535,59 @@
   /***/
 
   .config{
-    animation: config_close 1.5s ease-in infinite;
+    @media screen and (min-width: 700px) {
+      animation: config_close 1.5s ease-in infinite;
+
+      &.ANCC00{
+        .container-buttons{
+          animation: ANC0 1.5s ease-in infinite;
+        }
+      }
+
+      &.ANCC01{
+        .container-buttons{
+          animation: ANC1 1.5s ease-in infinite;
+        }
+      }
+
+      &.ANCC02{
+        .container-buttons{
+          animation: ANC2 1.5s ease-in infinite;
+        }
+      }
+
+      &.ANCC03{
+        .container-buttons{
+          animation: ANC3 1.5s ease-in infinite;
+        }
+      }
+    }
 
     @media screen and (max-width: 700px) {
       animation: config_close_responsive 1.5s ease-in infinite;
-    }
 
-    &.ANCC00{
-      .container-buttons{
-        animation: ANC0 1.5s ease-in infinite;
+      &.ANCC00{
+        .container-buttons{
+          animation: ANC0 1.5s ease-in infinite;
+        }
       }
-    }
 
-    &.ANCC01{
-      .container-buttons{
-        animation: ANC1 1.5s ease-in infinite;
+      &.ANCC01{
+        .container-buttons{
+          animation: ANC1 1.5s ease-in infinite;
+        }
       }
-    }
 
-    &.ANCC02{
-      .container-buttons{
-        animation: ANC2 1.5s ease-in infinite;
+      &.ANCC02{
+        .container-buttons{
+          animation: ANC2 1.5s ease-in infinite;
+        }
       }
-    }
 
-    &.ANCC03{
-      .container-buttons{
-        animation: ANC3 1.5s ease-in infinite;
+      &.ANCC03{
+        .container-buttons{
+          animation: ANC3 1.5s ease-in infinite;
+        }
       }
     }
   }
