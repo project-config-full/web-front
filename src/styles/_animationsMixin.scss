@@ -488,7 +488,7 @@
     }
   }
 
-    @keyframes ANC3 {
+  @keyframes ANC3 {
     0%{
       opacity: 1;
       transform: scale(1);
@@ -521,10 +521,6 @@
     }
 
     @if($preview){
-      38%, 70%{
-        width: 0;
-      }
-
       50%{
         transform: translateY(-100%);
       }
@@ -532,7 +528,6 @@
 
     100%{
       @if($preview){
-        width: 30%;
         transform: translateY(0);
       }@else{
         transform: translateY(-100%);
@@ -540,19 +535,12 @@
     }
   }
 
-  @keyframes config_close_ANC2 {
+  @keyframes ANC2 {
     0%{
-      @if($preview){
-        width: 30%;
-      }
       transform: scale(1) rotateZ(0deg);
     }
 
     @if($preview){
-      38%, 70%{
-        width: 0;
-      }
-
       50%{
         transform: scale(0) rotateZ(360deg);
       }
@@ -560,7 +548,6 @@
 
     100%{
       @if($preview){
-        width: 30%;
         transform: scale(1) rotateZ(0deg);
       }@else{
         transform: scale(0) rotateZ(-360deg);
@@ -568,20 +555,13 @@
     }
   }
 
-    @keyframes config_close_ANC3 {
+    @keyframes ANC3 {
     0%{
-      @if($preview){
-        width: 30%;
-      }
       opacity: 1;
       transform: scale(1);
     }
 
     @if($preview){
-      38%, 70%{
-        width: 0;
-      }
-
       50%{
         opacity: 0;
         transform: scale(4);
@@ -590,7 +570,6 @@
 
     100%{
       @if($preview){
-        width: 30%;
         opacity: 1;
         transform: scale(1);
       }@else{
@@ -622,73 +601,99 @@
 
   /***/
 
-  .config{
-    @media screen and (min-width: 700px) {
-      animation: config_close 1.5s ease-in infinite;
+  @if $preview {
+    .config{
+      @media screen and (min-width: 700px) {
+        animation: config_close 1.5s ease-in infinite;
 
-      &.ANCC00{
-        .container-buttons{
-          animation: ANC0 1.5s ease-in infinite;
+        &.ANCC00{
+          .container-buttons{
+            animation: ANC0 1.5s ease-in infinite;
+          }
+        }
+
+        &.ANCC01{
+          .container-buttons{
+            animation: ANC1 1.5s ease-in infinite;
+          }
+        }
+
+        &.ANCC02{
+          .container-buttons{
+            animation: ANC2 1.5s ease-in infinite;
+          }
+        }
+
+        &.ANCC03{
+          .container-buttons{
+            animation: ANC3 1.5s ease-in infinite;
+          }
         }
       }
 
-      &.ANCC01{
-        .container-buttons{
-          animation: ANC1 1.5s ease-in infinite;
-        }
-      }
+      @media screen and (max-width: 700px) {
+        animation: config_close_responsive 1.6s ease-in infinite;
 
-      &.ANCC02{
-        .container-buttons{
-          animation: ANC2 1.5s ease-in infinite;
+        &.ANCC00{
+          .container-buttons{
+            animation: ANC0 1.6s ease-in infinite;
+          }
         }
-      }
 
-      &.ANCC03{
-        .container-buttons{
-          animation: ANC3 1.5s ease-in infinite;
+        &.ANCC01{
+          .container-buttons{
+            animation: ANC1 1.6s ease-in infinite;
+          }
+        }
+
+        &.ANCC02{
+          .container-buttons{
+            animation: ANC2 1.6s ease-in infinite;
+          }
+        }
+
+        &.ANCC03{
+          .container-buttons{
+            animation: ANC3 1.6s ease-in infinite;
+          }
         }
       }
     }
+  }@else {
+    &.ANCC00{
+      transform: scale(0);
+      overflow: hidden;
 
-    @media screen and (max-width: 700px) {
-      animation: config_close_responsive 1.5s ease-in infinite;
-
-      &.ANCC00{
-        .container-buttons{
-          animation: ANC0 1.5s ease-in infinite;
-        }
-      }
-
-      &.ANCC01{
-        .container-buttons{
-          animation: ANC1 1.5s ease-in infinite;
-        }
-      }
-
-      &.ANCC02{
-        .container-buttons{
-          animation: ANC2 1.5s ease-in infinite;
-        }
-      }
-
-      &.ANCC03{
-        .container-buttons{
-          animation: ANC3 1.5s ease-in infinite;
-        }
+      &.openingConfig{
+        transform: scale(1) !important;
+        overflow: scroll;
       }
     }
 
     &.ANCC01{
-      animation: config_close_ANC1 1.5s ease-in infinite;
+      transform: translateY(-100%);
+
+      &.openingConfig{
+        transform: translateY(0) !important;
+      }
     }
 
     &.ANCC02{
-      animation: config_close_ANC2 1.5s ease-in infinite;
+      transform: scale(0) rotateZ(-360deg);
+
+      &.openingConfig{
+        transform: scale(1) rotateZ(0deg) !important;
+      }
     }
 
     &.ANCC03{
-      animation: config_close_ANC3 1.5s ease-in infinite;
+      opacity: 0;
+      transform: scale(4);
+
+      &.openingConfig{
+        opacity: 1;
+        transform: scale(1) !important;
+      }
     }
   }
 

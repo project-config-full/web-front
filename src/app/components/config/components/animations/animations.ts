@@ -13,6 +13,9 @@ import { SetButtonLocalStorage } from '../../../../interfaces/set-button-local-s
 import { ChangeButtonConfigAnimation } from '../../../../services/changeButtonConfigAnimation/change-button-config-animation';
 import { SettingSide } from '../../../../services/settingSide/setting-side';
 import { SettingsSideModel } from '../../../../models/settings_side_model/settings-side-model';
+import { SetConfigAnimation } from '../../../../services/setConfigAnimation/set-config-animation';
+import { SetActiveAnimConfig } from '../../../../services/setActiveAnimConfig/set-active-anim-config';
+import { SetActiveAnimConfigParams } from '../../../../interfaces/set-active-anim-config-params';
 
 @Component({
   selector: 'app-animations',
@@ -42,7 +45,9 @@ export class Animations implements OnInit{
     private changeAnimationsService: ChangeAnimationsService,
     private localStorageService: LocalStorage,
     private changeButtonConfigAnimationService: ChangeButtonConfigAnimation,
-    private SettingSideService: SettingSide
+    private SettingSideService: SettingSide,
+    private setConfigAnimationService: SetConfigAnimation,
+    private setActiveAnimConfigService: SetActiveAnimConfig
   ){
     this.changeColor.$colorVal.subscribe((color: ChangeColorI) => {
       if(color.animationText){
@@ -62,6 +67,12 @@ export class Animations implements OnInit{
       if(!val.change) return;
 
       this.animations = val.animations;
+    });
+
+    this.setActiveAnimConfigService.$activeAnimConfig.subscribe((val: SetActiveAnimConfigParams) => {
+      if(!val.change) return;
+
+      this.animationsConfig = val.animConfig;
     });
 
     this.animations = [
@@ -174,7 +185,9 @@ export class Animations implements OnInit{
             active: false
           }
         },
-        active: true
+        active: true,
+        setConfigAnimationService: this.setConfigAnimationService,
+        localStorageService: this.localStorageService
       }),
       new ConfigAnimation({
         side: SideEnum.RIGHT,
@@ -225,7 +238,9 @@ export class Animations implements OnInit{
             active: false
           }
         },
-        active: true
+        active: false,
+        setConfigAnimationService: this.setConfigAnimationService,
+        localStorageService: this.localStorageService
       }),
       new ConfigAnimation({
         side: SideEnum.RIGHT,
@@ -276,7 +291,9 @@ export class Animations implements OnInit{
             active: false
           }
         },
-        active: true
+        active: false,
+        setConfigAnimationService: this.setConfigAnimationService,
+        localStorageService: this.localStorageService
       }),
       new ConfigAnimation({
         side: SideEnum.RIGHT,
@@ -327,7 +344,9 @@ export class Animations implements OnInit{
             active: false
           }
         },
-        active: true
+        active: false,
+        setConfigAnimationService: this.setConfigAnimationService,
+        localStorageService: this.localStorageService
       })
     ]
   }
@@ -342,7 +361,27 @@ export class Animations implements OnInit{
     animationSelec.onClick();
   }
 
+  selectConfigAnimation(configAnim: ConfigAnimation): void{
+    this.animationsConfig.forEach((config: ConfigAnimation) => {
+      config.active = false;
+    });
+
+    configAnim.active = true;
+
+    configAnim.onClick();
+  }
+
   ngOnInit(): void {
+    const animConfigActive = this.localStorageService.getAnimConfig();
+
+    if(animConfigActive.btnActive){
+      this.animationsConfig.forEach((config: ConfigAnimation) => {
+        config.active = animConfigActive.animConfig === config.animationProps.enter.name;
+
+        if(config.active) config.onClick();
+      });
+    }
+
     this.SettingSideService.$settingSideVal.subscribe((val: SettingsSideModel) => {
       this.animationsConfig.forEach((config: ConfigAnimation) => {
         config.side = val.side;
