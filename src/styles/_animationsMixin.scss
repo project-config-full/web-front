@@ -512,6 +512,94 @@
     }
   }
 
+  @keyframes config_close_ANC1 {
+    0%{
+      @if($preview){
+        width: 30%;
+      }
+      transform: translateY(0);
+    }
+
+    @if($preview){
+      38%, 70%{
+        width: 0;
+      }
+
+      50%{
+        transform: translateY(-100%);
+      }
+    }
+
+    100%{
+      @if($preview){
+        width: 30%;
+        transform: translateY(0);
+      }@else{
+        transform: translateY(-100%);
+      }
+    }
+  }
+
+  @keyframes config_close_ANC2 {
+    0%{
+      @if($preview){
+        width: 30%;
+      }
+      transform: scale(1) rotateZ(0deg);
+    }
+
+    @if($preview){
+      38%, 70%{
+        width: 0;
+      }
+
+      50%{
+        transform: scale(0) rotateZ(360deg);
+      }
+    }
+
+    100%{
+      @if($preview){
+        width: 30%;
+        transform: scale(1) rotateZ(0deg);
+      }@else{
+        transform: scale(0) rotateZ(-360deg);
+      }
+    }
+  }
+
+    @keyframes config_close_ANC3 {
+    0%{
+      @if($preview){
+        width: 30%;
+      }
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    @if($preview){
+      38%, 70%{
+        width: 0;
+      }
+
+      50%{
+        opacity: 0;
+        transform: scale(4);
+      }
+    }
+
+    100%{
+      @if($preview){
+        width: 30%;
+        opacity: 1;
+        transform: scale(1);
+      }@else{
+        opacity: 0;
+        transform: scale(4);
+      }
+    }
+  }
+
   /***/
 
   //* ANIMAÇÕES RESPONSIVAS
@@ -589,6 +677,18 @@
           animation: ANC3 1.5s ease-in infinite;
         }
       }
+    }
+
+    &.ANCC01{
+      animation: config_close_ANC1 1.5s ease-in infinite;
+    }
+
+    &.ANCC02{
+      animation: config_close_ANC2 1.5s ease-in infinite;
+    }
+
+    &.ANCC03{
+      animation: config_close_ANC3 1.5s ease-in infinite;
     }
   }
 

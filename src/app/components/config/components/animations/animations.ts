@@ -169,7 +169,160 @@ export class Animations implements OnInit{
             active: true
           },
           exit: {
-            name: "ANCO01",
+            name: "NULL",
+            duration: .75,
+            active: false
+          }
+        },
+        active: true
+      }),
+      new ConfigAnimation({
+        side: SideEnum.RIGHT,
+        buttons: [
+          new ButtonConfigAnimation({
+            active: false,
+            especial: especialButtons.PRESETS,
+            colors: {
+              circle: "#f5deb3",
+              background: {
+                active: "#C0C0C0",
+                inactive: "#2c2c2c"
+              }
+            }
+          }),
+          new ButtonConfigAnimation({
+            active: false,
+            especial: especialButtons.ANIMATION,
+            colors: {
+              circle: "#f5deb3",
+              background: {
+                active: "#C0C0C0",
+                inactive: "#2c2c2c"
+              }
+            }
+          }),
+          new ButtonConfigAnimation({
+            active: false,
+            especial: especialButtons.SETTING_SIDE,
+            colors: {
+              circle: "#f5deb3",
+              background: {
+                active: "#C0C0C0",
+                inactive: "#2c2c2c"
+              }
+            }
+          })
+        ],
+        animationProps:{
+          enter: {
+            name: "ANCC01",
+            duration: .75,
+            active: true
+          },
+          exit: {
+            name: "NULL",
+            duration: .75,
+            active: false
+          }
+        },
+        active: true
+      }),
+      new ConfigAnimation({
+        side: SideEnum.RIGHT,
+        buttons: [
+          new ButtonConfigAnimation({
+            active: false,
+            especial: especialButtons.PRESETS,
+            colors: {
+              circle: "#f5deb3",
+              background: {
+                active: "#C0C0C0",
+                inactive: "#2c2c2c"
+              }
+            }
+          }),
+          new ButtonConfigAnimation({
+            active: false,
+            especial: especialButtons.ANIMATION,
+            colors: {
+              circle: "#f5deb3",
+              background: {
+                active: "#C0C0C0",
+                inactive: "#2c2c2c"
+              }
+            }
+          }),
+          new ButtonConfigAnimation({
+            active: false,
+            especial: especialButtons.SETTING_SIDE,
+            colors: {
+              circle: "#f5deb3",
+              background: {
+                active: "#C0C0C0",
+                inactive: "#2c2c2c"
+              }
+            }
+          })
+        ],
+        animationProps:{
+          enter: {
+            name: "ANCC02",
+            duration: .75,
+            active: true
+          },
+          exit: {
+            name: "NULL",
+            duration: .75,
+            active: false
+          }
+        },
+        active: true
+      }),
+      new ConfigAnimation({
+        side: SideEnum.RIGHT,
+        buttons: [
+          new ButtonConfigAnimation({
+            active: false,
+            especial: especialButtons.PRESETS,
+            colors: {
+              circle: "#f5deb3",
+              background: {
+                active: "#C0C0C0",
+                inactive: "#2c2c2c"
+              }
+            }
+          }),
+          new ButtonConfigAnimation({
+            active: false,
+            especial: especialButtons.ANIMATION,
+            colors: {
+              circle: "#f5deb3",
+              background: {
+                active: "#C0C0C0",
+                inactive: "#2c2c2c"
+              }
+            }
+          }),
+          new ButtonConfigAnimation({
+            active: false,
+            especial: especialButtons.SETTING_SIDE,
+            colors: {
+              circle: "#f5deb3",
+              background: {
+                active: "#C0C0C0",
+                inactive: "#2c2c2c"
+              }
+            }
+          })
+        ],
+        animationProps:{
+          enter: {
+            name: "ANCC03",
+            duration: .75,
+            active: true
+          },
+          exit: {
+            name: "NULL",
             duration: .75,
             active: false
           }
