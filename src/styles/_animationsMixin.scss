@@ -414,19 +414,26 @@
     }
   }
 
-  @keyframes config_close_ANC0 {
+  @keyframes config_close {
     0%{
-      @if($preview){
-        width: 30%;
-      }
+      width: 30%;
+    }
+
+    38%, 70%{
+      width: 0;
+    }
+
+    100%{
+      width: 30%;
+    }
+  }
+
+  @keyframes ANC0 {
+    0%{
       transform: scale(1);
     }
 
     @if($preview){
-      38%, 70%{
-        width: 0;
-      }
-
       50%{
         transform: scale(0);
       }
@@ -434,10 +441,73 @@
 
     100%{
       @if($preview){
-        width: 30%;
         transform: scale(1);
       }@else{
         transform: scale(0);
+      }
+    }
+  }
+
+  @keyframes ANC1 {
+    0%{
+      transform: translateY(0);
+    }
+
+    @if($preview){
+      50%{
+        transform: translateY(-100%);
+      }
+    }
+
+    100%{
+      @if($preview){
+        transform: translateY(0);
+      }@else{
+        transform: translateY(-100%);
+      }
+    }
+  }
+
+  @keyframes ANC2 {
+    0%{
+      transform: scale(1) rotateZ(0deg);
+    }
+
+    @if($preview){
+      50%{
+        transform: scale(0) rotateZ(360deg);
+      }
+    }
+
+    100%{
+      @if($preview){
+        transform: scale(1) rotateZ(0deg);
+      }@else{
+        transform: scale(0) rotateZ(-360deg);
+      }
+    }
+  }
+
+    @keyframes ANC3 {
+    0%{
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    @if($preview){
+      50%{
+        opacity: 0;
+        transform: scale(4);
+      }
+    }
+
+    100%{
+      @if($preview){
+        opacity: 1;
+        transform: scale(1);
+      }@else{
+        opacity: 0;
+        transform: scale(4);
       }
     }
   }
@@ -532,9 +602,81 @@
 
   /***/
 
+  //* ANIMAÇÕES RESPONSIVAS
+
+  /**/
+
+  @keyframes config_close_responsive {
+    0%{
+      height: 70%;
+    }
+
+    38%, 70%{
+      height: 0;
+    }
+
+    100%{
+      height: 70%;
+    }
+  }
+
+  /***/
+
   .config{
-    &.ANCC00{
-      animation: config_close_ANC0 1.5s ease-in infinite;
+    @media screen and (min-width: 700px) {
+      animation: config_close 1.5s ease-in infinite;
+
+      &.ANCC00{
+        .container-buttons{
+          animation: ANC0 1.5s ease-in infinite;
+        }
+      }
+
+      &.ANCC01{
+        .container-buttons{
+          animation: ANC1 1.5s ease-in infinite;
+        }
+      }
+
+      &.ANCC02{
+        .container-buttons{
+          animation: ANC2 1.5s ease-in infinite;
+        }
+      }
+
+      &.ANCC03{
+        .container-buttons{
+          animation: ANC3 1.5s ease-in infinite;
+        }
+      }
+    }
+
+    @media screen and (max-width: 700px) {
+      animation: config_close_responsive 1.5s ease-in infinite;
+
+      &.ANCC00{
+        .container-buttons{
+          animation: ANC0 1.5s ease-in infinite;
+        }
+      }
+
+      &.ANCC01{
+        .container-buttons{
+          animation: ANC1 1.5s ease-in infinite;
+        }
+      }
+
+      &.ANCC02{
+        .container-buttons{
+          animation: ANC2 1.5s ease-in infinite;
+        }
+      }
+
+      &.ANCC03{
+        .container-buttons{
+          animation: ANC3 1.5s ease-in infinite;
+        }
+      }
     }
 
     &.ANCC01{
@@ -551,6 +693,8 @@
   }
 
   .conteudo{
-    animation: conteudo_close 1.5s ease-in infinite;
+    @media screen and (min-width: 700px) {
+      animation: conteudo_close 1.5s ease-in infinite;
+    }
   }
 }
