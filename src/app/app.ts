@@ -58,6 +58,8 @@ export class App implements AfterViewInit{
     this._applyStylesInConteudoCmp(event.target.innerWidth);
   }
 
+  private widthIsSmall: boolean = window.innerWidth <= 700;
+
   private _applyStylesInConteudoCmp(width: number): void{
     const changeTransitionOff = (): void => {
       this.transitionOff = true;
@@ -69,5 +71,15 @@ export class App implements AfterViewInit{
     if(width <= 950) changeTransitionOff();
     if(width <= 700) changeTransitionOff();
     if(width <= 450) changeTransitionOff();
+
+    if(width <= 700 && !this.widthIsSmall){
+      this.widthIsSmall = true;
+      window.location.reload();
+    }
+
+    if(width > 700 && this.widthIsSmall){
+      this.widthIsSmall = false;
+      window.location.reload();
+    }
   }
 }
