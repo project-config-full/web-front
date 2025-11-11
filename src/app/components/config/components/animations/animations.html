@@ -51,6 +51,8 @@
       <div
         class="config-animation-wrapper"
         [ngClass]="ANConfig.side"
+        [class.active]="ANConfig.active"
+        (click)="selectConfigAnimation(ANConfig)"
       >
         <div
           class="config"

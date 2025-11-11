@@ -1,3 +1,6 @@
+import { LocalStorage } from "../../services/localStorage/local-storage";
+import { SetConfigAnimation } from "../../services/setConfigAnimation/set-config-animation";
+
 export enum SideEnum {
   LEFT = 'left',
   RIGHT = 'right',
@@ -41,6 +44,8 @@ export interface ConfigAnimationInterface {
   buttons: button[];
   animationProps: animationsProps;
   active: boolean;
+  setConfigAnimationService: SetConfigAnimation;
+  localStorageService: LocalStorage;
 }
 
 export class ButtonConfigAnimation {
@@ -65,6 +70,9 @@ export class ConfigAnimation {
   animationProps: animationsProps;
   active: boolean;
 
+  private setConfigAnimationService: SetConfigAnimation;
+  private localStorageService: LocalStorage;
+
   //* CPAC = Change Proprietys Animation Config
 
   public CPAC(): void{
@@ -78,15 +86,25 @@ export class ConfigAnimation {
     this.animationProps.exit.active = false;
   }
 
+  public onClick(): void{
+    this.setConfigAnimationService.setConfigAnimation(this.animationProps.enter.name);
+
+    this.localStorageService.setAnimConfig(this.animationProps.enter.name);
+  }
+
   constructor({
     side,
     buttons,
     animationProps,
     active,
+    setConfigAnimationService,
+    localStorageService,
   }: ConfigAnimationInterface){
     this.side = side;
     this.buttons = buttons;
     this.animationProps = animationProps;
     this.active = active;
+    this.setConfigAnimationService = setConfigAnimationService;
+    this.localStorageService = localStorageService;
   }
 }
