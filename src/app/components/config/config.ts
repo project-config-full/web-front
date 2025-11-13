@@ -20,6 +20,10 @@ import { SettingsSide } from "./components/settings-side/settings-side";
 import { SettingSide } from '../../services/settingSide/setting-side';
 import { SettingsSideModel } from '../../models/settings_side_model/settings-side-model';
 import { ChangeActiveSettingSide } from '../../services/changeActiveSettingSide/change-active-setting-side';
+import { ChangeButtonConfigAnimation } from '../../services/changeButtonConfigAnimation/change-button-config-animation';
+import { SetConfigAnimation } from '../../services/setConfigAnimation/set-config-animation';
+import { ConfigAnimation } from '../../models/configAnimation/config-animation';
+import { SetActiveAnimConfig } from '../../services/setActiveAnimConfig/set-active-anim-config';
 
 @Component({
   selector: 'app-config',
@@ -50,6 +54,8 @@ export class Config implements OnInit, AfterViewInit{
     }
   };
 
+  animationConfig!: string;
+
   constructor(
     private changeConfigService: ChangeConfig,
     private changeColorService: ChangeColor,
@@ -59,6 +65,9 @@ export class Config implements OnInit, AfterViewInit{
     private localStorageService: LocalStorage,
     private settingSideService: SettingSide,
     private changeActiveSettingSideService: ChangeActiveSettingSide,
+    private changeButtonConfigAnimation: ChangeButtonConfigAnimation,
+    private setConfigAnimationService: SetConfigAnimation,
+    private setActiveAnimConfigService: SetActiveAnimConfig,
   ){
     this.changeConfigService.$configVal.subscribe((val: boolean) => {
       if(!this.activeResponsive) this.openingConfig = val;
@@ -86,6 +95,21 @@ export class Config implements OnInit, AfterViewInit{
 
     this.settingSideService.$settingSideVal.subscribe((val: SettingsSideModel) => {
       this.activeSideConfigBottomTop = val.side === "bottom" || val.side === "top";
+    });
+
+    if(window.innerWidth < 700){
+      this.activeResponsive = true;
+      this.openingConfig = true;
+    }
+
+
+    this.setConfigAnimationService.$confgiAnimation.subscribe((val: string) => {
+      if(val.split('').length < 1){
+        this.animationConfig = '';
+        return;
+      };
+
+      this.animationConfig = val + ' changeAnim';
     });
   }
 
@@ -146,6 +170,7 @@ export class Config implements OnInit, AfterViewInit{
           active: "Other"
         },
         localStorageService: this.localStorageService,
+        changeButtonConfigAnimationService: this.changeButtonConfigAnimation,
         onClick: (button: ButtonsConfig) => {
           button.changeIsActive(this.buttons.indexOf(button));
 
@@ -229,22 +254,37 @@ export class Config implements OnInit, AfterViewInit{
         animations: true,
         reload: true,
         localStorageService: this.localStorageService,
+        changeButtonConfigAnimationService: this.changeButtonConfigAnimation,
         onClick: (button: ButtonsConfig) => {
           button.changeIsActive(this.buttons.indexOf(button));
 
-          const indexSelected: number = Math.floor(Math.random() * this.animationsChild.animations.length);
+          const indexSelectedAnimText: number = Math.floor(Math.random() * this.animationsChild.animations.length);
+          const indexSelectedAnimConfig: number = Math.floor(Math.random() * this.animationsChild.animations.length);
 
           if(button.isActive){
             this.animationsChild.animations.forEach((animation: AnimationsText) => {
               animation.active = false;
             });
 
-            this.animationsChild.animations[indexSelected].active = true;
+            this.animationsChild.animations[indexSelectedAnimText].active = true;
 
-            this.animationsChild.animations[indexSelected].onClick();
+            this.animationsChild.animations[indexSelectedAnimText].onClick();
 
             this.changeAnimationsService.setChangeActiveAnimations({
               animations: this.animationsChild.animations,
+              change: true
+            });
+
+            this.animationsChild.animationsConfig.forEach((animConfig: ConfigAnimation) => {
+              animConfig.active = false;
+            });
+
+            this.animationsChild.animationsConfig[indexSelectedAnimConfig].active = true;
+
+            this.animationsChild.animationsConfig[indexSelectedAnimConfig].onClick();
+
+            this.setActiveAnimConfigService.setActiveAnimConfig({
+              animConfig: this.animationsChild.animationsConfig,
               change: true
             });
 
@@ -267,6 +307,12 @@ export class Config implements OnInit, AfterViewInit{
               name: "remove_default"
             }
           });
+
+          const animConfigLs = this.localStorageService.getAnimConfig();
+
+          this.localStorageService.setAnimConfig(animConfigLs.animConfig, button.isActive);
+
+          this.setConfigAnimationService.setConfigAnimation('');
         }
       }),
       new ButtonsConfig({
@@ -277,6 +323,7 @@ export class Config implements OnInit, AfterViewInit{
         },
         settings_side: true,
         localStorageService: this.localStorageService,
+        changeButtonConfigAnimationService: this.changeButtonConfigAnimation,
         onClick: (button: ButtonsConfig) => {
           button.changeIsActive(this.buttons.indexOf(button))
 
@@ -314,6 +361,7 @@ export class Config implements OnInit, AfterViewInit{
         },
         reload: true,
         localStorageService: this.localStorageService,
+        changeButtonConfigAnimationService: this.changeButtonConfigAnimation,
         onClick: (button: ButtonsConfig) => {
           button.changeIsActive(this.buttons.indexOf(button));
 
@@ -347,6 +395,7 @@ export class Config implements OnInit, AfterViewInit{
         },
         reload: true,
         localStorageService: this.localStorageService,
+        changeButtonConfigAnimationService: this.changeButtonConfigAnimation,
         onClick: (button: ButtonsConfig) => {
           button.changeIsActive(this.buttons.indexOf(button));
 

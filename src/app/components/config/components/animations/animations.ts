@@ -7,6 +7,15 @@ import { ChangeAnimationText } from '../../../../services/change_animation_text/
 import { ChangeActiveAnimations } from '../../../../interfaces/change-active-animations';
 import { ChangeAnimationsService } from '../../../../services/changeActiveAnimationsService/change-animations-service';
 import { LocalStorage } from '../../../../services/localStorage/local-storage';
+import { ButtonConfigAnimation, ConfigAnimation, especialButtons, SideEnum } from '../../../../models/configAnimation/config-animation';
+import { ColorsConfigAnimation } from '../../../../interfaces/colors-config-animation';
+import { SetButtonLocalStorage } from '../../../../interfaces/set-button-local-storage';
+import { ChangeButtonConfigAnimation } from '../../../../services/changeButtonConfigAnimation/change-button-config-animation';
+import { SettingSide } from '../../../../services/settingSide/setting-side';
+import { SettingsSideModel } from '../../../../models/settings_side_model/settings-side-model';
+import { SetConfigAnimation } from '../../../../services/setConfigAnimation/set-config-animation';
+import { SetActiveAnimConfig } from '../../../../services/setActiveAnimConfig/set-active-anim-config';
+import { SetActiveAnimConfigParams } from '../../../../interfaces/set-active-anim-config-params';
 
 @Component({
   selector: 'app-animations',
@@ -26,12 +35,19 @@ export class Animations implements OnInit{
   CTC: string = "#FFFFFF";
 
   animations: AnimationsText[] = [];
+  animationsConfig: ConfigAnimation[] = [];
+
+  colorConfigAnimation: ColorsConfigAnimation = {} as ColorsConfigAnimation;
 
   constructor(
     private changeColor: ChangeColor,
     private changeAnimationTextService: ChangeAnimationText,
     private changeAnimationsService: ChangeAnimationsService,
-    private localStorageService: LocalStorage
+    private localStorageService: LocalStorage,
+    private changeButtonConfigAnimationService: ChangeButtonConfigAnimation,
+    private SettingSideService: SettingSide,
+    private setConfigAnimationService: SetConfigAnimation,
+    private setActiveAnimConfigService: SetActiveAnimConfig
   ){
     this.changeColor.$colorVal.subscribe((color: ChangeColorI) => {
       if(color.animationText){
@@ -40,12 +56,23 @@ export class Animations implements OnInit{
         this.CTR = color.animationText.colorOfTextRemove;
         this.CTC = color.animationText.colorOfTextChange;
       }
+
+      this.colorConfigAnimation.content = color.colorContent ?? this.colorConfigAnimation.content ?? "#2c2c2c";
+      this.colorConfigAnimation.config = color.colorConfig ?? this.colorConfigAnimation.config ?? "darkred";
+      this.colorConfigAnimation.text = color.colorText ?? this.colorConfigAnimation.text ?? "white";
+      this.colorConfigAnimation.icon = color.colorIcon ?? this.colorConfigAnimation.icon ?? "black";
     });
 
     this.changeAnimationsService.$animations.subscribe((val: ChangeActiveAnimations) => {
       if(!val.change) return;
 
       this.animations = val.animations;
+    });
+
+    this.setActiveAnimConfigService.$activeAnimConfig.subscribe((val: SetActiveAnimConfigParams) => {
+      if(!val.change) return;
+
+      this.animationsConfig = val.animConfig;
     });
 
     this.animations = [
@@ -107,6 +134,221 @@ export class Animations implements OnInit{
         localStorageService: this.localStorageService
       })
     ];
+
+    this.animationsConfig = [
+      new ConfigAnimation({
+        side: SideEnum.RIGHT,
+        buttons: [
+          new ButtonConfigAnimation({
+            active: false,
+            especial: especialButtons.PRESETS,
+            colors: {
+              circle: "#f5deb3",
+              background: {
+                active: "#C0C0C0",
+                inactive: "#2c2c2c"
+              }
+            }
+          }),
+          new ButtonConfigAnimation({
+            active: false,
+            especial: especialButtons.ANIMATION,
+            colors: {
+              circle: "#f5deb3",
+              background: {
+                active: "#C0C0C0",
+                inactive: "#2c2c2c"
+              }
+            }
+          }),
+          new ButtonConfigAnimation({
+            active: false,
+            especial: especialButtons.SETTING_SIDE,
+            colors: {
+              circle: "#f5deb3",
+              background: {
+                active: "#C0C0C0",
+                inactive: "#2c2c2c"
+              }
+            }
+          })
+        ],
+        animationProps:{
+          enter: {
+            name: "ANCC00",
+            duration: .75,
+            active: true
+          },
+          exit: {
+            name: "NULL",
+            duration: .75,
+            active: false
+          }
+        },
+        active: true,
+        setConfigAnimationService: this.setConfigAnimationService,
+        localStorageService: this.localStorageService
+      }),
+      new ConfigAnimation({
+        side: SideEnum.RIGHT,
+        buttons: [
+          new ButtonConfigAnimation({
+            active: false,
+            especial: especialButtons.PRESETS,
+            colors: {
+              circle: "#f5deb3",
+              background: {
+                active: "#C0C0C0",
+                inactive: "#2c2c2c"
+              }
+            }
+          }),
+          new ButtonConfigAnimation({
+            active: false,
+            especial: especialButtons.ANIMATION,
+            colors: {
+              circle: "#f5deb3",
+              background: {
+                active: "#C0C0C0",
+                inactive: "#2c2c2c"
+              }
+            }
+          }),
+          new ButtonConfigAnimation({
+            active: false,
+            especial: especialButtons.SETTING_SIDE,
+            colors: {
+              circle: "#f5deb3",
+              background: {
+                active: "#C0C0C0",
+                inactive: "#2c2c2c"
+              }
+            }
+          })
+        ],
+        animationProps:{
+          enter: {
+            name: "ANCC01",
+            duration: .75,
+            active: true
+          },
+          exit: {
+            name: "NULL",
+            duration: .75,
+            active: false
+          }
+        },
+        active: false,
+        setConfigAnimationService: this.setConfigAnimationService,
+        localStorageService: this.localStorageService
+      }),
+      new ConfigAnimation({
+        side: SideEnum.RIGHT,
+        buttons: [
+          new ButtonConfigAnimation({
+            active: false,
+            especial: especialButtons.PRESETS,
+            colors: {
+              circle: "#f5deb3",
+              background: {
+                active: "#C0C0C0",
+                inactive: "#2c2c2c"
+              }
+            }
+          }),
+          new ButtonConfigAnimation({
+            active: false,
+            especial: especialButtons.ANIMATION,
+            colors: {
+              circle: "#f5deb3",
+              background: {
+                active: "#C0C0C0",
+                inactive: "#2c2c2c"
+              }
+            }
+          }),
+          new ButtonConfigAnimation({
+            active: false,
+            especial: especialButtons.SETTING_SIDE,
+            colors: {
+              circle: "#f5deb3",
+              background: {
+                active: "#C0C0C0",
+                inactive: "#2c2c2c"
+              }
+            }
+          })
+        ],
+        animationProps:{
+          enter: {
+            name: "ANCC02",
+            duration: .75,
+            active: true
+          },
+          exit: {
+            name: "NULL",
+            duration: .75,
+            active: false
+          }
+        },
+        active: false,
+        setConfigAnimationService: this.setConfigAnimationService,
+        localStorageService: this.localStorageService
+      }),
+      new ConfigAnimation({
+        side: SideEnum.RIGHT,
+        buttons: [
+          new ButtonConfigAnimation({
+            active: false,
+            especial: especialButtons.PRESETS,
+            colors: {
+              circle: "#f5deb3",
+              background: {
+                active: "#C0C0C0",
+                inactive: "#2c2c2c"
+              }
+            }
+          }),
+          new ButtonConfigAnimation({
+            active: false,
+            especial: especialButtons.ANIMATION,
+            colors: {
+              circle: "#f5deb3",
+              background: {
+                active: "#C0C0C0",
+                inactive: "#2c2c2c"
+              }
+            }
+          }),
+          new ButtonConfigAnimation({
+            active: false,
+            especial: especialButtons.SETTING_SIDE,
+            colors: {
+              circle: "#f5deb3",
+              background: {
+                active: "#C0C0C0",
+                inactive: "#2c2c2c"
+              }
+            }
+          })
+        ],
+        animationProps:{
+          enter: {
+            name: "ANCC03",
+            duration: .75,
+            active: true
+          },
+          exit: {
+            name: "NULL",
+            duration: .75,
+            active: false
+          }
+        },
+        active: false,
+        setConfigAnimationService: this.setConfigAnimationService,
+        localStorageService: this.localStorageService
+      })
+    ]
   }
 
   selectAnimation(animationSelec: AnimationsText): void{
@@ -119,7 +361,61 @@ export class Animations implements OnInit{
     animationSelec.onClick();
   }
 
+  selectConfigAnimation(configAnim: ConfigAnimation): void{
+    this.animationsConfig.forEach((config: ConfigAnimation) => {
+      config.active = false;
+    });
+
+    configAnim.active = true;
+
+    configAnim.onClick();
+  }
+
   ngOnInit(): void {
+    const animConfigActive = this.localStorageService.getAnimConfig();
+
+    if(animConfigActive.btnActive){
+      this.animationsConfig.forEach((config: ConfigAnimation) => {
+        config.active = animConfigActive.animConfig === config.animationProps.enter.name;
+
+        if(config.active) config.onClick();
+      });
+    }
+
+    this.SettingSideService.$settingSideVal.subscribe((val: SettingsSideModel) => {
+      this.animationsConfig.forEach((config: ConfigAnimation) => {
+        config.side = val.side;
+      });
+    })
+
+    this.changeColor.$colorVal.subscribe((color: ChangeColorI) => {
+      this.animationsConfig.forEach((config: ConfigAnimation) => {
+        config.buttons.forEach((button: ButtonConfigAnimation) => {
+          const buttonsLS = this.localStorageService.getActiveButtons();
+
+          button.active = buttonsLS.find((buttonLS: SetButtonLocalStorage) => {
+            return buttonLS.indexOfButton === config.buttons.indexOf(button);
+          })?.isActive ?? false;
+
+          button.colors.circle = color.colorAllButton?.circleColor ?? button.colors.circle;
+          button.colors.background.active = color.colorAllButton?.active.buttonColor ?? button.colors.background.active;
+          button.colors.background.inactive = color.colorAllButton?.inactive.buttonColor ?? button.colors.background.inactive;
+        });
+      });
+    });
+
+    this.changeButtonConfigAnimationService.$buttonConfigAnimationVal.subscribe((val: SetButtonLocalStorage) => {
+      this.animationsConfig.forEach((config: ConfigAnimation) => {
+        config.buttons.forEach((button: ButtonConfigAnimation, i: number) => {
+          const buttonsLS = this.localStorageService.getActiveButtons();
+
+          button.active = buttonsLS.find((buttonLS: SetButtonLocalStorage) => {
+            return buttonLS.indexOfButton === config.buttons.indexOf(button);
+          })?.isActive ?? false;
+        });
+      });
+    });
+
     this.animations.forEach((AT: AnimationsText) => {
       if(AT.durationProprietys.change){
         setInterval(() => {
@@ -131,5 +427,11 @@ export class Animations implements OnInit{
         AT.CPRT();
       }, AT.durationProprietys.remove);
     })
+
+    this.animationsConfig.forEach((config: ConfigAnimation) => {
+      setInterval(() => {
+        config.CPAC();
+      }, config.animationProps.enter.duration * 1000)
+    });
   }
 }

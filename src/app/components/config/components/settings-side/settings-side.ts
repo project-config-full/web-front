@@ -8,6 +8,7 @@ import { ParamsSetSideConfig } from '../../../../interfaces/params-set-side-conf
 import { ChangeActiveSettingSide } from '../../../../services/changeActiveSettingSide/change-active-setting-side';
 import { ChangeActiveAnimations } from '../../../../interfaces/change-active-animations';
 import { ChangeActiveSettingSideInterface } from '../../../../interfaces/change-active-setting-side-interface';
+import { SideEnum } from '../../../../models/configAnimation/config-animation';
 
 @Component({
   selector: 'app-settings-side',
@@ -43,7 +44,7 @@ export class SettingsSide implements OnInit{
             }
           }
         },
-        side: 'rigth',
+        side: SideEnum.RIGHT,
         settingSideService: this.settingSideService,
         localStorageService: this.localStorageService
       }),
@@ -65,7 +66,7 @@ export class SettingsSide implements OnInit{
             }
           }
         },
-        side: 'top',
+        side: SideEnum.TOP,
         settingSideService: this.settingSideService,
         localStorageService: this.localStorageService
       }),
@@ -87,7 +88,7 @@ export class SettingsSide implements OnInit{
             }
           }
         },
-        side: 'bottom',
+        side: SideEnum.BOTTOM,
         settingSideService: this.settingSideService,
         localStorageService: this.localStorageService
       })
@@ -99,13 +100,13 @@ export class SettingsSide implements OnInit{
       this.settings_side.forEach((settingSide: SettingsSideModel) => {
         if(!val.previewConfigSide) return;
 
-        settingSide.colors.conteudo = val.previewConfigSide!.content;
-        settingSide.colors.colorIcon = val.previewConfigSide!.icon;
-        settingSide.colors.colorText = val.previewConfigSide!.text;
-        settingSide.colors.colorConfig = val.previewConfigSide!.config;
-        settingSide.colors.button!.circleColor = val.previewConfigSide!.allButton.circleColor;
-        settingSide.colors.button!.active.buttonColor = val.previewConfigSide!.allButton.activeBtn;
-        settingSide.colors.button!.inactive.buttonColor = val.previewConfigSide!.allButton.inactiveBtn;
+        settingSide.colors.conteudo = val.previewConfigSide.content ?? settingSide.colors.conteudo;
+        settingSide.colors.colorIcon = val.previewConfigSide.icon ?? settingSide.colors.colorIcon;
+        settingSide.colors.colorText = val.previewConfigSide.text ?? settingSide.colors.colorText;
+        settingSide.colors.colorConfig = val.previewConfigSide.config ?? settingSide.colors.colorConfig;
+        settingSide.colors.button!.circleColor = val.previewConfigSide.allButton?.circleColor ?? settingSide.colors.button!.circleColor;
+        settingSide.colors.button!.active.buttonColor = val.previewConfigSide.allButton?.activeBtn ?? settingSide.colors.button!.active.buttonColor;
+        settingSide.colors.button!.inactive.buttonColor = val.previewConfigSide.allButton?.inactiveBtn ?? settingSide.colors.button!.inactive.buttonColor;
       });
     })
 

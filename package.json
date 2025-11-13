@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --base-href=\"https://project-config-full.github.io/web-front/\"",
+    "build": "ng build --base-href=\"/web-front/\"",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
