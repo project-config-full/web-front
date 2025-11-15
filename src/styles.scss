@@ -1,3 +1,9 @@
+@use 'animationsMixin' as *;
+
+:root{
+  @include animations_config($preview: true);
+}
+
 *{
   margin: 0;
   padding: 0;
