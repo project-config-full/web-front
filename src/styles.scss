@@ -1,7 +1,7 @@
 @use 'animationsMixin' as *;
 
-:root{
-  @include animations_config($preview: true);
+.load_animation{
+  @include animations_config();
 }
 
 *{
