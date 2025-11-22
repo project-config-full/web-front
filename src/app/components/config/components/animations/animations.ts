@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AnimationsText } from '../../../../models/animations_text/animations-text.model';
 import { CommonModule } from '@angular/common';
 import { ChangeColor } from '../../../../services/change_color/change-color';
@@ -16,6 +16,7 @@ import { SettingsSideModel } from '../../../../models/settings_side_model/settin
 import { SetConfigAnimation } from '../../../../services/setConfigAnimation/set-config-animation';
 import { SetActiveAnimConfig } from '../../../../services/setActiveAnimConfig/set-active-anim-config';
 import { SetActiveAnimConfigParams } from '../../../../interfaces/set-active-anim-config-params';
+import { ChangeSideANConfig } from '../../../../services/changeSideANConfig/change-side-anconfig';
 
 @Component({
   selector: 'app-animations',
@@ -47,7 +48,8 @@ export class Animations implements OnInit{
     private changeButtonConfigAnimationService: ChangeButtonConfigAnimation,
     private SettingSideService: SettingSide,
     private setConfigAnimationService: SetConfigAnimation,
-    private setActiveAnimConfigService: SetActiveAnimConfig
+    private setActiveAnimConfigService: SetActiveAnimConfig,
+    private changeSideANConfigService: ChangeSideANConfig,
   ){
     this.changeColor.$colorVal.subscribe((color: ChangeColorI) => {
       if(color.animationText){
@@ -349,7 +351,25 @@ export class Animations implements OnInit{
         localStorageService: this.localStorageService
       })
     ]
+
+    if(this.widthAll < 700){
+      if(this.localStorageService.getSideConfig().btnActive) return;
+
+      setTimeout(() => {
+        this.animationsConfig.forEach(config => {
+          config.side = SideEnum.LEFT;
+        });
+      });
+    }
+
+    this.changeSideANConfigService.$settingSideVal.subscribe((val: SideEnum) => {
+      this.animationsConfig.forEach((config: ConfigAnimation) => {
+        config.side = val;
+      });
+    });
   }
+
+  widthAll: number = window.innerWidth;
 
   selectAnimation(animationSelec: AnimationsText): void{
     this.animations.forEach((animation: AnimationsText) => {

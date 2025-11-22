@@ -22,8 +22,9 @@ import { SettingsSideModel } from '../../models/settings_side_model/settings-sid
 import { ChangeActiveSettingSide } from '../../services/changeActiveSettingSide/change-active-setting-side';
 import { ChangeButtonConfigAnimation } from '../../services/changeButtonConfigAnimation/change-button-config-animation';
 import { SetConfigAnimation } from '../../services/setConfigAnimation/set-config-animation';
-import { ConfigAnimation } from '../../models/configAnimation/config-animation';
+import { ConfigAnimation, SideEnum } from '../../models/configAnimation/config-animation';
 import { SetActiveAnimConfig } from '../../services/setActiveAnimConfig/set-active-anim-config';
+import { ChangeSideANConfig } from '../../services/changeSideANConfig/change-side-anconfig';
 
 @Component({
   selector: 'app-config',
@@ -68,6 +69,7 @@ export class Config implements OnInit, AfterViewInit{
     private changeButtonConfigAnimation: ChangeButtonConfigAnimation,
     private setConfigAnimationService: SetConfigAnimation,
     private setActiveAnimConfigService: SetActiveAnimConfig,
+    private changeSideANConfigService: ChangeSideANConfig,
   ){
     this.changeConfigService.$configVal.subscribe((val: boolean) => {
       if(!this.activeResponsive) this.openingConfig = val;
@@ -350,7 +352,11 @@ export class Config implements OnInit, AfterViewInit{
               settingSide: this.settingsSideChild.settings_side,
               change: true
             });
+
+            return;
           }
+
+          this.changeSideANConfigService.setSideANConfig(SideEnum.LEFT);
         }
       }),
       new ButtonsConfig({
