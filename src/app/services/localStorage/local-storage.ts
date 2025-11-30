@@ -6,6 +6,8 @@ import { AnimationsText } from '../../models/animations_text/animations-text.mod
 import { ParamsSetAnimationTextLs } from '../../interfaces/params-set-animation-text-ls';
 import { SettingsSideModel } from '../../models/settings_side_model/settings-side-model';
 import { ParamsSetSideConfig } from '../../interfaces/params-set-side-config';
+import { ConfigAnimation } from '../../models/configAnimation/config-animation';
+import { ParamsSetAnimConfig } from '../../interfaces/params-set-anim-config';
 
 @Injectable({
   providedIn: 'root'
@@ -94,5 +96,20 @@ export class LocalStorage {
     const sideConfigLs = localStorage.getItem("sideConfig");
 
     return sideConfigLs ? JSON.parse(sideConfigLs) : {} as ParamsSetSideConfig;
+  }
+
+  setAnimConfig(animConfig: string, btnActive?: boolean): void{
+    const animConfigLS: ParamsSetAnimConfig = {
+      animConfig,
+      btnActive: btnActive ?? true
+    }
+
+    localStorage.setItem("animConfig", this.safeStringify(animConfigLS));
+  }
+
+  getAnimConfig(): ParamsSetAnimConfig{
+    const animConfigLs = localStorage.getItem("animConfig");
+
+    return animConfigLs ? JSON.parse(animConfigLs) : {} as ParamsSetAnimConfig;
   }
 }

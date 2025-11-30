@@ -6,6 +6,7 @@
   cursor: pointer;
   margin: .5rem;
   position: absolute;
+  z-index: 100;
 
   svg{
     width: 100%;
@@ -20,8 +21,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  perspective: 800px;
+  transform-style: preserve-3d;
 
   .container-text-wrapper-animation{
+    transform-style: preserve-3d;
     @include animations_text();
 
     .text-wrapper{
@@ -71,8 +75,9 @@
     top: 0;
     right: 0;
 
-    &.rigth{
-      right: inherit;
+    &.right,
+    &.bottom{
+      right: inherit !important;
       left: 0;
     }
   }
