@@ -38,7 +38,6 @@ export class Config implements OnInit, AfterViewInit{
   @ViewChild(SettingsSide) settingsSideChild!: SettingsSide;
 
   openingConfig!: boolean;
-  activeResponsive: boolean = false;
   configIsOpen!: boolean;
 
   reloadButtons: boolean = false;
@@ -72,7 +71,7 @@ export class Config implements OnInit, AfterViewInit{
     private changeSideANConfigService: ChangeSideANConfig,
   ){
     this.changeConfigService.$configVal.subscribe((val: boolean) => {
-      if(!this.activeResponsive) this.openingConfig = val;
+      this.openingConfig = val;
 
       this.configIsOpen = val;
     });
@@ -100,7 +99,6 @@ export class Config implements OnInit, AfterViewInit{
     });
 
     if(window.innerWidth < 700){
-      this.activeResponsive = true;
       this.openingConfig = true;
     }
 
@@ -453,12 +451,10 @@ export class Config implements OnInit, AfterViewInit{
     const width = target.innerWidth;
 
     if(width < 700){
-      this.activeResponsive = true;
       this.openingConfig = true;
       return;
     }
 
-    this.activeResponsive = false;
     this.openingConfig = this.configIsOpen;
   }
 }
