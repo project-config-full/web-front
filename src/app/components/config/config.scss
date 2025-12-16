@@ -142,5 +142,32 @@
     .animations-wrapper{
       @include reload_button();
     }
+
+    .open-window-modal-wrapper{
+      width: 100%;
+      padding: .5rem 0;
+      padding-right: 1rem;
+      display: flex;
+      justify-content: end;
+
+      button{
+        padding: .2rem .8rem;
+        background-color: #2c2c2c;
+        color: #c0c0c0;
+        border: 1px solid wheat;
+        border-radius: .5rem;
+        font-size: .7rem;
+        cursor: pointer;
+        transition: transform .2s ease-in-out;
+
+        &:hover{
+          transform: scale(1.03);
+        }
+
+        &:active{
+          opacity: .8;
+        }
+      }
+    }
   }
 }
