@@ -25,6 +25,7 @@ import { SetConfigAnimation } from '../../services/setConfigAnimation/set-config
 import { ConfigAnimation, SideEnum } from '../../models/configAnimation/config-animation';
 import { SetActiveAnimConfig } from '../../services/setActiveAnimConfig/set-active-anim-config';
 import { ChangeSideANConfig } from '../../services/changeSideANConfig/change-side-anconfig';
+import { ChangeModalWindow } from '../../services/changeModalWindow/change-modal-window';
 
 @Component({
   selector: 'app-config',
@@ -69,6 +70,7 @@ export class Config implements OnInit, AfterViewInit{
     private setConfigAnimationService: SetConfigAnimation,
     private setActiveAnimConfigService: SetActiveAnimConfig,
     private changeSideANConfigService: ChangeSideANConfig,
+    private changeModalWindowService: ChangeModalWindow
   ){
     this.changeConfigService.$configVal.subscribe((val: boolean) => {
       this.openingConfig = val;
@@ -439,11 +441,14 @@ export class Config implements OnInit, AfterViewInit{
   changeReloadButtons(): void{
     this.reloadButtons = !this.reloadButtons;
 
-    setTimeout(() => this.reloadButtons = false ,3000);
+    setTimeout(() => this.reloadButtons = false, 3000);
   }
 
   buttons: ButtonsConfig[] = [];
 
+  openModalWindow(): void{
+    this.changeModalWindowService.setOpeningModalWindow(true);
+  }
 
   @HostListener('window:resize', ['$event'])
   onResize(e: Event): void{
