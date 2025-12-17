@@ -99,8 +99,6 @@ export class Conteudo {
       if(!this.localStorageService.getSideConfig().btnActive) return;
 
       this.sideConfig = val.side;
-
-      console.log(val.side);
     });
   }
 
