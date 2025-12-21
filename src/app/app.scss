@@ -85,6 +85,24 @@
     transition: background-color .5s ease-in-out !important;
   }
 
+  .modal-window-wrapper{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #000000b2;
+    opacity: 0;
+    width: 100%;
+    z-index: 100;
+    height: 100%;
+    transition: opacity .3s ease-in-out;
+    pointer-events: none;
+
+    &.active{
+      pointer-events: all;
+      opacity: 1;
+    }
+  }
+
   @media screen and (max-width: 1200px){
     app-config.isOpenConfig{
       width: 30%;
