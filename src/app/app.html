@@ -16,4 +16,11 @@
     (changeConfigEnv)="configIsOpen = $event"
     [style.backgroundColor]="colorOfContent"
   ></app-conteudo>
+
+  <div
+    class="modal-window-wrapper"
+    [class.active]="modalWindowIsOpen"
+  >
+    <app-modal-window></app-modal-window>
+  </div><!-- modal-window-wrapper -->
 </div><!-- container -->

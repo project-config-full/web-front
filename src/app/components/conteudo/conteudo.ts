@@ -95,9 +95,9 @@ export class Conteudo {
     this.isTextActive = buttonRemoveText ? !buttonRemoveText.isActive : true;
     this.firtTextActive = buttonChangeText ? !buttonChangeText.isActive : true;
 
-    if(!this.localStorageService.getSideConfig().btnActive) return;
-
     this.settingSideService.$settingSideVal.subscribe((val: SettingsSideModel) => {
+      if(!this.localStorageService.getSideConfig().btnActive) return;
+
       this.sideConfig = val.side;
     });
   }

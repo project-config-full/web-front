@@ -22,8 +22,10 @@ import { SettingsSideModel } from '../../models/settings_side_model/settings-sid
 import { ChangeActiveSettingSide } from '../../services/changeActiveSettingSide/change-active-setting-side';
 import { ChangeButtonConfigAnimation } from '../../services/changeButtonConfigAnimation/change-button-config-animation';
 import { SetConfigAnimation } from '../../services/setConfigAnimation/set-config-animation';
-import { ConfigAnimation } from '../../models/configAnimation/config-animation';
+import { ConfigAnimation, SideEnum } from '../../models/configAnimation/config-animation';
 import { SetActiveAnimConfig } from '../../services/setActiveAnimConfig/set-active-anim-config';
+import { ChangeSideANConfig } from '../../services/changeSideANConfig/change-side-anconfig';
+import { ChangeModalWindow } from '../../services/changeModalWindow/change-modal-window';
 
 @Component({
   selector: 'app-config',
@@ -37,7 +39,6 @@ export class Config implements OnInit, AfterViewInit{
   @ViewChild(SettingsSide) settingsSideChild!: SettingsSide;
 
   openingConfig!: boolean;
-  activeResponsive: boolean = false;
   configIsOpen!: boolean;
 
   reloadButtons: boolean = false;
@@ -68,9 +69,11 @@ export class Config implements OnInit, AfterViewInit{
     private changeButtonConfigAnimation: ChangeButtonConfigAnimation,
     private setConfigAnimationService: SetConfigAnimation,
     private setActiveAnimConfigService: SetActiveAnimConfig,
+    private changeSideANConfigService: ChangeSideANConfig,
+    private changeModalWindowService: ChangeModalWindow
   ){
     this.changeConfigService.$configVal.subscribe((val: boolean) => {
-      if(!this.activeResponsive) this.openingConfig = val;
+      this.openingConfig = val;
 
       this.configIsOpen = val;
     });
@@ -98,7 +101,6 @@ export class Config implements OnInit, AfterViewInit{
     });
 
     if(window.innerWidth < 700){
-      this.activeResponsive = true;
       this.openingConfig = true;
     }
 
@@ -350,7 +352,11 @@ export class Config implements OnInit, AfterViewInit{
               settingSide: this.settingsSideChild.settings_side,
               change: true
             });
+
+            return;
           }
+
+          this.changeSideANConfigService.setSideANConfig(SideEnum.LEFT);
         }
       }),
       new ButtonsConfig({
@@ -435,11 +441,14 @@ export class Config implements OnInit, AfterViewInit{
   changeReloadButtons(): void{
     this.reloadButtons = !this.reloadButtons;
 
-    setTimeout(() => this.reloadButtons = false ,3000);
+    setTimeout(() => this.reloadButtons = false, 3000);
   }
 
   buttons: ButtonsConfig[] = [];
 
+  openModalWindow(): void{
+    this.changeModalWindowService.setOpeningModalWindow(true);
+  }
 
   @HostListener('window:resize', ['$event'])
   onResize(e: Event): void{
@@ -447,12 +456,10 @@ export class Config implements OnInit, AfterViewInit{
     const width = target.innerWidth;
 
     if(width < 700){
-      this.activeResponsive = true;
       this.openingConfig = true;
       return;
     }
 
-    this.activeResponsive = false;
     this.openingConfig = this.configIsOpen;
   }
 }
