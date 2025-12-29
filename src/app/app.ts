@@ -6,10 +6,12 @@ import { ChangeColor } from './services/change_color/change-color';
 import { ChangeColorI } from './interfaces/change-color-i';
 import { SettingSide } from './services/settingSide/setting-side';
 import { SettingsSideModel } from './models/settings_side_model/settings-side-model';
+import { ModalWindow } from "./components/modal-window/modal-window";
+import { ChangeModalWindow } from './services/changeModalWindow/change-modal-window';
 
 @Component({
   selector: 'app-root',
-  imports: [Config, Conteudo, CommonModule],
+  imports: [Config, Conteudo, CommonModule, ModalWindow],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
@@ -25,13 +27,20 @@ export class App implements AfterViewInit{
 
   sideAll: string = "left";
 
+  modalWindowIsOpen: boolean = false;
+
   constructor(
     private changeColorService: ChangeColor,
     private settingSideService: SettingSide,
-    private cdr: ChangeDetectorRef,
+    private changeModalWindowService: ChangeModalWindow,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngAfterViewInit(): void {
+    this.changeModalWindowService.$openingModalWindow.subscribe((val: boolean)=>{
+      this.modalWindowIsOpen = val;
+    });
+
     this.changeColorService.$colorVal.subscribe((val: ChangeColorI)=>{
       this.colorOfConfig = val.colorConfig ? val.colorConfig : this.colorOfConfig;
       this.colorOfContent = val.colorContent ? val.colorContent : this.colorOfContent;
