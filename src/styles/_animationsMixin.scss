@@ -163,18 +163,22 @@
       transform: translate(100%, 0) scale(.5);
     }
 
+    45%{
+      opacity: 0;
+    }
+
     50%{
       opacity: 0;
       transform: translate(-100%,0) scale(.5);
     }
 
     75%{
-      transform: translate(0) scale(.5);
+      transform: translate(0, 0) scale(.5);
     }
 
     100%{
       opacity: 1;
-      transform: translate(0) scale(1);
+      transform: translate(0, 0) scale(1);
     }
   }
 
@@ -384,5 +388,297 @@
   &.reload-button{
     pointer-events: none;
     animation: reload 3s ease-in-out;
+  }
+}
+
+@mixin animations_config($preview: true){
+  //* ANIMAÇÕES GERAIS
+
+  /**/
+
+  @keyframes conteudo_close {
+    0%{
+      width: 70%;
+    }
+
+    38%{
+      width: 100%;
+    }
+
+    70%{
+      width: 100%;
+    }
+
+    100%{
+      width: 70%;
+    }
+  }
+
+  @keyframes config_close {
+    0%{
+      width: 30%;
+    }
+
+    38%, 70%{
+      width: 0;
+    }
+
+    100%{
+      width: 30%;
+    }
+  }
+
+  @keyframes ANC0 {
+    0%{
+      transform: scale(1);
+    }
+
+    @if($preview){
+      50%{
+        transform: scale(0);
+      }
+    }
+
+    100%{
+      @if($preview){
+        transform: scale(1);
+      }@else{
+        transform: scale(0);
+      }
+    }
+  }
+
+  @keyframes ANC1 {
+    0%{
+      transform: translateY(0);
+    }
+
+    @if($preview){
+      50%{
+        transform: translateY(-100%);
+      }
+    }
+
+    100%{
+      @if($preview){
+        transform: translateY(0);
+      }@else{
+        transform: translateY(-100%);
+      }
+    }
+  }
+
+  @keyframes ANC2 {
+    0%{
+      transform: scale(1) rotateZ(0deg);
+    }
+
+    @if($preview){
+      50%{
+        transform: scale(0) rotateZ(360deg);
+      }
+    }
+
+    100%{
+      @if($preview){
+        transform: scale(1) rotateZ(0deg);
+      }@else{
+        transform: scale(0) rotateZ(-360deg);
+      }
+    }
+  }
+
+  @keyframes ANC3 {
+    0%{
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    @if($preview){
+      50%{
+        opacity: 0;
+        transform: scale(4);
+      }
+    }
+
+    100%{
+      @if($preview){
+        opacity: 1;
+        transform: scale(1);
+      }@else{
+        opacity: 0;
+        transform: scale(4);
+      }
+    }
+  }
+
+  /***/
+
+  //* ANIMAÇÕES RESPONSIVAS
+
+  /**/
+
+  @keyframes config_close_responsive {
+    0%{
+      height: 70%;
+    }
+
+    38%, 70%{
+      height: 0;
+    }
+
+    100%{
+      height: 70%;
+    }
+  }
+
+  /***/
+
+  //* ANIMAÇÕES PARA BOTTOM E TOP
+
+  /**/
+
+  @keyframes conteudo_close_bottom_and_top {
+    0%{
+      height: 70%;
+    }
+
+    38%, 70%{
+      height: 100%;
+    }
+
+    100%{
+      height: 70%;
+    }
+  }
+
+  @keyframes config_close_bottom_and_top {
+    0%{
+      height: 30%;
+    }
+
+    38%, 70%{
+      height: 0;
+    }
+
+    100%{
+      height: 30%;
+    }
+  }
+
+  /***/
+
+  @if $preview {
+    &.top, &.bottom{
+      @media screen and (min-width: 700px) {
+        .config{
+          animation: config_close_bottom_and_top 1.5s ease-in infinite !important;
+        }
+
+        .conteudo{
+          animation: conteudo_close_bottom_and_top 1.5s ease-in infinite !important;
+        }
+      }
+    }
+
+    .config{
+      @media screen and (min-width: 700px) {
+        animation: config_close 1.5s ease-in infinite;
+
+        &.ANCC00{
+          .container-buttons{
+            animation: ANC0 1.5s ease-in infinite;
+          }
+        }
+
+        &.ANCC01{
+          .container-buttons{
+            animation: ANC1 1.5s ease-in infinite;
+          }
+        }
+
+        &.ANCC02{
+          .container-buttons{
+            animation: ANC2 1.5s ease-in infinite;
+          }
+        }
+
+        &.ANCC03{
+          .container-buttons{
+            animation: ANC3 1.5s ease-in infinite;
+          }
+        }
+      }
+
+      @media screen and (max-width: 700px) {
+        animation: config_close_responsive 1.6s ease-in infinite;
+
+        &.ANCC00{
+          .container-buttons{
+            animation: ANC0 1.6s ease-in infinite;
+          }
+        }
+
+        &.ANCC01{
+          .container-buttons{
+            animation: ANC1 1.6s ease-in infinite;
+          }
+        }
+
+        &.ANCC02{
+          .container-buttons{
+            animation: ANC2 1.6s ease-in infinite;
+          }
+        }
+
+        &.ANCC03{
+          .container-buttons{
+            animation: ANC3 1.6s ease-in infinite;
+          }
+        }
+      }
+    }
+  }@else {
+    &.ANCC00{
+      transform: scale(0);
+      overflow: hidden;
+
+      &.openingConfig{
+        transform: scale(1) !important;
+        overflow: scroll;
+      }
+    }
+
+    &.ANCC01{
+      transform: translateY(-100%);
+
+      &.openingConfig{
+        transform: translateY(0) !important;
+      }
+    }
+
+    &.ANCC02{
+      transform: scale(0) rotateZ(-360deg);
+
+      &.openingConfig{
+        transform: scale(1) rotateZ(0deg) !important;
+      }
+    }
+
+    &.ANCC03{
+      opacity: 0;
+      transform: scale(4);
+
+      &.openingConfig{
+        opacity: 1;
+        transform: scale(1) !important;
+      }
+    }
+  }
+
+  .conteudo{
+    @media screen and (min-width: 700px) {
+      animation: conteudo_close 1.5s ease-in infinite;
+    }
   }
 }

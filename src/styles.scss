@@ -1,3 +1,9 @@
+@use 'animationsMixin' as *;
+
+.load_animation{
+  @include animations_config();
+}
+
 *{
   margin: 0;
   padding: 0;
