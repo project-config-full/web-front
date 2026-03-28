@@ -32,7 +32,10 @@ export class Presets implements OnInit{
       colorInput: "#8B0000",
       changeColor: (color: string) => {
         this.changeColorService.setColorVal({
-          colorConfig: color
+          colorConfig: color,
+          previewConfigSide: {
+            config: color
+          }
         })
       }
     }),
@@ -42,7 +45,10 @@ export class Presets implements OnInit{
       colorInput: "#2c2c2c",
       changeColor: (color: string) => {
         this.changeColorService.setColorVal({
-          colorContent: color
+          colorContent: color,
+          previewConfigSide: {
+            content: color
+          }
         })
       }
     }),
@@ -52,7 +58,10 @@ export class Presets implements OnInit{
       colorInput: "#FFFFFF",
       changeColor: (color: string) => {
         this.changeColorService.setColorVal({
-          colorText: color
+          colorText: color,
+          previewConfigSide: {
+            text: color
+          }
         });
       }
     }),
@@ -62,7 +71,10 @@ export class Presets implements OnInit{
       colorInput: "#000000",
       changeColor: (color: string) => {
         this.changeColorService.setColorVal({
-          colorIcon: color
+          colorIcon: color,
+          previewConfigSide: {
+            icon: color
+          }
         });
       }
     })

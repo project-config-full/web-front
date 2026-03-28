@@ -95,6 +95,3 @@ http://localhost:4200
 ![Exemplo de tela](./public/image.png)
 
 ---
-
-📬 **Contato**
-Se quiser trocar ideias ou tirar dúvidas sobre o projeto, me envie uma mensagem!

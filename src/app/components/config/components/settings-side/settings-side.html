@@ -9,25 +9,27 @@
         class="config"
         [style.backgroundColor]="settingSide.colors.colorConfig"
       >
-        <div
-          class="button"
-          [style.backgroundColor]="settingSide.colors.button!.inactive.buttonColor"
-        >
+        <div class="container-buttons">
           <div
-            class="circle"
-            [style.backgroundColor]="settingSide.colors.button!.circleColor"
-          ></div><!-- circle-->
-        </div><!-- button-wrapper -->
+            class="button"
+            [style.backgroundColor]="settingSide.colors.button!.inactive.buttonColor"
+          >
+            <div
+              class="circle"
+              [style.backgroundColor]="settingSide.colors.button!.circleColor"
+            ></div><!-- circle-->
+          </div><!-- button -->
 
-        <div
-          class="button"
-          [style.backgroundColor]="settingSide.colors.button!.active.buttonColor"
-        >
           <div
-            class="circle"
-            [style.backgroundColor]="settingSide.colors.button!.circleColor"
-          ></div><!-- circle-->
-        </div><!-- button-wrapper -->
+            class="button"
+            [style.backgroundColor]="settingSide.colors.button!.active.buttonColor"
+          >
+            <div
+              class="circle"
+              [style.backgroundColor]="settingSide.colors.button!.circleColor"
+            ></div><!-- circle-->
+          </div><!-- button -->
+        </div><!-- container-buttons -->
       </div><!-- config -->
 
       <div

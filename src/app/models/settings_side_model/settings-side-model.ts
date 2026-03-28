@@ -1,6 +1,7 @@
 import { ChangeColorI } from "../../interfaces/change-color-i";
 import { LocalStorage } from "../../services/localStorage/local-storage";
 import { SettingSide } from "../../services/settingSide/setting-side";
+import { SideEnum } from "../configAnimation/config-animation";
 
 interface SettingsSideInterface {
   colors: {
@@ -10,7 +11,7 @@ interface SettingsSideInterface {
     colorConfig: string;
     button: ChangeColorI["colorAllButton"];
   },
-  side: string;
+  side: SideEnum;
   active?: boolean;
   settingSideService: SettingSide;
   localStorageService: LocalStorage;
@@ -18,7 +19,7 @@ interface SettingsSideInterface {
 
 export class SettingsSideModel {
   colors: SettingsSideInterface["colors"];
-  side: string;
+  side: SideEnum;
   active: boolean;
 
   private settingSideService: SettingSide;

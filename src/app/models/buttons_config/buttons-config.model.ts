@@ -1,5 +1,6 @@
 import { ChangeColorI } from "../../interfaces/change-color-i";
 import { LocalStorage } from "../../services/localStorage/local-storage";
+import { ChangeButtonConfigAnimation } from '../../services/changeButtonConfigAnimation/change-button-config-animation';
 
 interface textInButtonInterface {
   disable: string;
@@ -16,6 +17,7 @@ interface ButtonsConfigInterface {
   textInButton: textInButtonInterface;
   color?: ChangeColorI["colorAllButton"];
   localStorageService: LocalStorage;
+  changeButtonConfigAnimationService: ChangeButtonConfigAnimation;
   onClick: (button: ButtonsConfig) => void;
 }
 
@@ -31,11 +33,17 @@ export class ButtonsConfig {
   onClick: (button: this) => void;
 
   private localStorageService: LocalStorage;
+  private changeButtonConfigAnimationService: ChangeButtonConfigAnimation;
 
   public changeIsActive(indexOfButton: number): void {
     this.isActive = !this.isActive;
 
     this.localStorageService.setActiveButtons({
+      indexOfButton,
+      isActive: this.isActive
+    });
+
+    this.changeButtonConfigAnimationService.setButtonConfigAnimationVal({
       indexOfButton,
       isActive: this.isActive
     });
@@ -65,6 +73,7 @@ export class ButtonsConfig {
       }
     },
     localStorageService,
+    changeButtonConfigAnimationService,
     onClick
   }: ButtonsConfigInterface){
     this.label = label;
@@ -76,6 +85,7 @@ export class ButtonsConfig {
     this.textInButton = textInButton;
     this.color = color;
     this.localStorageService = localStorageService;
+    this.changeButtonConfigAnimationService = changeButtonConfigAnimationService;
     this.onClick = onClick;
   }
 }
